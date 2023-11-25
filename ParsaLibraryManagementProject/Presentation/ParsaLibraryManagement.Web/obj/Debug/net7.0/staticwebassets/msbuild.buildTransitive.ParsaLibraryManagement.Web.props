@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\ParsaLibraryManagement.Web.props" />
+</Project>

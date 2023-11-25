@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33927.249
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{4700A4B9-C9C4-46F0-84FC-0CC66DD50699}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{984EB32E-363D-4E5B-9208-A2873494BE68}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{836A3E37-630C-42D9-80A7-BD0AEE3528D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParsaLibraryManagement.Web", "Presentation\ParsaLibraryManagement.Web\ParsaLibraryManagement.Web.csproj", "{4B15FAB1-C3F6-4B20-B2A8-37552BAF4907}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParsaLibraryManagement.Domain", "Libraries\ParsaLibraryManagement.Domain\ParsaLibraryManagement.Domain.csproj", "{D1773FD0-601D-4C35-A223-92DD9C98A18A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParsaLibraryManagement.Application", "Libraries\ParsaLibraryManagement.Application\ParsaLibraryManagement.Application.csproj", "{710185B0-A08F-48E4-BE78-BD047454BB60}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParsaLibraryManagement.Infrastructure", "Libraries\ParsaLibraryManagement.Infrastructure\ParsaLibraryManagement.Infrastructure.csproj", "{AC8E7483-1AFD-425D-94A5-BCC46E6D60A1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4B15FAB1-C3F6-4B20-B2A8-37552BAF4907}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B15FAB1-C3F6-4B20-B2A8-37552BAF4907}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B15FAB1-C3F6-4B20-B2A8-37552BAF4907}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B15FAB1-C3F6-4B20-B2A8-37552BAF4907}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1773FD0-601D-4C35-A223-92DD9C98A18A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1773FD0-601D-4C35-A223-92DD9C98A18A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1773FD0-601D-4C35-A223-92DD9C98A18A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1773FD0-601D-4C35-A223-92DD9C98A18A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{710185B0-A08F-48E4-BE78-BD047454BB60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{710185B0-A08F-48E4-BE78-BD047454BB60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{710185B0-A08F-48E4-BE78-BD047454BB60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{710185B0-A08F-48E4-BE78-BD047454BB60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC8E7483-1AFD-425D-94A5-BCC46E6D60A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC8E7483-1AFD-425D-94A5-BCC46E6D60A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC8E7483-1AFD-425D-94A5-BCC46E6D60A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC8E7483-1AFD-425D-94A5-BCC46E6D60A1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4B15FAB1-C3F6-4B20-B2A8-37552BAF4907} = {984EB32E-363D-4E5B-9208-A2873494BE68}
+		{D1773FD0-601D-4C35-A223-92DD9C98A18A} = {4700A4B9-C9C4-46F0-84FC-0CC66DD50699}
+		{710185B0-A08F-48E4-BE78-BD047454BB60} = {4700A4B9-C9C4-46F0-84FC-0CC66DD50699}
+		{AC8E7483-1AFD-425D-94A5-BCC46E6D60A1} = {4700A4B9-C9C4-46F0-84FC-0CC66DD50699}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5946E072-C8DD-468C-9E6E-9C89EC556305}
+	EndGlobalSection
+EndGlobal
