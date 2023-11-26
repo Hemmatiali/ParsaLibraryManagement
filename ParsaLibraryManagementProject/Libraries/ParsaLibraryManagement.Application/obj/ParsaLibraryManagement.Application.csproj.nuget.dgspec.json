@@ -33,6 +33,9 @@
             "projectReferences": {
               "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Libraries\\ParsaLibraryManagement.Domain\\ParsaLibraryManagement.Domain.csproj": {
                 "projectPath": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Libraries\\ParsaLibraryManagement.Domain\\ParsaLibraryManagement.Domain.csproj"
+              },
+              "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Libraries\\ParsaLibraryManagement.Infrastructure\\ParsaLibraryManagement.Infrastructure.csproj": {
+                "projectPath": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Libraries\\ParsaLibraryManagement.Infrastructure\\ParsaLibraryManagement.Infrastructure.csproj"
               }
             }
           }
@@ -46,6 +49,20 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[12.0.1, )"
+            },
+            "FluentValidation": {
+              "target": "Package",
+              "version": "[11.8.1, )"
+            },
+            "Microsoft.AspNetCore.Http.Features": {
+              "target": "Package",
+              "version": "[5.0.17, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -104,6 +121,94 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.307\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Libraries\\ParsaLibraryManagement.Infrastructure\\ParsaLibraryManagement.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Libraries\\ParsaLibraryManagement.Infrastructure\\ParsaLibraryManagement.Infrastructure.csproj",
+        "projectName": "ParsaLibraryManagement.Infrastructure",
+        "projectPath": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Libraries\\ParsaLibraryManagement.Infrastructure\\ParsaLibraryManagement.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\hemat\\.nuget\\packages\\",
+        "outputPath": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Libraries\\ParsaLibraryManagement.Infrastructure\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\hemat\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Libraries\\ParsaLibraryManagement.Domain\\ParsaLibraryManagement.Domain.csproj": {
+                "projectPath": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Libraries\\ParsaLibraryManagement.Domain\\ParsaLibraryManagement.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.14, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.14, )"
+            },
+            "Microsoft.EntityFrameworkCore.Relational": {
+              "target": "Package",
+              "version": "[7.0.14, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[7.0.14, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.14, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

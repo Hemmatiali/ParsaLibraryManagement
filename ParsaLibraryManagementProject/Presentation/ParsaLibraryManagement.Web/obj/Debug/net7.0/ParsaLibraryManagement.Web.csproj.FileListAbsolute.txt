@@ -79,3 +79,5 @@ E:\Parsa Library Management(New Release)\ParsaLibraryManagement\src\ParsaLibrary
 E:\Parsa Library Management(New Release)\ParsaLibraryManagement\src\ParsaLibraryManagementProject\Presentation\ParsaLibraryManagement.Web\bin\Debug\net7.0\Microsoft.Extensions.DependencyModel.dll
 E:\Parsa Library Management(New Release)\ParsaLibraryManagement\src\ParsaLibraryManagementProject\Presentation\ParsaLibraryManagement.Web\bin\Debug\net7.0\Mono.TextTemplating.dll
 E:\Parsa Library Management(New Release)\ParsaLibraryManagement\src\ParsaLibraryManagementProject\Presentation\ParsaLibraryManagement.Web\bin\Debug\net7.0\System.CodeDom.dll
+E:\Parsa Library Management(New Release)\ParsaLibraryManagement\src\ParsaLibraryManagementProject\Presentation\ParsaLibraryManagement.Web\bin\Debug\net7.0\AutoMapper.dll
+E:\Parsa Library Management(New Release)\ParsaLibraryManagement\src\ParsaLibraryManagementProject\Presentation\ParsaLibraryManagement.Web\bin\Debug\net7.0\FluentValidation.dll
