@@ -4,6 +4,7 @@ using System.Diagnostics;
 
 namespace ParsaLibraryManagement.Web.Controllers
 {
+    //todo remove
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

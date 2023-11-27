@@ -9,13 +9,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{836A3E37-630C-42D9-80A7-BD0AEE3528D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParsaLibraryManagement.Web", "Presentation\ParsaLibraryManagement.Web\ParsaLibraryManagement.Web.csproj", "{4B15FAB1-C3F6-4B20-B2A8-37552BAF4907}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParsaLibraryManagement.Web", "Presentation\ParsaLibraryManagement.Web\ParsaLibraryManagement.Web.csproj", "{4B15FAB1-C3F6-4B20-B2A8-37552BAF4907}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParsaLibraryManagement.Domain", "Libraries\ParsaLibraryManagement.Domain\ParsaLibraryManagement.Domain.csproj", "{D1773FD0-601D-4C35-A223-92DD9C98A18A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParsaLibraryManagement.Domain", "Libraries\ParsaLibraryManagement.Domain\ParsaLibraryManagement.Domain.csproj", "{D1773FD0-601D-4C35-A223-92DD9C98A18A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParsaLibraryManagement.Application", "Libraries\ParsaLibraryManagement.Application\ParsaLibraryManagement.Application.csproj", "{710185B0-A08F-48E4-BE78-BD047454BB60}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParsaLibraryManagement.Application", "Libraries\ParsaLibraryManagement.Application\ParsaLibraryManagement.Application.csproj", "{710185B0-A08F-48E4-BE78-BD047454BB60}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParsaLibraryManagement.Infrastructure", "Libraries\ParsaLibraryManagement.Infrastructure\ParsaLibraryManagement.Infrastructure.csproj", "{AC8E7483-1AFD-425D-94A5-BCC46E6D60A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParsaLibraryManagement.Infrastructure", "Libraries\ParsaLibraryManagement.Infrastructure\ParsaLibraryManagement.Infrastructure.csproj", "{AC8E7483-1AFD-425D-94A5-BCC46E6D60A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

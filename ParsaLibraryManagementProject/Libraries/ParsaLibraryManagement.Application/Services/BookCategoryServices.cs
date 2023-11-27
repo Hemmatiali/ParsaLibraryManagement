@@ -3,27 +3,28 @@ using FluentValidation;
 using ParsaLibraryManagement.Application.DTOs;
 using ParsaLibraryManagement.Application.Interfaces;
 using ParsaLibraryManagement.Domain.Entities;
-using ParsaLibraryManagement.Infrastructure.Data.Contexts;
+using ParsaLibraryManagement.Domain.Interfaces.Repository;
 
 namespace ParsaLibraryManagement.Application.Services
 {
     //todo xml
-    public class BookCategoryServices : IBooksCategoryServices
+    public class BookCategoryServices : IBookCategoryServices
     {
         #region Fields
 
-        private readonly ParsaLibraryManagementDBContext _context;
         private readonly IMapper _mapper;
         private readonly IValidator<BookCategoryDto> _validator;
+        private readonly IBaseRepository<BooksCategory> _repository;
 
         #endregion
+
         #region Ctor
 
-        public BookCategoryServices(ParsaLibraryManagementDBContext context, IMapper mapper, IValidator<BookCategoryDto> validator)
+        public BookCategoryServices(IMapper mapper, IValidator<BookCategoryDto> validator, IRepositoryFactory repositoryFactory)
         {
-            _context = context;
             _mapper = mapper;
             _validator = validator;
+            _repository = repositoryFactory.GetRepository<BooksCategory>();
         }
 
         #endregion
@@ -31,22 +32,34 @@ namespace ParsaLibraryManagement.Application.Services
         #region Methods
 
         /// <inheritdoc />
-        public void CreateCategory(BookCategoryDto categoryDto)
+        public async Task<List<BookCategoryDto>> GetAllCategoriesAsync()
+        {
+            var categories = await _repository.GetAllAsync();
+            var categoryDtos = categories.Select(c => _mapper.Map<BookCategoryDto>(c)).ToList();
+            return categoryDtos;
+        }
+
+        /// <inheritdoc />
+        public async Task<string?> CreateCategoryAsync(BookCategoryDto categoryDto)
         {
             // Validate DTO
-            var validationResult = _validator.Validate(categoryDto);
+            var validationResult = await _validator.ValidateAsync(categoryDto);
             if (!validationResult.IsValid)
             {
-                // Handle validation errors. Throw an exception with errors responses
-                throw new ValidationException(validationResult.Errors);
+                var errorMessages = string.Join(", ", validationResult.Errors.Select(e => e.ErrorMessage));
+                return errorMessages;
             }
 
             // Mapper
             var category = _mapper.Map<BooksCategory>(categoryDto);
 
-            // Add in DB
-            _context.BooksCategories.Add(category);
-            _context.SaveChanges();
+            // Adds the category to the repository
+            await _repository.AddAsync(category);
+
+            // Saves changes to the database
+            await _repository.SaveChangesAsync();
+
+            return null;
         }
 
         #endregion

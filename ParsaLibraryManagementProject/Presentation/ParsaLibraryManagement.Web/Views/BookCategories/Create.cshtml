@@ -1,0 +1,99 @@
+﻿@model ParsaLibraryManagement.Web.ViewModels.BookCategories.BookCategoryViewModel
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Create book category";
+}
+
+<!-- begin::main content -->
+<main class="main-content">
+    <div class="container-fluid">
+        <!-- begin::page header -->
+        <div class="page-header">
+            <div>
+                <h3>Create a book category</h3>
+            </div>
+        </div>
+        <!-- end::page header -->
+
+        <div class="card">
+            <div class="card-body">
+                @if (@ViewBag.errorMessage != null)
+                {
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="alert alert-danger" role="alert">
+                                        <i class="ti-alert m-l-10"></i>  @ViewBag.errorMessage
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <form asp-action="Create" class="needs-validation" novalidate="" method="post" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="txtTitle">Title</label>
+                            <input id="txtTitle" asp-for="@Model.Category.Title" type="text" class="form-control" placeholder="Title" maxlength="50" required="" />
+                            <span asp-validation-for="@Model.Category.Title" class="text-danger"></span>
+                            <div class="invalid-feedback">
+                                Title is required.
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="drpRefGroups">Reference group</label>
+                            @{
+                                <select id="drpRefGroups" class="form-control" asp-for="@Model.Category.RefId" asp-items="@Model.RefGroups"></select>
+                            }
+                            <span asp-validation-for="@Model.Category.RefId" class="text-danger"></span>
+                            <div class="invalid-feedback">
+                              Reference group is required. 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <label for="fuImg">Category image</label>
+                            <input id="fuImg" asp-for="@Model.ImageFile" type="file" class="form-control" required="" maxlength="37" />
+                            <small id="fuImgHelp" class="form-text text-muted">Note that for better quality, the minimum photo size should be 250 x 250.</small>
+                            <span asp-validation-for="@Model.ImageFile" class="text-danger"></span>
+                            <div class="invalid-feedback">
+                               Category image is required.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row" style="margin-top: 12px">
+                        <div class="col-md-12">
+                            <input type="submit" value="Submit" class="btn btn btn-primary" />
+                            <a class="btn btn-secondary" style="color:white" asp-action="Index">Back to list</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    @section FormsValidation
+        {
+        <script>
+            //  Form Validation
+            window.addEventListener('load', function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        </script>
+    }
+</main>
+<!-- end::main content -->

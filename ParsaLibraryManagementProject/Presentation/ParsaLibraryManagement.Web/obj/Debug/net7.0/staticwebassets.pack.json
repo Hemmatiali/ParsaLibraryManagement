@@ -5,16 +5,288 @@
       "PackagePath": "staticwebassets\\ParsaLibraryManagement.Web.bundle.scp.css"
     },
     {
-      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\css\\site.css",
-      "PackagePath": "staticwebassets\\css\\site.css"
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\css\\app.min.css",
+      "PackagePath": "staticwebassets\\assets\\css\\app.min.css"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\css\\custom.css",
+      "PackagePath": "staticwebassets\\assets\\css\\custom.css"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\icons\\font-awesome\\css\\font-awesome.min.css",
+      "PackagePath": "staticwebassets\\assets\\icons\\font-awesome\\css\\font-awesome.min.css"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\icons\\font-awesome\\fonts\\fontawesome-webfont.eot",
+      "PackagePath": "staticwebassets\\assets\\icons\\font-awesome\\fonts\\fontawesome-webfont.eot"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\icons\\font-awesome\\fonts\\fontawesome-webfont.svg",
+      "PackagePath": "staticwebassets\\assets\\icons\\font-awesome\\fonts\\fontawesome-webfont.svg"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\icons\\font-awesome\\fonts\\fontawesome-webfont.ttf",
+      "PackagePath": "staticwebassets\\assets\\icons\\font-awesome\\fonts\\fontawesome-webfont.ttf"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\icons\\font-awesome\\fonts\\fontawesome-webfont.woff",
+      "PackagePath": "staticwebassets\\assets\\icons\\font-awesome\\fonts\\fontawesome-webfont.woff"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\icons\\font-awesome\\fonts\\fontawesome-webfont.woff2",
+      "PackagePath": "staticwebassets\\assets\\icons\\font-awesome\\fonts\\fontawesome-webfont.woff2"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\icons\\themify\\fonts\\themify.eot",
+      "PackagePath": "staticwebassets\\assets\\icons\\themify\\fonts\\themify.eot"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\icons\\themify\\fonts\\themify.svg",
+      "PackagePath": "staticwebassets\\assets\\icons\\themify\\fonts\\themify.svg"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\icons\\themify\\fonts\\themify.ttf",
+      "PackagePath": "staticwebassets\\assets\\icons\\themify\\fonts\\themify.ttf"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\icons\\themify\\fonts\\themify.woff",
+      "PackagePath": "staticwebassets\\assets\\icons\\themify\\fonts\\themify.woff"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\icons\\themify\\themify-icons.css",
+      "PackagePath": "staticwebassets\\assets\\icons\\themify\\themify-icons.css"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\icons\\weather\\css\\helper.css",
+      "PackagePath": "staticwebassets\\assets\\icons\\weather\\css\\helper.css"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\icons\\weather\\css\\pe-icon-7-weather.css",
+      "PackagePath": "staticwebassets\\assets\\icons\\weather\\css\\pe-icon-7-weather.css"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\icons\\weather\\fonts\\pe-icon-set-weather.eot",
+      "PackagePath": "staticwebassets\\assets\\icons\\weather\\fonts\\pe-icon-set-weather.eot"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\icons\\weather\\fonts\\pe-icon-set-weather.svg",
+      "PackagePath": "staticwebassets\\assets\\icons\\weather\\fonts\\pe-icon-set-weather.svg"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\icons\\weather\\fonts\\pe-icon-set-weather.ttf",
+      "PackagePath": "staticwebassets\\assets\\icons\\weather\\fonts\\pe-icon-set-weather.ttf"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\icons\\weather\\fonts\\pe-icon-set-weather.woff",
+      "PackagePath": "staticwebassets\\assets\\icons\\weather\\fonts\\pe-icon-set-weather.woff"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\js\\app.js",
+      "PackagePath": "staticwebassets\\assets\\js\\app.js"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\js\\app.min.js",
+      "PackagePath": "staticwebassets\\assets\\js\\app.min.js"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\js\\custom.js",
+      "PackagePath": "staticwebassets\\assets\\js\\custom.js"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\js\\examples\\charts\\chartjs.js",
+      "PackagePath": "staticwebassets\\assets\\js\\examples\\charts\\chartjs.js"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\js\\examples\\charts\\justgage.js",
+      "PackagePath": "staticwebassets\\assets\\js\\examples\\charts\\justgage.js"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\js\\examples\\charts\\peity.js",
+      "PackagePath": "staticwebassets\\assets\\js\\examples\\charts\\peity.js"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\js\\examples\\ckeditor.js",
+      "PackagePath": "staticwebassets\\assets\\js\\examples\\ckeditor.js"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\js\\examples\\clockpicker.js",
+      "PackagePath": "staticwebassets\\assets\\js\\examples\\clockpicker.js"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\js\\examples\\colorpicker.js",
+      "PackagePath": "staticwebassets\\assets\\js\\examples\\colorpicker.js"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\js\\examples\\dashboard.js",
+      "PackagePath": "staticwebassets\\assets\\js\\examples\\dashboard.js"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\js\\examples\\datatable.js",
+      "PackagePath": "staticwebassets\\assets\\js\\examples\\datatable.js"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\js\\examples\\datepicker.js",
+      "PackagePath": "staticwebassets\\assets\\js\\examples\\datepicker.js"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\js\\examples\\dropzone.js",
+      "PackagePath": "staticwebassets\\assets\\js\\examples\\dropzone.js"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\js\\examples\\form-wizard.js",
+      "PackagePath": "staticwebassets\\assets\\js\\examples\\form-wizard.js"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\js\\examples\\fullcalendar.js",
+      "PackagePath": "staticwebassets\\assets\\js\\examples\\fullcalendar.js"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\js\\examples\\input-mask.js",
+      "PackagePath": "staticwebassets\\assets\\js\\examples\\input-mask.js"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\js\\examples\\lightbox.js",
+      "PackagePath": "staticwebassets\\assets\\js\\examples\\lightbox.js"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\js\\examples\\range-slider.js",
+      "PackagePath": "staticwebassets\\assets\\js\\examples\\range-slider.js"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\js\\examples\\select2.js",
+      "PackagePath": "staticwebassets\\assets\\js\\examples\\select2.js"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\js\\examples\\sweet-alert.js",
+      "PackagePath": "staticwebassets\\assets\\js\\examples\\sweet-alert.js"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\js\\examples\\swiper.js",
+      "PackagePath": "staticwebassets\\assets\\js\\examples\\swiper.js"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\js\\examples\\tagsinput.js",
+      "PackagePath": "staticwebassets\\assets\\js\\examples\\tagsinput.js"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\js\\examples\\toast.js",
+      "PackagePath": "staticwebassets\\assets\\js\\examples\\toast.js"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\js\\examples\\tour.js",
+      "PackagePath": "staticwebassets\\assets\\js\\examples\\tour.js"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\js\\examples\\treeview.js",
+      "PackagePath": "staticwebassets\\assets\\js\\examples\\treeview.js"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\js\\examples\\vmap.js",
+      "PackagePath": "staticwebassets\\assets\\js\\examples\\vmap.js"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\media\\image\\404.png",
+      "PackagePath": "staticwebassets\\assets\\media\\image\\404.png"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\media\\image\\avatar.jpg",
+      "PackagePath": "staticwebassets\\assets\\media\\image\\avatar.jpg"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\media\\image\\dark-logo.png",
+      "PackagePath": "staticwebassets\\assets\\media\\image\\dark-logo.png"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\media\\image\\favicon.png",
+      "PackagePath": "staticwebassets\\assets\\media\\image\\favicon.png"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\media\\image\\light-logo.png",
+      "PackagePath": "staticwebassets\\assets\\media\\image\\light-logo.png"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\media\\image\\photo1.jpg",
+      "PackagePath": "staticwebassets\\assets\\media\\image\\photo1.jpg"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\media\\image\\photo10.jpg",
+      "PackagePath": "staticwebassets\\assets\\media\\image\\photo10.jpg"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\media\\image\\photo2.jpg",
+      "PackagePath": "staticwebassets\\assets\\media\\image\\photo2.jpg"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\media\\image\\photo3.jpg",
+      "PackagePath": "staticwebassets\\assets\\media\\image\\photo3.jpg"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\media\\image\\photo4.jpg",
+      "PackagePath": "staticwebassets\\assets\\media\\image\\photo4.jpg"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\media\\image\\photo5.jpg",
+      "PackagePath": "staticwebassets\\assets\\media\\image\\photo5.jpg"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\media\\image\\photo6.jpg",
+      "PackagePath": "staticwebassets\\assets\\media\\image\\photo6.jpg"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\media\\image\\photo7.jpg",
+      "PackagePath": "staticwebassets\\assets\\media\\image\\photo7.jpg"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\media\\image\\photo8.jpg",
+      "PackagePath": "staticwebassets\\assets\\media\\image\\photo8.jpg"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\media\\image\\photo9.jpg",
+      "PackagePath": "staticwebassets\\assets\\media\\image\\photo9.jpg"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\media\\image\\portfolio-five.jpg",
+      "PackagePath": "staticwebassets\\assets\\media\\image\\portfolio-five.jpg"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\media\\image\\portfolio-four.jpg",
+      "PackagePath": "staticwebassets\\assets\\media\\image\\portfolio-four.jpg"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\media\\image\\portfolio-one.jpg",
+      "PackagePath": "staticwebassets\\assets\\media\\image\\portfolio-one.jpg"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\media\\image\\portfolio-six.jpg",
+      "PackagePath": "staticwebassets\\assets\\media\\image\\portfolio-six.jpg"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\media\\image\\portfolio-three.jpg",
+      "PackagePath": "staticwebassets\\assets\\media\\image\\portfolio-three.jpg"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\media\\image\\portfolio-two.jpg",
+      "PackagePath": "staticwebassets\\assets\\media\\image\\portfolio-two.jpg"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\vendors\\bundle.css",
+      "PackagePath": "staticwebassets\\assets\\vendors\\bundle.css"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\assets\\vendors\\bundle.js",
+      "PackagePath": "staticwebassets\\assets\\vendors\\bundle.js"
     },
     {
       "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
-      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\js\\site.js",
-      "PackagePath": "staticwebassets\\js\\site.js"
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\images\\BookCategories\\4a666dfa945d4e76bd6a354c7d15fbf1.png",
+      "PackagePath": "staticwebassets\\images\\BookCategories\\4a666dfa945d4e76bd6a354c7d15fbf1.png"
     },
     {
       "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\lib\\bootstrap\\LICENSE",
@@ -243,6 +515,10 @@
     {
       "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\logo.svg",
+      "PackagePath": "staticwebassets\\logo.svg"
     },
     {
       "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.ParsaLibraryManagement.Web.Microsoft.AspNetCore.StaticWebAssets.props",

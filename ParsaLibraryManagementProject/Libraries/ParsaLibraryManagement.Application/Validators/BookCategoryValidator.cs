@@ -15,7 +15,7 @@ namespace ParsaLibraryManagement.Application.Validators
 
             RuleFor(x => x.ImageAddress)
                 .NotEmpty().WithMessage("Image address is required.")
-                .Length(37, 37).WithMessage("Image address must be 37 characters.");
+                .MaximumLength(37).WithMessage("Image address must be maximum 37 characters.");
         }
     }
 }

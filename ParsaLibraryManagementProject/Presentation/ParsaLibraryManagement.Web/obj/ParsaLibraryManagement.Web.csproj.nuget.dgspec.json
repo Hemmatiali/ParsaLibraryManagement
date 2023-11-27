@@ -33,9 +33,6 @@
             "projectReferences": {
               "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Libraries\\ParsaLibraryManagement.Domain\\ParsaLibraryManagement.Domain.csproj": {
                 "projectPath": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Libraries\\ParsaLibraryManagement.Domain\\ParsaLibraryManagement.Domain.csproj"
-              },
-              "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Libraries\\ParsaLibraryManagement.Infrastructure\\ParsaLibraryManagement.Infrastructure.csproj": {
-                "projectPath": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Libraries\\ParsaLibraryManagement.Infrastructure\\ParsaLibraryManagement.Infrastructure.csproj"
               }
             }
           }
@@ -121,6 +118,12 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Http.Features": {
+              "target": "Package",
+              "version": "[5.0.17, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -276,6 +279,14 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[12.0.1, )"
+            },
+            "FluentValidation.AspNetCore": {
+              "target": "Package",
+              "version": "[11.3.0, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[7.0.14, )"

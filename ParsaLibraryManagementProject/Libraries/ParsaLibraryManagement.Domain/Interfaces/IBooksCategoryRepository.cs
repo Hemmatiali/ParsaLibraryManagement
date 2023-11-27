@@ -1,4 +1,6 @@
-﻿namespace ParsaLibraryManagement.Domain.Interfaces
+﻿using ParsaLibraryManagement.Domain.Entities;
+
+namespace ParsaLibraryManagement.Domain.Interfaces
 {
     /// <summary>
     /// Represents a repository for managing book category-related data.
@@ -8,5 +10,7 @@
     /// </remarks>
     public interface IBooksCategoryRepository
     {
+        void AddBookCategory(BooksCategory category);
+        void SaveChanges();
     }
 }

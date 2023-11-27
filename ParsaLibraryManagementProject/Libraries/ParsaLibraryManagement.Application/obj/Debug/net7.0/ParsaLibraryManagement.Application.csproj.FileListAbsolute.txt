@@ -13,5 +13,3 @@ E:\Parsa Library Management(New Release)\ParsaLibraryManagement\src\ParsaLibrary
 E:\Parsa Library Management(New Release)\ParsaLibraryManagement\src\ParsaLibraryManagementProject\Libraries\ParsaLibraryManagement.Application\obj\Debug\net7.0\refint\ParsaLibraryManagement.Application.dll
 E:\Parsa Library Management(New Release)\ParsaLibraryManagement\src\ParsaLibraryManagementProject\Libraries\ParsaLibraryManagement.Application\obj\Debug\net7.0\ParsaLibraryManagement.Application.pdb
 E:\Parsa Library Management(New Release)\ParsaLibraryManagement\src\ParsaLibraryManagementProject\Libraries\ParsaLibraryManagement.Application\obj\Debug\net7.0\ref\ParsaLibraryManagement.Application.dll
-E:\Parsa Library Management(New Release)\ParsaLibraryManagement\src\ParsaLibraryManagementProject\Libraries\ParsaLibraryManagement.Application\bin\Debug\net7.0\ParsaLibraryManagement.Infrastructure.dll
-E:\Parsa Library Management(New Release)\ParsaLibraryManagement\src\ParsaLibraryManagementProject\Libraries\ParsaLibraryManagement.Application\bin\Debug\net7.0\ParsaLibraryManagement.Infrastructure.pdb
