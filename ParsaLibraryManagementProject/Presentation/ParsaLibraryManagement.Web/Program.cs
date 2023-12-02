@@ -1,16 +1,14 @@
 using FluentValidation.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using ParsaLibraryManagement.Application.Interfaces;
 using ParsaLibraryManagement.Application.Mappings;
 using ParsaLibraryManagement.Application.Services;
 using ParsaLibraryManagement.Application.Validators;
-using ParsaLibraryManagement.Domain.Entities;
-using ParsaLibraryManagement.Domain.Interfaces.General;
+using ParsaLibraryManagement.Domain.Interfaces.ImageServices;
 using ParsaLibraryManagement.Domain.Interfaces.Repository;
 using ParsaLibraryManagement.Infrastructure.Data.Contexts;
 using ParsaLibraryManagement.Infrastructure.Data.Repositories;
-using ParsaLibraryManagement.Infrastructure.Services.General;
+using ParsaLibraryManagement.Infrastructure.Services.ImageServices;
 using ParsaLibraryManagement.Web.ValidationServices;
 
 var builder = WebApplication.CreateBuilder(args);

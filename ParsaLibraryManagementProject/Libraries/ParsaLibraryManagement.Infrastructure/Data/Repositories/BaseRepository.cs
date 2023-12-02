@@ -1,9 +1,4 @@
 ﻿using ParsaLibraryManagement.Infrastructure.Data.Contexts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ParsaLibraryManagement.Domain.Interfaces.Repository;
 
@@ -55,6 +50,9 @@ namespace ParsaLibraryManagement.Infrastructure.Data.Repositories
 
         /// <inheritdoc/>
         public async Task<TEntity?> GetByIdAsync(int id) => await Context.Set<TEntity>().FindAsync(id);
+
+        /// <inheritdoc/>
+        public async Task<TEntity?> GetByIdAsync(short id) => await Context.Set<TEntity>().FindAsync(id);
 
         /// <inheritdoc/>
         public TEntity? GetById(int id) => Context.Set<TEntity>().Find(id);

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "0zzkX1eBQ0MpSW+NnH6SElhejdiR29rIeUPM4W0xV2A=",
+  "Hash": "Ve02pv+78P66wGKBAIDBJHVtG/PKP/9eqHfCVHZ4ysY=",
   "Source": "ParsaLibraryManagement.Web",
   "BasePath": "_content/ParsaLibraryManagement.Web",
   "Mode": "Default",
@@ -1241,12 +1241,12 @@
       "OriginalItemSpec": "wwwroot\\favicon.png"
     },
     {
-      "Identity": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\images\\BookCategories\\4a666dfa945d4e76bd6a354c7d15fbf1.png",
+      "Identity": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\images\\BookCategories\\8be82b8da4b8433ca237417f3dd146bb.png",
       "SourceId": "ParsaLibraryManagement.Web",
       "SourceType": "Discovered",
       "ContentRoot": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\",
       "BasePath": "_content/ParsaLibraryManagement.Web",
-      "RelativePath": "images/BookCategories/4a666dfa945d4e76bd6a354c7d15fbf1.png",
+      "RelativePath": "images/BookCategories/8be82b8da4b8433ca237417f3dd146bb.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -1255,7 +1255,24 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\BookCategories\\4a666dfa945d4e76bd6a354c7d15fbf1.png"
+      "OriginalItemSpec": "wwwroot\\images\\BookCategories\\8be82b8da4b8433ca237417f3dd146bb.png"
+    },
+    {
+      "Identity": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\images\\BookCategories\\thumbnail\\8be82b8da4b8433ca237417f3dd146bb.png",
+      "SourceId": "ParsaLibraryManagement.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\",
+      "BasePath": "_content/ParsaLibraryManagement.Web",
+      "RelativePath": "images/BookCategories/thumbnail/8be82b8da4b8433ca237417f3dd146bb.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\BookCategories\\thumbnail\\8be82b8da4b8433ca237417f3dd146bb.png"
     },
     {
       "Identity": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",

@@ -86,3 +86,4 @@ E:\Parsa Library Management(New Release)\ParsaLibraryManagement\src\ParsaLibrary
 E:\Parsa Library Management(New Release)\ParsaLibraryManagement\src\ParsaLibraryManagementProject\Presentation\ParsaLibraryManagement.Web\bin\Debug\net7.0\FluentValidation.AspNetCore.dll
 E:\Parsa Library Management(New Release)\ParsaLibraryManagement\src\ParsaLibraryManagementProject\Presentation\ParsaLibraryManagement.Web\bin\Debug\net7.0\FluentValidation.DependencyInjectionExtensions.dll
 E:\Parsa Library Management(New Release)\ParsaLibraryManagement\src\ParsaLibraryManagementProject\Presentation\ParsaLibraryManagement.Web\obj\Debug\net7.0\ParsaLibraryManagement.Web.MvcApplicationPartsAssemblyInfo.cs
+E:\Parsa Library Management(New Release)\ParsaLibraryManagement\src\ParsaLibraryManagementProject\Presentation\ParsaLibraryManagement.Web\bin\Debug\net7.0\SixLabors.ImageSharp.dll

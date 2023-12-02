@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ParsaLibraryManagement.Domain.Interfaces.Repository
+﻿namespace ParsaLibraryManagement.Domain.Interfaces.Repository
 {
     //todo xml
     public interface IBaseRepository<TEntity> where TEntity : class
@@ -19,6 +13,7 @@ namespace ParsaLibraryManagement.Domain.Interfaces.Repository
         Task<IEnumerable<TEntity>> GetAllAsync();
         IEnumerable<TEntity> GetAll();
         Task<TEntity?> GetByIdAsync(int id);
+        Task<TEntity?> GetByIdAsync(short id);
         TEntity? GetById(int id);
         Task SaveChangesAsync();
         void SaveChanges();

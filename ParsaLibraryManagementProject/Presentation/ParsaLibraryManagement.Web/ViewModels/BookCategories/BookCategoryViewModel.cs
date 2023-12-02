@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using ParsaLibraryManagement.Application.DTOs;
-using ParsaLibraryManagement.Web.ValidationAttributes;
 using System.ComponentModel.DataAnnotations;
 
 namespace ParsaLibraryManagement.Web.ViewModels.BookCategories

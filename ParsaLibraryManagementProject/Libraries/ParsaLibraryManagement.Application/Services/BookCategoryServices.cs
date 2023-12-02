@@ -32,6 +32,20 @@ namespace ParsaLibraryManagement.Application.Services
         #region Methods
 
         /// <inheritdoc />
+        public async Task<BookCategoryDto?> GetCategoryByIdAsync(short categoryId)
+        {
+            // Get category
+            var category = await _repository.GetByIdAsync(categoryId);
+            if (category == null)
+                return null;
+
+            // Map the category to Dto
+            return _mapper.Map<BookCategoryDto>(category);
+        }
+
+
+
+        /// <inheritdoc />
         public async Task<List<BookCategoryDto>> GetAllCategoriesAsync()
         {
             var categories = await _repository.GetAllAsync();
@@ -61,6 +75,30 @@ namespace ParsaLibraryManagement.Application.Services
 
             return null;
         }
+
+        /// <inheritdoc />
+        public async Task<string?> UpdateCategoryAsync(short categoryId, BookCategoryDto categoryDto)
+        {
+            var validationResult = await _validator.ValidateAsync(categoryDto);
+            if (!validationResult.IsValid)
+            {
+                return string.Join(", ", validationResult.Errors.Select(e => e.ErrorMessage));
+            }
+
+            var category = await _repository.GetByIdAsync(categoryId);
+            if (category == null)
+            {
+                return "Category not found.";
+            }
+
+            _mapper.Map(categoryDto, category);
+            await _repository.UpdateAsync(category);
+            await _repository.SaveChangesAsync();
+
+            return null;
+        }
+
+
 
         #endregion
     }

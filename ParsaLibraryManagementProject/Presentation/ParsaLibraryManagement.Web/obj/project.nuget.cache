@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "1xS+g7acOTg8UCGnMxtg2cZAVqYeNf0fuj8nfJ4ZD9t051UMJiOlIpY0/efmG3mtLsQbImZE2lBIJfWiGUyzUA==",
+  "dgSpecHash": "QXrMuKPbkPT+8R540PylpgoPLX9qmi5ZNSENsDV7SoHRIEMR/96AZDfD1lkAB6Xsyy9b8NDICJRffAQUSnnWTA==",
   "success": true,
   "projectFilePath": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\ParsaLibraryManagement.Web.csproj",
   "expectedPackageFiles": [
@@ -46,6 +46,7 @@
     "C:\\Users\\hemat\\.nuget\\packages\\microsoft.sqlserver.server\\1.0.0\\microsoft.sqlserver.server.1.0.0.nupkg.sha512",
     "C:\\Users\\hemat\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "C:\\Users\\hemat\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
+    "C:\\Users\\hemat\\.nuget\\packages\\sixlabors.imagesharp\\3.1.0\\sixlabors.imagesharp.3.1.0.nupkg.sha512",
     "C:\\Users\\hemat\\.nuget\\packages\\system.codedom\\4.4.0\\system.codedom.4.4.0.nupkg.sha512",
     "C:\\Users\\hemat\\.nuget\\packages\\system.configuration.configurationmanager\\6.0.1\\system.configuration.configurationmanager.6.0.1.nupkg.sha512",
     "C:\\Users\\hemat\\.nuget\\packages\\system.diagnostics.diagnosticsource\\6.0.0\\system.diagnostics.diagnosticsource.6.0.0.nupkg.sha512",

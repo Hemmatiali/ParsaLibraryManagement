@@ -285,8 +285,12 @@
       "PackagePath": "staticwebassets\\favicon.png"
     },
     {
-      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\images\\BookCategories\\4a666dfa945d4e76bd6a354c7d15fbf1.png",
-      "PackagePath": "staticwebassets\\images\\BookCategories\\4a666dfa945d4e76bd6a354c7d15fbf1.png"
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\images\\BookCategories\\8be82b8da4b8433ca237417f3dd146bb.png",
+      "PackagePath": "staticwebassets\\images\\BookCategories\\8be82b8da4b8433ca237417f3dd146bb.png"
+    },
+    {
+      "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\images\\BookCategories\\thumbnail\\8be82b8da4b8433ca237417f3dd146bb.png",
+      "PackagePath": "staticwebassets\\images\\BookCategories\\thumbnail\\8be82b8da4b8433ca237417f3dd146bb.png"
     },
     {
       "Id": "E:\\Parsa Library Management(New Release)\\ParsaLibraryManagement\\src\\ParsaLibraryManagementProject\\Presentation\\ParsaLibraryManagement.Web\\wwwroot\\lib\\bootstrap\\LICENSE",

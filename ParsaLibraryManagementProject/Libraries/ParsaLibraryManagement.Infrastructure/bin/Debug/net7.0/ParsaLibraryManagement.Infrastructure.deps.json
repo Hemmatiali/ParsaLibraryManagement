@@ -13,7 +13,8 @@
           "Microsoft.EntityFrameworkCore.Relational": "7.0.14",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.14",
           "Microsoft.EntityFrameworkCore.Tools": "7.0.14",
-          "ParsaLibraryManagement.Domain": "1.0.0"
+          "ParsaLibraryManagement.Domain": "1.0.0",
+          "SixLabors.ImageSharp": "3.1.0"
         },
         "runtime": {
           "ParsaLibraryManagement.Infrastructure.dll": {}
@@ -446,6 +447,14 @@
           "lib/netstandard2.0/Mono.TextTemplating.dll": {
             "assemblyVersion": "2.2.0.0",
             "fileVersion": "2.2.1.1"
+          }
+        }
+      },
+      "SixLabors.ImageSharp/3.1.0": {
+        "runtime": {
+          "lib/net6.0/SixLabors.ImageSharp.dll": {
+            "assemblyVersion": "3.0.0.0",
+            "fileVersion": "3.1.0.0"
           }
         }
       },
@@ -914,6 +923,13 @@
       "sha512": "sha512-KZYeKBET/2Z0gY1WlTAK7+RHTl7GSbtvTLDXEZZojUdAPqpQNDL6tHv7VUpqfX5VEOh+uRGKaZXkuD253nEOBQ==",
       "path": "mono.texttemplating/2.2.1",
       "hashPath": "mono.texttemplating.2.2.1.nupkg.sha512"
+    },
+    "SixLabors.ImageSharp/3.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ESlqDmrxIFxOd8VcKpyymA6uav51iXFp/j73fYcDMpIXWe2VEsjS2OL8nZGpvgt2Y1LKgQpM5ZpPJa/YlS73Pg==",
+      "path": "sixlabors.imagesharp/3.1.0",
+      "hashPath": "sixlabors.imagesharp.3.1.0.nupkg.sha512"
     },
     "System.CodeDom/4.4.0": {
       "type": "package",

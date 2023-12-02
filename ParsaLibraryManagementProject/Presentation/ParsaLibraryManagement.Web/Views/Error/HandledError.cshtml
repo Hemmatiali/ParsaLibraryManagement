@@ -1,0 +1,33 @@
+﻿@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Error";
+}
+
+<!-- begin::main content -->
+<main class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">An error occurred!</h5>
+                        @if (string.IsNullOrWhiteSpace(ViewBag.errMessage))
+                        {
+                            <div class="alert alert-danger" role="alert">
+                                Un handled error occurred! contact the support.
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="alert alert-danger" role="alert">
+                                @ViewBag.errMessage
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- end::main content -->

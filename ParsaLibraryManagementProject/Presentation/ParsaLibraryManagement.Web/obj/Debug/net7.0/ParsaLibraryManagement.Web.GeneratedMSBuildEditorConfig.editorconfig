@@ -20,8 +20,16 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va0NhdGVnb3JpZXNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/Parsa Library Management(New Release)/ParsaLibraryManagement/src/ParsaLibraryManagementProject/Presentation/ParsaLibraryManagement.Web/Views/BookCategories/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va0NhdGVnb3JpZXNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/Parsa Library Management(New Release)/ParsaLibraryManagement/src/ParsaLibraryManagementProject/Presentation/ParsaLibraryManagement.Web/Views/BookCategories/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va0NhdGVnb3JpZXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Parsa Library Management(New Release)/ParsaLibraryManagement/src/ParsaLibraryManagementProject/Presentation/ParsaLibraryManagement.Web/Views/Error/HandledError.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcSGFuZGxlZEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/Parsa Library Management(New Release)/ParsaLibraryManagement/src/ParsaLibraryManagementProject/Presentation/ParsaLibraryManagement.Web/Views/Shared/Error.cshtml]

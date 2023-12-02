@@ -1,6 +1,56 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model List<ParsaLibraryManagement.Application.DTOs.BookCategoryDto>
+
 @{
-    <h1>Index of book categories</h1>
+    Layout = "_Layout";
+    ViewData["Title"] = "List of book categories";
 }
+
+<main class="main-content">
+    <div class="container">
+        <!-- begin::page header -->
+        <div class="page-header">
+            <a class="btn btn-primary" asp-action="Create" style="color:white">
+                <i class="ti-plus m-r-5"></i> Create a new category
+            </a>
+        </div>
+        <!-- end::page header -->
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Classification of books</h5>
+                        <div class="table-responsive" tabindex="1" style="overflow: hidden; outline: none;">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Category title</th>
+                                    <th class="text-left" scope="col">Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @{
+                                    int rowIndex = 1;
+                                    @foreach (var category in Model)
+                                    {
+                                        <tr>
+                                            <td>@rowIndex</td>
+                                            <td>@category.Title</td>
+                                            <td class="text-left">
+                                                <a asp-action="Edit" asp-route-id="@category.CategoryId" class="btn btn-warning" style="color:white"> <i class="ti-pencil m-r-5"></i> Edit </a>
+                                                @*<a asp-action="Delete" asp-route-id="@category.CategoryId" class="btn btn-danger btn-square btn-uppercase"> <i class="ti-pencil m-l-5"></i> Delete</a> todo*@
+                                            </td>
+                                        </tr>
+                                        rowIndex++;
+                                    }
+                                }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

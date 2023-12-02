@@ -1,6 +1,4 @@
 ﻿using ParsaLibraryManagement.Application.DTOs;
-using ParsaLibraryManagement.Domain.Entities;
-using ParsaLibraryManagement.Domain.Interfaces;
 
 namespace ParsaLibraryManagement.Application.Interfaces
 {
@@ -8,9 +6,8 @@ namespace ParsaLibraryManagement.Application.Interfaces
     public interface IBookCategoryServices
     {
         ////todo XML
-        //Task<IEnumerable<BookCategoryDto>> GetAllCategoriesAsync();
-        ////todo XML
-        //Task<BookCategoryDto> GetCategoryByIdAsync(int categoryId);
+        Task<BookCategoryDto?> GetCategoryByIdAsync(short categoryId);
+
         ////todo XML
         Task<List<BookCategoryDto>> GetAllCategoriesAsync();
 
@@ -18,7 +15,9 @@ namespace ParsaLibraryManagement.Application.Interfaces
         Task<string?> CreateCategoryAsync(BookCategoryDto categoryDto);
 
         ////todo XML
-        //Task UpdateCategoryAsync(int categoryId, BookCategoryDto categoryDto);
+        Task<string?> UpdateCategoryAsync(short categoryId, BookCategoryDto categoryDto);
+
+
         ////todo XML
         //Task DeleteCategoryAsync(int categoryId);
     }
