@@ -9,7 +9,7 @@ namespace ParsaLibraryManagement.Infrastructure.Data.Repositories
     {
         #region Fields
 
-        private readonly ParsaLibraryManagementDBContext Context;
+        private readonly ParsaLibraryManagementDBContext _context;
 
         #endregion
 
@@ -17,7 +17,7 @@ namespace ParsaLibraryManagement.Infrastructure.Data.Repositories
 
         public BaseRepository(ParsaLibraryManagementDBContext context)
         {
-            Context = context;
+            _context = context;
         }
 
         #endregion
@@ -25,43 +25,43 @@ namespace ParsaLibraryManagement.Infrastructure.Data.Repositories
         #region Methods
 
         /// <inheritdoc/>
-        public async Task AddAsync(TEntity entity) => await Context.Set<TEntity>().AddAsync(entity);
+        public async Task AddAsync(TEntity entity) => await _context.Set<TEntity>().AddAsync(entity);
 
         /// <inheritdoc/>
-        public void Add(TEntity entity) => Context.Set<TEntity>().Add(entity);
+        public void Add(TEntity entity) => _context.Set<TEntity>().Add(entity);
 
         /// <inheritdoc/>
-        public async Task UpdateAsync(TEntity entity) => await Task.Run(() => Context.Set<TEntity>().Update(entity));
+        public async Task UpdateAsync(TEntity entity) => await Task.Run(() => _context.Set<TEntity>().Update(entity));
 
         /// <inheritdoc/>
-        public void Update(TEntity entity) => Context.Set<TEntity>().Update(entity);
+        public void Update(TEntity entity) => _context.Set<TEntity>().Update(entity);
 
         /// <inheritdoc/>
-        public async Task RemoveAsync(TEntity entity) => await Task.Run(() => Context.Set<TEntity>().Remove(entity));
+        public async Task RemoveAsync(TEntity entity) => await Task.Run(() => _context.Set<TEntity>().Remove(entity));
 
         /// <inheritdoc/>
-        public void Remove(TEntity entity) => Context.Set<TEntity>().Remove(entity);
+        public void Remove(TEntity entity) => _context.Set<TEntity>().Remove(entity);
 
         /// <inheritdoc/>
-        public async Task<IEnumerable<TEntity>> GetAllAsync() => await Context.Set<TEntity>().ToListAsync();
+        public async Task<IEnumerable<TEntity>> GetAllAsync() => await _context.Set<TEntity>().ToListAsync();
 
         /// <inheritdoc/>
-        public IEnumerable<TEntity> GetAll() => Context.Set<TEntity>().ToList();
+        public IEnumerable<TEntity> GetAll() => _context.Set<TEntity>().ToList();
 
         /// <inheritdoc/>
-        public async Task<TEntity?> GetByIdAsync(int id) => await Context.Set<TEntity>().FindAsync(id);
+        public async Task<TEntity?> GetByIdAsync(int id) => await _context.Set<TEntity>().FindAsync(id);
 
         /// <inheritdoc/>
-        public async Task<TEntity?> GetByIdAsync(short id) => await Context.Set<TEntity>().FindAsync(id);
+        public async Task<TEntity?> GetByIdAsync(short id) => await _context.Set<TEntity>().FindAsync(id);
 
         /// <inheritdoc/>
-        public TEntity? GetById(int id) => Context.Set<TEntity>().Find(id);
+        public TEntity? GetById(int id) => _context.Set<TEntity>().Find(id);
 
         /// <inheritdoc/>
-        public async Task SaveChangesAsync() => await Context.SaveChangesAsync();
+        public async Task SaveChangesAsync() => await _context.SaveChangesAsync();
 
         /// <inheritdoc/>
-        public void SaveChanges() => Context.SaveChanges();
+        public void SaveChanges() => _context.SaveChanges();
 
         #endregion
     }

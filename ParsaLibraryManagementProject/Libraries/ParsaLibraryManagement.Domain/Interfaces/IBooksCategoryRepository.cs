@@ -1,16 +1,20 @@
-﻿using ParsaLibraryManagement.Domain.Entities;
+﻿using ParsaLibraryManagement.Domain.Models;
 
 namespace ParsaLibraryManagement.Domain.Interfaces
 {
     /// <summary>
-    /// Represents a repository for managing book category-related data.
+    ///     Interface for the repository that handles book category entities.
     /// </summary>
     /// <remarks>
-    /// This interface defines methods for CRUD operations on book category entities.
+    ///     This interface defines methods related to book categories in the repository.
     /// </remarks>
     public interface IBooksCategoryRepository
     {
-        void AddBookCategory(BooksCategory category);
-        void SaveChanges();
+        /// <summary>
+        ///     Checks if a book category has child relations asynchronously.
+        /// </summary>
+        /// <param name="categoryId">The ID of the book category to check for child relations.</param>
+        /// <returns>A task representing the asynchronous operation, yielding an <see cref="OperationResultModel"/>.</returns>
+        Task<OperationResultModel> HasChildRelations(short categoryId);
     }
 }

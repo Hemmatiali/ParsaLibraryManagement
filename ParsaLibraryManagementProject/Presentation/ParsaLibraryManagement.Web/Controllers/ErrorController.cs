@@ -32,7 +32,7 @@ namespace ParsaLibraryManagement.Web.Controllers
                 ErrorMessageGenerator.ErrorMessageGeneratorMethod(ErrorsMessagesConstants.UnHandledErrMsg, out var errMessage);
             }
 
-            ViewBag.errMessage = errorMessage;
+            ViewBag.errMessage = errorMessage;//todo check
             return View();
         }
 

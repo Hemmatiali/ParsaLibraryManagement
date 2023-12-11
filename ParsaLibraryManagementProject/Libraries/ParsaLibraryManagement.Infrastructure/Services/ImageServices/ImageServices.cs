@@ -2,14 +2,12 @@
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
 using SixLabors.ImageSharp.Formats.Jpeg;
-using System;
-using System.IO;
-using System.Threading.Tasks;
 using ParsaLibraryManagement.Domain.Interfaces.ImageServices;
+using ParsaLibraryManagement.Infrastructure.Common.Constants;
 
 namespace ParsaLibraryManagement.Infrastructure.Services.ImageServices
 {
-    //todo xml
+    /// <inheritdoc cref="IImageServices"/>
     public class ImageServices : IImageServices
     {
         #region Fields
@@ -23,7 +21,12 @@ namespace ParsaLibraryManagement.Infrastructure.Services.ImageServices
 
         #region Methods
 
-        //todo xml & try catch
+        /// <summary>
+        ///     Asynchronously saves an image with compression to the specified path.
+        /// </summary>
+        /// <param name="image">The image to be saved.</param>
+        /// <param name="path">The path where the compressed image should be saved.</param>
+        /// <returns>A task representing the asynchronous operation.</returns>
         private async Task SaveCompressedImageAsync(Image image, string path)
         {
             try
@@ -36,10 +39,14 @@ namespace ParsaLibraryManagement.Infrastructure.Services.ImageServices
             {
                 throw;
             }
-
         }
 
-        //todo xml & try catch
+        /// <summary>
+        ///     Asynchronously saves a thumbnail image to the specified path.
+        /// </summary>
+        /// <param name="image">The image to be saved as a thumbnail.</param>
+        /// <param name="path">The path where the thumbnail image should be saved.</param>
+        /// <returns>A task representing the asynchronous operation.</returns>
         private async Task SaveThumbnailAsync(Image image, string path)
         {
             try
@@ -54,15 +61,6 @@ namespace ParsaLibraryManagement.Infrastructure.Services.ImageServices
             }
         }
 
-        //todo xml
-        private void LogError(Exception ex)
-        {
-            // TODO Implement logging functionality
-            // This can be as simple as logging to a file, or you can use a more robust logging framework
-            // Example:
-            // File.AppendAllText("log.txt", $"{DateTime.Now}: {ex.Message}\n");
-        }
-
         /// <inheritdoc />
         public async Task<string?> SaveImageAsync(IFormFile? imageFile, string? folderName)
         {
@@ -73,11 +71,11 @@ namespace ParsaLibraryManagement.Infrastructure.Services.ImageServices
             try
             {
                 // Directory of image
-                var directoryPath = string.IsNullOrWhiteSpace(folderName) ? "wwwroot/images" : $"wwwroot/images/{folderName}";
+                var directoryPath = string.IsNullOrWhiteSpace(folderName) ? PathConstants.GeneralImgPath : PathConstants.GeneralImgPath + "/" + folderName;
                 var fullPath = Path.Combine(Directory.GetCurrentDirectory(), directoryPath);
 
                 // Directory of thumbnail image
-                var directoryPathThumbnail = string.IsNullOrWhiteSpace(folderName) ? "wwwroot/images/thumbnail" : $"wwwroot/images/{folderName}/thumbnail";
+                var directoryPathThumbnail = string.IsNullOrWhiteSpace(folderName) ? PathConstants.GeneralThumbnailImgPath : PathConstants.GeneralThumbnailImgPath + "/" + folderName;
                 var fullPathThumbnail = Path.Combine(Directory.GetCurrentDirectory(), directoryPathThumbnail);
 
                 // Create directory if it does not exist
@@ -113,8 +111,7 @@ namespace ParsaLibraryManagement.Infrastructure.Services.ImageServices
             }
             catch (Exception e)
             {
-                //TODO            // Implement appropriate error logging
-                return null;
+                throw;
             }
         }
 
@@ -131,7 +128,7 @@ namespace ParsaLibraryManagement.Infrastructure.Services.ImageServices
                 bool thumbnailDeleted = false;
 
                 // Check the image existence
-                var directoryPath = Path.Combine("wwwroot", "images", folderName);
+                var directoryPath = Path.Combine(PathConstants.GeneralImgPath, folderName);
                 var fullPath = Path.Combine(Directory.GetCurrentDirectory(), directoryPath, imageName);
 
                 // Delete file
@@ -142,7 +139,7 @@ namespace ParsaLibraryManagement.Infrastructure.Services.ImageServices
                 }
 
                 // Delete the associated thumbnail as well
-                var thumbnailPath = Path.Combine(directoryPath, "thumbnail");
+                var thumbnailPath = Path.Combine(PathConstants.GeneralThumbnailImgPath, folderName);
                 var fullPathThumbnail = Path.Combine(Directory.GetCurrentDirectory(), thumbnailPath, imageName);
 
                 // Delete file

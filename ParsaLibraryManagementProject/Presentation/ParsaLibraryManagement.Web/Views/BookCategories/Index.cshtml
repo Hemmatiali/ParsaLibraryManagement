@@ -23,28 +23,28 @@
                         <div class="table-responsive" tabindex="1" style="overflow: hidden; outline: none;">
                             <table class="table">
                                 <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Category title</th>
-                                    <th class="text-left" scope="col">Action</th>
-                                </tr>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Category title</th>
+                                        <th class="text-left" scope="col">Action</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                @{
-                                    int rowIndex = 1;
-                                    @foreach (var category in Model)
-                                    {
-                                        <tr>
-                                            <td>@rowIndex</td>
-                                            <td>@category.Title</td>
-                                            <td class="text-left">
-                                                <a asp-action="Edit" asp-route-id="@category.CategoryId" class="btn btn-warning" style="color:white"> <i class="ti-pencil m-r-5"></i> Edit </a>
-                                                @*<a asp-action="Delete" asp-route-id="@category.CategoryId" class="btn btn-danger btn-square btn-uppercase"> <i class="ti-pencil m-l-5"></i> Delete</a> todo*@
-                                            </td>
-                                        </tr>
-                                        rowIndex++;
+                                    @{
+                                        int rowIndex = 1;
+                                        @foreach (var category in Model)
+                                        {
+                                            <tr>
+                                                <td>@rowIndex</td>
+                                                <td>@category.Title</td>
+                                                <td class="text-left">
+                                                    <a asp-action="Edit" asp-route-id="@category.CategoryId" class="btn btn-warning" style="color:white"> <i class="ti-pencil m-r-5"></i> Edit </a>
+                                                    <a asp-action="Delete" asp-route-id="@category.CategoryId" class="btn btn-danger" style="color:white"> <i class="ti-pencil m-r-5"></i> Delete</a>
+                                                </td>
+                                            </tr>
+                                            rowIndex++;
+                                        }
                                     }
-                                }
                                 </tbody>
                             </table>
                         </div>

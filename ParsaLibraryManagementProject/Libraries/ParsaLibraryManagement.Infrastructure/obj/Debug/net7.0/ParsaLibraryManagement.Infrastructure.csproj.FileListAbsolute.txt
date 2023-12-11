@@ -1,4 +1,5 @@
 E:\Parsa Library Management(New Release)\ParsaLibraryManagement\src\ParsaLibraryManagementProject\Libraries\ParsaLibraryManagement.Infrastructure\bin\Debug\net7.0\ParsaLibraryManagement.Infrastructure.deps.json
+E:\Parsa Library Management(New Release)\ParsaLibraryManagement\src\ParsaLibraryManagementProject\Libraries\ParsaLibraryManagement.Infrastructure\bin\Debug\net7.0\ParsaLibraryManagement.Infrastructure.runtimeconfig.json
 E:\Parsa Library Management(New Release)\ParsaLibraryManagement\src\ParsaLibraryManagementProject\Libraries\ParsaLibraryManagement.Infrastructure\bin\Debug\net7.0\ParsaLibraryManagement.Infrastructure.dll
 E:\Parsa Library Management(New Release)\ParsaLibraryManagement\src\ParsaLibraryManagementProject\Libraries\ParsaLibraryManagement.Infrastructure\bin\Debug\net7.0\ParsaLibraryManagement.Infrastructure.pdb
 E:\Parsa Library Management(New Release)\ParsaLibraryManagement\src\ParsaLibraryManagementProject\Libraries\ParsaLibraryManagement.Infrastructure\bin\Debug\net7.0\ParsaLibraryManagement.Domain.dll
@@ -12,6 +13,5 @@ E:\Parsa Library Management(New Release)\ParsaLibraryManagement\src\ParsaLibrary
 E:\Parsa Library Management(New Release)\ParsaLibraryManagement\src\ParsaLibraryManagementProject\Libraries\ParsaLibraryManagement.Infrastructure\obj\Debug\net7.0\ParsaLibraryManagement.Infrastructure.dll
 E:\Parsa Library Management(New Release)\ParsaLibraryManagement\src\ParsaLibraryManagementProject\Libraries\ParsaLibraryManagement.Infrastructure\obj\Debug\net7.0\refint\ParsaLibraryManagement.Infrastructure.dll
 E:\Parsa Library Management(New Release)\ParsaLibraryManagement\src\ParsaLibraryManagementProject\Libraries\ParsaLibraryManagement.Infrastructure\obj\Debug\net7.0\ParsaLibraryManagement.Infrastructure.pdb
-E:\Parsa Library Management(New Release)\ParsaLibraryManagement\src\ParsaLibraryManagementProject\Libraries\ParsaLibraryManagement.Infrastructure\obj\Debug\net7.0\ref\ParsaLibraryManagement.Infrastructure.dll
-E:\Parsa Library Management(New Release)\ParsaLibraryManagement\src\ParsaLibraryManagementProject\Libraries\ParsaLibraryManagement.Infrastructure\bin\Debug\net7.0\ParsaLibraryManagement.Infrastructure.runtimeconfig.json
 E:\Parsa Library Management(New Release)\ParsaLibraryManagement\src\ParsaLibraryManagementProject\Libraries\ParsaLibraryManagement.Infrastructure\obj\Debug\net7.0\ParsaLibraryManagement.Infrastructure.genruntimeconfig.cache
+E:\Parsa Library Management(New Release)\ParsaLibraryManagement\src\ParsaLibraryManagementProject\Libraries\ParsaLibraryManagement.Infrastructure\obj\Debug\net7.0\ref\ParsaLibraryManagement.Infrastructure.dll

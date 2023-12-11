@@ -20,7 +20,7 @@
                 @if (@ViewBag.errorMessage != null)
                 {
                     <div class="form-row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="alert alert-danger" role="alert">
@@ -46,7 +46,9 @@
                         <div class="col-md-6 mb-3">
                             <label for="drpRefGroups">Reference group</label>
                             @{
-                                <select id="drpRefGroups" class="form-control" asp-for="@Model.Category.RefId" asp-items="@Model.RefGroups"></select>
+                                <select id="drpRefGroups" class="form-control" asp-for="@Model.Category.RefId" asp-items="@Model.RefGroups">
+                                    <option value=""></option>
+                                </select>
                             }
                             <span asp-validation-for="@Model.Category.RefId" class="text-danger"></span>
                             <div class="invalid-feedback">

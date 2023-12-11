@@ -1,32 +1,32 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ParsaLibraryManagement.Application.Interfaces;
-using ParsaLibraryManagement.Domain.Interfaces.ImageServices;
 using ParsaLibraryManagement.Web.Constants;
-using ParsaLibraryManagement.Web.ValidationServices;
 using ParsaLibraryManagement.Web.ViewModels.BookCategories;
+using ParsaLibraryManagement.Infrastructure.Common.Constants;
 
 namespace ParsaLibraryManagement.Web.Controllers
 {
-    //todo xml
+    /// <summary>
+    ///     Controller responsible for handling actions related to book categories.
+    /// </summary>
+    /// <remarks>
+    ///     This controller inherits from the <see cref="BaseController"/> and provides actions for managing book categories.
+    /// </remarks>
     public class BookCategoriesController : BaseController
     {
         #region Fields
 
         private readonly IBookCategoryServices _bookCategoryServices;
-        private readonly ImageFileValidationService _imageFileValidationServices;
-        private readonly IImageServices _imageService;
         private readonly ILogger<BookCategoriesController> _logger;
 
         #endregion
 
         #region Ctor
 
-        public BookCategoriesController(IBookCategoryServices bookCategoryServices, ImageFileValidationService imageFileValidationServices, IImageServices imageService, ILogger<BookCategoriesController> logger)
+        public BookCategoriesController(IBookCategoryServices bookCategoryServices, ILogger<BookCategoriesController> logger)
         {
             _bookCategoryServices = bookCategoryServices;
-            _imageFileValidationServices = imageFileValidationServices;
-            _imageService = imageService;
             _logger = logger;
         }
 
@@ -34,76 +34,57 @@ namespace ParsaLibraryManagement.Web.Controllers
 
         #region Methods
 
-        //todo xml
+        /// <summary>
+        ///     Prepares a view model for the BookCategory view (Create and Edit methods).
+        /// </summary>
+        /// <returns>A task representing the asynchronous operation, yielding a <see cref="BookCategoryViewModel"/>.</returns>
         private async Task<BookCategoryViewModel> PrepareBookCategoryViewModel()
-        {//todo comments & try catch
-            var categories = await _bookCategoryServices.GetAllCategoriesAsync();
-            return new BookCategoryViewModel
-            {
-                RefGroups = categories.Select(c => new SelectListItem(c.Title, c.CategoryId.ToString())).ToList()
-            };
-        }
-
-        //todo xml
-        private async Task<IActionResult> RePopulateViewModelAndReturnView(BookCategoryViewModel model)
-        {//todo comments & try catch
-            var viewModel = await PrepareBookCategoryViewModel();
-            viewModel.Category = model.Category; // Preserve user inputs
-            return View(viewModel);
-        }
-
-        //todo xml
-        private async Task<bool> ValidateAndUploadImage(BookCategoryViewModel model, bool isEditMode = false)
         {
             try
             {
-                // Check image file
-                if (model.ImageFile != null)
+                // Get all categories
+                var categories = await _bookCategoryServices.GetAllCategoriesAsync();
+
+                // Assign categories to view model
+                return new BookCategoryViewModel
                 {
-                    // Validate image file
-                    if (!_imageFileValidationServices.ValidateFile(model.ImageFile, out var errorMessage))
-                    {
-                        ModelState.AddModelError("ImageFile", errorMessage);
-                        return false;
-                    }
-
-                    // In edit mode, delete the existing image and thumbnail image if it exists
-                    if (isEditMode && !string.IsNullOrWhiteSpace(model.Category.ImageAddress))
-                    {
-                        await _imageService.DeleteImageAsync(model.Category.ImageAddress, "BookCategories");
-                    }
-
-                    // Save the new image
-                    var imagePath = await _imageService.SaveImageAsync(model.ImageFile, "BookCategories");
-                    if (string.IsNullOrWhiteSpace(imagePath))
-                    {
-                        ModelState.AddModelError("ImageFile", "Failed to upload image.");
-                        return false;
-                    }
-
-                    // Update the image path in the model
-                    model.Category.ImageAddress = imagePath;
-                }
-                else if (isEditMode)
-                {
-                    // Image is expected in edit mode but not provided
-                    ModelState.AddModelError("ImageFile", "Image upload is required in edit mode.");
-                    return false;
-                }
-
-                return true;
+                    RefGroups = categories.Select(c => new SelectListItem(c.Title, c.CategoryId.ToString())).ToList()
+                };
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                // todo:Log and handle the exception
-                // Consider using a logging framework or service
-                ModelState.AddModelError("ImageFile", "An error occurred while processing the image.");
-                _logger.LogError(ex, "Error processing the image.");
-                return false;
+                throw;
             }
         }
 
-        //todo xml
+        /// <summary>
+        ///     Re-populates the view model and returns the associated view.
+        /// </summary>
+        /// <param name="model">The view model to be re-populated.</param>
+        /// <returns>A task representing the asynchronous operation, yielding an <see cref="IActionResult"/>.</returns>
+        private async Task<IActionResult> RePopulateViewModelAndReturnView(BookCategoryViewModel model)
+        {
+            try
+            {
+                // Get view model data
+                var viewModel = await PrepareBookCategoryViewModel();
+
+                // Preserve user inputs
+                viewModel.Category = model.Category;
+
+                // Return view with populated model
+                return View(viewModel);
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        ///     Handles the HTTP GET request for the index view of book categories.
+        /// </summary>
+        /// <returns>A task representing the asynchronous operation, yielding an <see cref="IActionResult"/>.</returns>
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -120,15 +101,17 @@ namespace ParsaLibraryManagement.Web.Controllers
             }
         }
 
-        //todo xml
+        /// <summary>
+        ///     Handles the HTTP GET request for the create view of book categories.
+        /// </summary>
+        /// <returns>A task representing the asynchronous operation, yielding an <see cref="IActionResult"/>.</returns>
         [HttpGet]
         public async Task<IActionResult> Create()
         {
             try
             {
                 // Prepare view model
-                var viewModel = await PrepareBookCategoryViewModel();
-                return View(viewModel);
+                return await RePopulateViewModelAndReturnView(new BookCategoryViewModel());
             }
             catch (Exception e)
             {
@@ -137,33 +120,28 @@ namespace ParsaLibraryManagement.Web.Controllers
             }
         }
 
-        //todo xml
+        /// <summary>
+        ///     Handles the HTTP POST request for creating a book category.
+        /// </summary>
+        /// <param name="model">The view model containing data for the new book category.</param>
+        /// <returns>A task representing the asynchronous operation, yielding an <see cref="IActionResult"/>.</returns>
         [HttpPost]
         public async Task<IActionResult> Create(BookCategoryViewModel model)
         {
             try
             {
-                // Validate model
+                // Check validation
                 if (!ModelState.IsValid)
-                {
                     return await RePopulateViewModelAndReturnView(model);
-                }
 
-                // Validate image
-                if (!await ValidateAndUploadImage(model))
-                {
-                    return await RePopulateViewModelAndReturnView(model);
-                }
+                // Create book category
+                var result = await _bookCategoryServices.CreateCategoryAsync(model.Category, model.ImageFile, PathConstants.BookCategoriesFolderName);
 
-                // Create the book category
-                var result = await _bookCategoryServices.CreateCategoryAsync(model.Category);
+                // Check error
                 if (string.IsNullOrWhiteSpace(result))
-                {
-                    // Done
-                    return RedirectToAction("Index");
-                }
+                    return RedirectToAction("Index"); // Done
 
-                // Error
+                // Handle errors
                 ViewBag.errorMessage = result;
                 return await RePopulateViewModelAndReturnView(model);
             }
@@ -175,8 +153,11 @@ namespace ParsaLibraryManagement.Web.Controllers
             }
         }
 
-
-        //todo xml
+        /// <summary>
+        ///     Handles the HTTP GET request for the edit view of a specific book category.
+        /// </summary>
+        /// <param name="id">The ID of the book category to be edited.</param>
+        /// <returns>A task representing the asynchronous operation, yielding an <see cref="IActionResult"/>.</returns>
         [HttpGet]
         public async Task<IActionResult> Edit(short id)
         {
@@ -185,24 +166,25 @@ namespace ParsaLibraryManagement.Web.Controllers
                 // Get category
                 var categoryDto = await _bookCategoryServices.GetCategoryByIdAsync(id);
                 if (categoryDto == null)
-                {
                     return NotFound();
-                }
 
-                // Prepare view model
-                var viewModel = await PrepareBookCategoryViewModel();
-                viewModel.Category = categoryDto;
-                return View(viewModel);
+                // Prepare view model with the existing category data
+                var viewModel = new BookCategoryViewModel { Category = categoryDto };
+                return await RePopulateViewModelAndReturnView(viewModel);
             }
             catch (Exception e)
             {
-                //TODO: Add appropriate error handling logic
                 _logger.LogError(e, "Error reading items for book category edit.");
                 return GenerateCatchMessage(ErrorsMessagesConstants.UnSuccessfulReadItemErrMsg)!;
             }
         }
 
-        //todo xml
+        /// <summary>
+        ///     Handles the HTTP POST request for editing a specific book category.
+        /// </summary>
+        /// <param name="id">The ID of the book category to be edited.</param>
+        /// <param name="model">The view model containing updated data for the book category.</param>
+        /// <returns>A task representing the asynchronous operation, yielding an <see cref="IActionResult"/>.</returns>
         [HttpPost]
         public async Task<IActionResult> Edit(short id, BookCategoryViewModel model)
         {
@@ -210,21 +192,12 @@ namespace ParsaLibraryManagement.Web.Controllers
             {
                 // Validate model
                 if (!ModelState.IsValid)
-                {
                     return await RePopulateViewModelAndReturnView(model);
-                }
-
-                // Validate image
-                if (!await ValidateAndUploadImage(model, true))
-                {
-                    return await RePopulateViewModelAndReturnView(model);
-                }
 
                 // Edit the book category
-                var result = await _bookCategoryServices.UpdateCategoryAsync(id, model.Category);
+                var result = await _bookCategoryServices.UpdateCategoryAsync(id, model.Category, model.ImageFile, PathConstants.BookCategoriesFolderName);
                 if (string.IsNullOrWhiteSpace(result))
-                    // Done
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index"); // Done
 
                 // Error
                 ViewBag.errorMessage = result;
@@ -235,6 +208,63 @@ namespace ParsaLibraryManagement.Web.Controllers
                 //TODO: Add appropriate error handling logic
                 _logger.LogError(ex, "Error editing book category.");
                 return GenerateCatchMessage(ErrorsMessagesConstants.UnSuccessfulEditItemErrMsg)!;
+            }
+        }
+
+        /// <summary>
+        ///     Handles the HTTP GET request for the delete confirmation view of a specific book category.
+        /// </summary>
+        /// <param name="id">The ID of the book category to be deleted.</param>
+        /// <returns>A task representing the asynchronous operation, yielding an <see cref="IActionResult"/>.</returns>
+        [HttpGet]
+        public async Task<IActionResult> Delete(short id)
+        {
+            try
+            {
+                // Get category
+                var categoryDto = await _bookCategoryServices.GetCategoryByIdAsync(id);
+                if (categoryDto == null)
+                    return NotFound();
+
+                // Prepare view model
+                return View(new BookCategoryDeleteViewModel { Category = categoryDto });
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error reading items for book category delete.");
+                return GenerateCatchMessage(ErrorsMessagesConstants.UnSuccessfulReadItemErrMsg)!;
+            }
+        }
+
+        /// <summary>
+        ///     Handles the HTTP POST request for deleting a specific book category.
+        /// </summary>
+        /// <param name="id">The ID of the book category to be deleted.</param>
+        /// <param name="model">The delete view model containing confirmation data.</param>
+        /// <returns>A task representing the asynchronous operation, yielding an <see cref="IActionResult"/>.</returns>
+        [HttpPost]
+        public async Task<IActionResult> Delete(short id, BookCategoryDeleteViewModel model)
+        {
+            try
+            {
+                // Validate model
+                if (!ModelState.IsValid)
+                    return View(model);
+
+                // Delete the book category
+                var result = await _bookCategoryServices.DeleteCategoryAsync(id, PathConstants.BookCategoriesFolderName);
+                if (string.IsNullOrWhiteSpace(result))
+                    return RedirectToAction("Index"); // Done
+
+                // Error
+                ViewBag.errorMessage = result;
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                //TODO: Add appropriate error handling logic
+                _logger.LogError(ex, "Error deleting book category.");
+                return GenerateCatchMessage(ErrorsMessagesConstants.UnSuccessfulDeleteItemErrMsg)!;
             }
         }
 

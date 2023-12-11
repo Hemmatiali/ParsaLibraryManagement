@@ -1,15 +1,17 @@
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
+using ParsaLibraryManagement.Application.Configuration;
 using ParsaLibraryManagement.Application.Interfaces;
+using ParsaLibraryManagement.Application.Interfaces.ImageServices;
 using ParsaLibraryManagement.Application.Mappings;
 using ParsaLibraryManagement.Application.Services;
 using ParsaLibraryManagement.Application.Validators;
+using ParsaLibraryManagement.Domain.Interfaces;
 using ParsaLibraryManagement.Domain.Interfaces.ImageServices;
 using ParsaLibraryManagement.Domain.Interfaces.Repository;
 using ParsaLibraryManagement.Infrastructure.Data.Contexts;
 using ParsaLibraryManagement.Infrastructure.Data.Repositories;
 using ParsaLibraryManagement.Infrastructure.Services.ImageServices;
-using ParsaLibraryManagement.Web.ValidationServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,9 +41,14 @@ builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyCont
 #region Services
 
 builder.Services.AddScoped<IRepositoryFactory, RepositoryFactory>();
+var fileUploadOptions = builder.Configuration.GetSection("FileUploadOptions").Get<FileUploadOptions>();
+builder.Services.AddSingleton(fileUploadOptions);
+builder.Services.AddScoped<ImageFileValidationService>();
 builder.Services.AddScoped<ImageFileValidationService>();
 builder.Services.AddTransient<IBookCategoryServices, BookCategoryServices>();
+builder.Services.AddTransient<IBooksCategoryRepository, BooksCategoryRepository>();
 builder.Services.AddTransient<IImageServices, ImageServices>();
+builder.Services.AddTransient<IImageFileValidationService, ImageFileValidationService>();
 
 #endregion
 

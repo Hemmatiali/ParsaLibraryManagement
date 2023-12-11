@@ -22,4 +22,8 @@
     <ProjectReference Include="..\..\Libraries\ParsaLibraryManagement.Infrastructure\ParsaLibraryManagement.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ValidationAttributes\" />
+  </ItemGroup>
+
 </Project>

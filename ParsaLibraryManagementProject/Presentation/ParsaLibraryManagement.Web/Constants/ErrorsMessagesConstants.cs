@@ -105,6 +105,12 @@ namespace ParsaLibraryManagement.Web.Constants
         #region Delete error messages
         //6001
 
+        /// <summary>
+        ///		Unsuccessful delete item error messages
+        ///     Error Code: 6001
+        ///     Type: Error
+        /// </summary>
+        public static ErrorsMessagesConstants UnSuccessfulDeleteItemErrMsg => new(ErrorCodeTypesEnum.Error, 6001, "Unsuccessful delete item.");
 
         #endregion
 

@@ -1,27 +1,52 @@
-﻿using ParsaLibraryManagement.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using ParsaLibraryManagement.Domain.Common;
 using ParsaLibraryManagement.Domain.Interfaces;
+using ParsaLibraryManagement.Domain.Models;
 using ParsaLibraryManagement.Infrastructure.Data.Contexts;
 
 namespace ParsaLibraryManagement.Infrastructure.Data.Repositories
 {
-    //todo xml
+    /// <inheritdoc cref="IBooksCategoryRepository"/>
     public class BooksCategoryRepository : IBooksCategoryRepository
     {
+        #region Fields
+
         private readonly ParsaLibraryManagementDBContext _context;
+
+        #endregion
+
+        #region Ctor
 
         public BooksCategoryRepository(ParsaLibraryManagementDBContext context)
         {
             _context = context;
         }
 
-        public void AddBookCategory(BooksCategory category)
+        #endregion
+
+        #region Methods
+
+        /// <inheritdoc />
+        public async Task<OperationResultModel> HasChildRelations(short categoryId)
         {
-            _context.BooksCategories.Add(category);
+            try
+            {
+                // Check for child categories
+                var hasChildCategory = await _context.BooksCategories.AnyAsync(b => b.RefId == categoryId);
+                if (hasChildCategory)
+                    return new OperationResultModel { WasSuccess = true, Message = ErrorMessages.HasRelationOnSubCategoriesMsg };
+
+                // Check for books with this category
+                var hasBooks = await _context.Books.AnyAsync(b => b.CategoryId == categoryId);
+                return hasBooks ? new OperationResultModel { WasSuccess = true, Message = string.Format(ErrorMessages.HasRelationOnWithPlaceHolderMsg, "books") } :
+                    new OperationResultModel { WasSuccess = false };
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
         }
 
-        public void SaveChanges()
-        {
-            _context.SaveChanges();
-        }
+        #endregion
     }
 }

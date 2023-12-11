@@ -3,7 +3,12 @@ using ParsaLibraryManagement.Domain.Interfaces.Repository;
 
 namespace ParsaLibraryManagement.Infrastructure.Data.Repositories
 {
-    //todo xml
+    /// <summary>
+    ///     Factory for creating repository instances.
+    /// </summary>
+    /// <remarks>
+    ///     This class implements the <see cref="IRepositoryFactory"/> interface and provides a method for getting repositories.
+    /// </remarks>
     public class RepositoryFactory : IRepositoryFactory
     {
         #region Fields
@@ -23,6 +28,7 @@ namespace ParsaLibraryManagement.Infrastructure.Data.Repositories
 
         #region Methods
 
+        /// <inheritdoc />
         public IBaseRepository<TEntity> GetRepository<TEntity>() where TEntity : class
         {
             return new BaseRepository<TEntity>(_context);

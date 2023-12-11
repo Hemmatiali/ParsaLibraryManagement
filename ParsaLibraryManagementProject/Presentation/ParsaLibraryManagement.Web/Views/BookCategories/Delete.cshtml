@@ -1,0 +1,76 @@
+﻿@model ParsaLibraryManagement.Web.ViewModels.BookCategories.BookCategoryDeleteViewModel
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Delete book category";
+}
+
+<!-- begin::main content -->
+<main class="main-content">
+    <div class="container">
+        <!-- begin::page header -->
+        <div class="page-header">
+            <div>
+                <h3>Delete the book category</h3>
+            </div>
+        </div>
+        <!-- end::page header -->
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+
+                        <h5 class="card-title">Are you sure to delete the @Model.Category.Title category?</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Be careful that it is not possible to return back, after deletion.</h6>
+
+                        @if (!string.IsNullOrWhiteSpace(ViewBag.errorMessage))
+                        {
+                            <!-- error message section -->
+                            <div class="row">
+                                <div class="col-md-12 d-flex mt-4 mt-md-0">
+                                    <div class="card flex-grow-1 mb-0">
+                                        <div class="card-body paddingBottom-0px">
+                                            <div class="alert alert-danger mb-3 paddingRight-0px">@ViewBag.errorMessage</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        <form asp-action="Delete" class="needs-validation" novalidate="" method="post">
+                            <input type="hidden" asp-for="Category.CategoryId"/>
+                            <input type="hidden" asp-for="Category.Title"/>
+                            
+                            <!-- delete section -->
+                            <div class="form-row" style="margin-top: 12px">
+                                <div class="col-md-12">
+                                    <input type="submit" value="Delete" class="btn btn btn-danger"/>
+                                    <a class="btn btn-secondary" style="color:white" asp-action="Index">Back to list</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @section FormsValidation
+        {
+        <script>
+            //  Form Validation
+            window.addEventListener('load', function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        </script>
+    }
+</main>
