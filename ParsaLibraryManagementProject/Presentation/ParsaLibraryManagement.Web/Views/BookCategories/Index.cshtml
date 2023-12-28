@@ -3,15 +3,36 @@
 @{
     Layout = "_Layout";
     ViewData["Title"] = "List of book categories";
+
+    var letters = new List<string> {
+        "A", "B", "C", "D", "E", "F", "G", "H", "I",
+        "J", "K", "L", "M", "N", "O", "P", "Q", "R",
+        "S", "T", "U", "V", "W", "X", "Y", "Z"
+    };
 }
 
 <main class="main-content">
     <div class="container">
         <!-- begin::page header -->
         <div class="page-header">
-            <a class="btn btn-primary" asp-action="Create" style="color:white">
-                <i class="ti-plus m-r-5"></i> Create a new category
-            </a>
+            <div class="row">
+                <a class="btn btn-primary col-md-3" asp-action="Create" style="color:white">
+                    <i class="ti-plus m-r-5"></i> Create a new category
+                </a>
+            </div>
+            <div class="row">
+                <div class="btn-group btn-group-sm mt-2 mb-2" role="group" aria-label="Filter">
+                    @foreach (var letter in letters)
+                    {
+                        <a class="btn btn-outline-primary" asp-action="Index" asp-route-letter="@letter">@letter</a>
+                    }
+                </div>
+            </div>
+            <div class="row">
+                <a class="btn btn-primary col-md-3" asp-action="Index" style="color:white">
+                    <i class="ti-na m-r-5"></i> Clear Filter
+                </a>
+            </div>
         </div>
         <!-- end::page header -->
 
@@ -19,13 +40,8 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
+
                         <h5 class="card-title">Classification of books</h5>
-                  
-                        <div class="btn-group" role="group" aria-label="Basic outlined example">
-                            <a class="btn btn-outline-primary" asp-action="Index" asp-route-letter="a">A</a>
-                            <a class="btn btn-outline-primary" asp-action="Index" asp-route-letter="b">B</a>
-                            <a class="btn btn-outline-primary" asp-action="Index" asp-route-letter="c">C</a>
-                        </div>
 
                         <div class="table-responsive" tabindex="1" style="overflow: hidden; outline: none;">
                             <table class="table">
