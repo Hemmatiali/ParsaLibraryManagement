@@ -86,12 +86,15 @@ namespace ParsaLibraryManagement.Web.Controllers
         /// </summary>
         /// <returns>A task representing the asynchronous operation, yielding an <see cref="IActionResult"/>.</returns>
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index([FromQuery] char? letter)
         {
             try
             {
                 // Get all categories
-                var categoriesDto = await _bookCategoryServices.GetAllCategoriesAsync();
+                var categoriesDto = letter.HasValue ?
+                    await _bookCategoryServices.GetAllCategoriesByLetterAsync(letter.Value) :
+                    await _bookCategoryServices.GetAllCategoriesAsync();
+
                 return View(categoriesDto);
             }
             catch (Exception e)
