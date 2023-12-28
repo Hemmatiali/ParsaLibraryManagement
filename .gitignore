@@ -6,6 +6,7 @@
 # User-specific files
 *.rsuser
 *.suo
+**/*.suo
 *.user
 *.userosscache
 *.sln.docstates
@@ -34,7 +35,14 @@ bld/
 # Visual Studio 2015/2017 cache/options directory
 .vs/
 **/.vs/
-**/.vs/**
+**/.vs/*
+**/bin/
+**/obj/
+**/bin/**
+**/obj/**
+
+
+
 # Uncomment if you have tasks that create the project's static files in wwwroot
 #wwwroot/
 
@@ -372,3 +380,4 @@ ParsaLibraryManagementProject/project.fragment.lock.json
 ParsaLibraryManagementProject/artifacts/
 ParsaLibraryManagementProject/node_modules/
 ParsaLibraryManagementProject/Presentation/ParsaLibraryManagement.Web/wwwroot/images
+
