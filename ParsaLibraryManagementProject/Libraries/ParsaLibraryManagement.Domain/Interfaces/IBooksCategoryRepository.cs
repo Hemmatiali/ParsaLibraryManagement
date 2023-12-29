@@ -23,6 +23,6 @@ namespace ParsaLibraryManagement.Domain.Interfaces
         /// </summary>
         /// <param name="letter"></param>
         /// <returns></returns>
-        Task<List<BooksCategory>> GetBooksCategoriesByStartingLetterAsync(char letter);
+        Task<List<BooksCategory>> GetBooksCategoriesByStartingLetterAsync(string startsWith);
     }
 }

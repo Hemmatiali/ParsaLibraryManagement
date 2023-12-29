@@ -28,7 +28,7 @@ namespace ParsaLibraryManagement.Application.Interfaces
         ///     Gets all book categories asynchronously starting by a letter.
         /// </summary>
         /// <returns>A task representing the asynchronous operation, yielding a list of <see cref="BookCategoryDto"/>.</returns>
-        Task<List<BookCategoryDto>> GetAllCategoriesByLetterAsync(char letter);
+        Task<List<BookCategoryDto>> GetAllCategoriesStartingWithAsync(string startsWith);
 
         /// <summary>
         ///     Creates a new book category asynchronously.

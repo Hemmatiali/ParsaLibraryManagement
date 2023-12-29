@@ -86,16 +86,35 @@ namespace ParsaLibraryManagement.Web.Controllers
         /// </summary>
         /// <returns>A task representing the asynchronous operation, yielding an <see cref="IActionResult"/>.</returns>
         [HttpGet]
-        public async Task<IActionResult> Index([FromQuery] char? letter)
+        public async Task<IActionResult> Index()
         {
             try
             {
                 // Get all categories
-                var categoriesDto = letter.HasValue ?
-                    await _bookCategoryServices.GetAllCategoriesByLetterAsync(letter.Value) :
-                    await _bookCategoryServices.GetAllCategoriesAsync();
+                var categoriesDto = await _bookCategoryServices.GetAllCategoriesAsync();
 
                 return View(categoriesDto);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error reading book categories.");
+                return GenerateCatchMessage(ErrorsMessagesConstants.UnSuccessfulReadItemsErrMsg)!;
+            }
+        }
+
+        /// <summary>
+        ///     Handles the HTTP GET request for the view of filtered book categories.
+        /// </summary>
+        /// <returns>A task representing the asynchronous operation, yielding an <see cref="IActionResult"/>.</returns>
+        [HttpGet("BookCategories/Filter/{startsWith}")]
+        public async Task<IActionResult> Filter(string startsWith)
+        {
+            try
+            {
+                // Get all categories
+                var categoriesDto = await _bookCategoryServices.GetAllCategoriesStartingWithAsync(startsWith);
+
+                return View("Index", categoriesDto);
             }
             catch (Exception e)
             {

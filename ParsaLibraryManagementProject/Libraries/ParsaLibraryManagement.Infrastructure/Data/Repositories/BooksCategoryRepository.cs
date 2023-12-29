@@ -48,9 +48,10 @@ namespace ParsaLibraryManagement.Infrastructure.Data.Repositories
             }
         }
 
-        public async Task<List<BooksCategory>> GetBooksCategoriesByStartingLetterAsync(char letter)
+        public async Task<List<BooksCategory>> GetBooksCategoriesByStartingLetterAsync(string startsWith)
             => await _context.BooksCategories.Where(
-                b => b.Title.ToUpper().StartsWith(letter.ToString().ToUpper()))
+                b => b.Title.ToUpper()
+                      .StartsWith(startsWith.ToUpper()))
             .ToListAsync();
 
         #endregion
