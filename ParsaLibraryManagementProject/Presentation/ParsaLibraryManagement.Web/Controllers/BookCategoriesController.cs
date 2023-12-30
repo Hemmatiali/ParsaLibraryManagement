@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ParsaLibraryManagement.Application.Interfaces;
+using ParsaLibraryManagement.Infrastructure.Common.Constants;
 using ParsaLibraryManagement.Web.Constants;
 using ParsaLibraryManagement.Web.ViewModels.BookCategories;
-using ParsaLibraryManagement.Infrastructure.Common.Constants;
 
 namespace ParsaLibraryManagement.Web.Controllers
 {
@@ -92,7 +92,29 @@ namespace ParsaLibraryManagement.Web.Controllers
             {
                 // Get all categories
                 var categoriesDto = await _bookCategoryServices.GetAllCategoriesAsync();
+
                 return View(categoriesDto);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error reading book categories.");
+                return GenerateCatchMessage(ErrorsMessagesConstants.UnSuccessfulReadItemsErrMsg)!;
+            }
+        }
+
+        /// <summary>
+        ///     Handles the HTTP GET request for the view of filtered book categories.
+        /// </summary>
+        /// <returns>A task representing the asynchronous operation, yielding an <see cref="IActionResult"/>.</returns>
+        [HttpGet("BookCategories/Filter/{startsWith}")]
+        public async Task<IActionResult> Filter(string startsWith)
+        {
+            try
+            {
+                // Get all categories
+                var categoriesDto = await _bookCategoryServices.GetAllCategoriesStartingWithAsync(startsWith);
+
+                return View("Index", categoriesDto);
             }
             catch (Exception e)
             {

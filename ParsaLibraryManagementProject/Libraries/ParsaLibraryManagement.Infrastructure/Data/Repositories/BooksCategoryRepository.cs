@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ParsaLibraryManagement.Domain.Common;
+using ParsaLibraryManagement.Domain.Entities;
 using ParsaLibraryManagement.Domain.Interfaces;
 using ParsaLibraryManagement.Domain.Models;
 using ParsaLibraryManagement.Infrastructure.Data.Contexts;
@@ -46,6 +47,12 @@ namespace ParsaLibraryManagement.Infrastructure.Data.Repositories
                 throw;
             }
         }
+
+        public async Task<List<BooksCategory>> GetBooksCategoriesByStartingLetterAsync(string startsWith)
+            => await _context.BooksCategories.Where(
+                b => b.Title.ToUpper()
+                      .StartsWith(startsWith.ToUpper()))
+            .ToListAsync();
 
         #endregion
     }
