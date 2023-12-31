@@ -79,6 +79,16 @@ namespace ParsaLibraryManagement.Application.Services
         }
 
         /// <inheritdoc />
+        public async Task<List<BookCategoryDto>> GetCategoriesAsync(string prefix)
+        {
+            // Get categories
+            var categories = await _booksCategoryRepository.GetBookCategoriesAsync(prefix);
+
+            // Map the categories to Dto
+            return _mapper.Map<List<BookCategoryDto>>(categories);
+        }
+
+        /// <inheritdoc />
         public async Task<string?> CreateCategoryAsync(BookCategoryDto categoryDto, IFormFile imageFile, string folderName)
         {
             var imageNameWithExtension = "";
@@ -194,6 +204,7 @@ namespace ParsaLibraryManagement.Application.Services
                 throw;
             }
         }
+
 
         #endregion
     }

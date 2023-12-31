@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ParsaLibraryManagement.Domain.Common;
+using ParsaLibraryManagement.Domain.Entities;
 using ParsaLibraryManagement.Domain.Interfaces;
 using ParsaLibraryManagement.Domain.Models;
 using ParsaLibraryManagement.Infrastructure.Data.Contexts;
@@ -40,6 +41,21 @@ namespace ParsaLibraryManagement.Infrastructure.Data.Repositories
                 var hasBooks = await _context.Books.AnyAsync(b => b.CategoryId == categoryId);
                 return hasBooks ? new OperationResultModel { WasSuccess = true, Message = string.Format(ErrorMessages.HasRelationOnWithPlaceHolderMsg, "books") } :
                     new OperationResultModel { WasSuccess = false };
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        public async Task<List<BooksCategory>> GetBookCategoriesAsync(string prefix)
+        {
+            try
+            {
+                // Get categories with prefix
+                return await _context.BooksCategories.Where(b => b.Title.ToUpper()
+                            .StartsWith(prefix.ToUpper())).ToListAsync();
             }
             catch (Exception e)
             {

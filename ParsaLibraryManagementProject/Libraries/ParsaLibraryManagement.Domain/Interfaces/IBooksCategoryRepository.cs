@@ -1,4 +1,5 @@
-﻿using ParsaLibraryManagement.Domain.Models;
+﻿using ParsaLibraryManagement.Domain.Entities;
+using ParsaLibraryManagement.Domain.Models;
 
 namespace ParsaLibraryManagement.Domain.Interfaces
 {
@@ -16,5 +17,12 @@ namespace ParsaLibraryManagement.Domain.Interfaces
         /// <param name="categoryId">The ID of the book category to check for child relations.</param>
         /// <returns>A task representing the asynchronous operation, yielding an <see cref="OperationResultModel"/>.</returns>
         Task<OperationResultModel> HasChildRelations(short categoryId);
+
+        /// <summary>
+        ///     Retrieves a list of book categories based on the specified prefix asynchronously.
+        /// </summary>
+        /// <param name="prefix">The prefix used to filter book categories.</param>
+        /// <returns>A task representing the asynchronous operation, returning a list of <see cref="BooksCategory"/>.</returns>
+        Task<List<BooksCategory>> GetBookCategoriesAsync(string prefix);
     }
 }
