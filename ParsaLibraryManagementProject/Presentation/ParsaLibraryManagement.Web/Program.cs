@@ -58,13 +58,38 @@ builder.Services.AddTransient<IImageFileValidationService, ImageFileValidationSe
 
 var app = builder.Build();
 
+#region Development environment
+
 // Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    //Unexpected error
+    app.UseExceptionHandler("/Error"); 
+
+    //Handle status codes like 404
+    app.UseStatusCodePagesWithReExecute("/Error", "?statusCode={0}");
+
+    //Security mechanism that protect websites against protocol downgrade attacks and cookie hijacking.
     app.UseHsts();
 }
+
+#endregion
+
+#region Production environment
+
+if (!app.Environment.IsDevelopment())
+{
+    //Unexpected error
+    app.UseExceptionHandler("/Error");
+
+    //Handle status codes like 404
+    app.UseStatusCodePagesWithReExecute("/Error", "?statusCode={0}");
+
+    //Security mechanism that protect websites against protocol downgrade attacks and cookie hijacking.
+    app.UseHsts();
+}
+
+#endregion
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
