@@ -8,7 +8,7 @@
         /// <summary>
         /// Gets or sets the unique identifier for the gender.
         /// </summary>
-        public byte GenderId { get; set; }
+        public short GenderId { get; set; }
 
         /// <summary>
         /// Gets or sets the code for the gender.

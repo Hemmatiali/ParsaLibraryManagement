@@ -50,6 +50,10 @@ builder.Services.AddTransient<IBooksCategoryRepository, BooksCategoryRepository>
 builder.Services.AddTransient<IImageServices, ImageServices>();
 builder.Services.AddTransient<IImageFileValidationService, ImageFileValidationService>();
 
+builder.Services.AddScoped<IPublisherServices, PublisherService>();
+builder.Services.AddScoped<IPublisherRepository, PublisherRepository>();
+
+
 #endregion
 
 #endregion

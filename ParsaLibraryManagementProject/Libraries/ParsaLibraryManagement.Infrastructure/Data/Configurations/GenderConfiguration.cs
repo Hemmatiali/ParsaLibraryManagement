@@ -16,6 +16,7 @@ namespace ParsaLibraryManagement.Infrastructure.Data.Configurations
         {
             builder.HasKey(e => e.GenderId);
             builder.Property(e => e.GenderId).ValueGeneratedOnAdd();
+            builder.Property(e => e.GenderId).HasConversion<short>();
 
             builder.Property(e => e.Code)
                 .IsRequired()

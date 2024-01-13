@@ -33,7 +33,7 @@
         /// <summary>
         /// Gets or sets the gender ID of the user.
         /// </summary>
-        public byte GenderId { get; set; }
+        public short GenderId { get; set; }
 
         /// <summary>
         /// Gets or sets the phone number of the user.

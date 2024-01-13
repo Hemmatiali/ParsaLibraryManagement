@@ -1,0 +1,59 @@
+﻿@model System.Collections.Generic.List<ParsaLibraryManagement.Application.DTOs.PublisherDto>
+
+@{
+    ViewBag.Title = "List Of Publishers";
+    Layout = "_Layout";
+}
+
+<main class="main-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+
+                        <div class="row card-title">
+                            <h5 class="col-4">Classification of publishers</h5>
+                            <a class="btn btn-primary col-3 offset-4 d-block" asp-action="Create" style="color:white">
+                                <i class="ti-plus m-r-5"></i> Create a new Publisher
+                            </a>
+
+                        </div>
+
+                        <div class="table-responsive" tabindex="1" style="overflow: hidden; outline: none;">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th class="text-center" scope="col">First Name</th>
+                                    <th class="text-center" scope="col">Last Name</th>
+                                    <th class="text-center" scope="col">Email</th>
+                                    <th class="text-center" scope="col">Phone Number</th>
+                                    <th class="text-center" scope="col">Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @{
+                                    @foreach (var publisher in Model.Select((dto, i) => new { publisher = dto, index = i + 1 }))
+                                    {
+                                        <tr>
+                                            <td class="text-center">@publisher.index</td>
+                                            <td class="text-center">@publisher.publisher.FirstName</td>
+                                            <td class="text-center">@publisher.publisher.LastName</td>
+                                            <td class="text-center">@publisher.publisher.Email</td>
+                                            <td class="text-center">@publisher.publisher.PhoneNumber</td>
+                                            <td class="text-center">
+                                                <a asp-action="Edit" asp-route-id="@publisher.publisher.PublisherId" class="btn btn-warning" style="color:white"> <i class="ti-pencil m-r-5"></i> Edit </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

@@ -137,11 +137,11 @@ namespace ParsaLibraryManagement.Infrastructure.Migrations
 
             modelBuilder.Entity("ParsaLibraryManagement.Domain.Entities.Gender", b =>
                 {
-                    b.Property<byte>("GenderId")
+                    b.Property<short>("GenderId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint");
+                        .HasColumnType("smallint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("GenderId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<short>("GenderId"));
 
                     b.Property<string>("Code")
                         .IsRequired()
@@ -178,8 +178,8 @@ namespace ParsaLibraryManagement.Infrastructure.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<byte>("GenderId")
-                        .HasColumnType("tinyint");
+                    b.Property<short>("GenderId")
+                        .HasColumnType("smallint");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -219,8 +219,8 @@ namespace ParsaLibraryManagement.Infrastructure.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<byte>("GenderId")
-                        .HasColumnType("tinyint");
+                    b.Property<short>("GenderId")
+                        .HasColumnType("smallint");
 
                     b.Property<string>("LastName")
                         .IsRequired()

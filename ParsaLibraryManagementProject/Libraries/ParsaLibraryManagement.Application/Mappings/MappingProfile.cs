@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using ParsaLibraryManagement.Application.DTOs;
+using ParsaLibraryManagement.Application.Utilities;
 using ParsaLibraryManagement.Domain.Entities;
 
 namespace ParsaLibraryManagement.Application.Mappings
@@ -15,6 +16,10 @@ namespace ParsaLibraryManagement.Application.Mappings
         public MappingProfile()
         {
             CreateMap<BooksCategory, BookCategoryDto>().ReverseMap();
+
+            CreateMap<Publisher, PublisherDto>()
+                .ForMember(dto => dto.Email,expression => expression.MapFrom(publisher => publisher.Email.CleanEmail()))
+                .ReverseMap();
         }
     }
 }
