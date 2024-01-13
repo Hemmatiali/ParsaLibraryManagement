@@ -53,6 +53,8 @@ builder.Services.AddTransient<IImageFileValidationService, ImageFileValidationSe
 builder.Services.AddScoped<IPublisherServices, PublisherService>();
 builder.Services.AddScoped<IPublisherRepository, PublisherRepository>();
 
+builder.Services.AddScoped<IGenderService, GenderService>();
+
 
 #endregion
 

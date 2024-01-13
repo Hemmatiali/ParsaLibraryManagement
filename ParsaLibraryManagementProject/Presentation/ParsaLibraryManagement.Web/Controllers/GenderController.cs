@@ -1,56 +1,52 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using ParsaLibraryManagement.Application.Interfaces;
 using ParsaLibraryManagement.Web.Constants;
-using ParsaLibraryManagement.Web.ViewModels.Publisher;
+using ParsaLibraryManagement.Web.ViewModels.Gender;
 
 namespace ParsaLibraryManagement.Web.Controllers;
 
-public class PublisherController : BaseController
+public class GenderController:BaseController
 {
-    private readonly IPublisherServices _publisherServices;
-    private readonly ILogger<PublisherController> _logger;
     private readonly IGenderService _genderService;
+    private readonly ILogger<GenderController> _logger;
 
-    public PublisherController(IPublisherServices publisherServices, ILogger<PublisherController> logger,
-        IGenderService genderService)
+    public GenderController(IGenderService genderService, ILogger<GenderController> logger)
     {
-        _publisherServices = publisherServices;
-        _logger = logger;
         _genderService = genderService;
+        _logger = logger;
     }
-
+    
     public async Task<IActionResult> Index()
     {
         try
         {
-            var publishers = await _publisherServices.GetPublishersAsync();
-            return View(publishers);
+            var genders = await _genderService.GetGendersAsync();
+            return View(genders);
         }
         catch (Exception e)
         {
-            _logger.LogError(e, "Error reading publishers.");
+            _logger.LogError(e, "Error reading genders.");
             return GenerateCatchMessage(ErrorsMessagesConstants.UnSuccessfulReadItemsErrMsg)!;
         }
     }
-
+    
     [HttpGet]
     public async Task<IActionResult> Create()
     {
         try
         {
             // Prepare view model
-            return await RePopulateViewModelAndReturnView(new PublisherViewModel());
+            return await RePopulateViewModelAndReturnView(new GenderViewModel());
         }
         catch (Exception e)
         {
-            _logger.LogError(e, "Error reading items for publisher create.");
+            _logger.LogError(e, "Error reading items for gender create.");
             return GenerateCatchMessage(ErrorsMessagesConstants.UnSuccessfulReadItemErrMsg)!;
         }
     }
-
+    
     [HttpPost]
-    public async Task<IActionResult> Create(PublisherViewModel model)
+    public async Task<IActionResult> Create(GenderViewModel model)
     {
         try
         {
@@ -59,7 +55,7 @@ public class PublisherController : BaseController
                 return await RePopulateViewModelAndReturnView(model);
 
             // Create publisher
-            var result = await _publisherServices.CreatePublisherAsync(model.Publisher);
+            var result = await _genderService.CreateGenderAsync(model.GenderDto);
 
             // Check error
             if (string.IsNullOrWhiteSpace(result))
@@ -71,34 +67,34 @@ public class PublisherController : BaseController
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error creating publisher.");
+            _logger.LogError(ex, "Error creating gender.");
             return GenerateCatchMessage(ErrorsMessagesConstants.UnSuccessfulCreateItemErrMsg)!;
         }
     }
-
-    [HttpGet("Publisher/Edit/{id:int}")]
+    
+    [HttpGet("Gender/Edit/{id:int}")]
     public async Task<IActionResult> Edit(int id)
     {
         try
         {
-            // Get publisher
-            var publisher = await _publisherServices.GetPublisherByAsync(Convert.ToInt16(id));
-            if (publisher == null)
+            // Get gender
+            var gender = await _genderService.GetGenderByAsync(Convert.ToInt16(id));
+            if (gender == null)
                 return NotFound();
 
-            // Prepare view model with the existing publisher data
-            var viewModel = new PublisherViewModel() { Publisher = publisher };
+            // Prepare view model with the existing gender data
+            var viewModel = new GenderViewModel { GenderDto = gender };
             return await RePopulateViewModelAndReturnView(viewModel);
         }
         catch (Exception e)
         {
-            _logger.LogError(e, "Error reading items for publisher edit.");
+            _logger.LogError(e, "Error reading items for gender edit.");
             return GenerateCatchMessage(ErrorsMessagesConstants.UnSuccessfulReadItemErrMsg)!;
         }
     }
-
+    
     [HttpPost]
-    public async Task<IActionResult> Edit(PublisherViewModel model)
+    public async Task<IActionResult> Edit(GenderViewModel model)
     {
         try
         {
@@ -107,7 +103,7 @@ public class PublisherController : BaseController
                 return await RePopulateViewModelAndReturnView(model);
 
             // Edit the book category
-            var result = await _publisherServices.UpdatePublisherAsync(model.Publisher);
+            var result = await _genderService.UpdateGenderAsync(model.GenderDto);
             if (string.IsNullOrWhiteSpace(result))
                 return RedirectToAction("Index"); // Done
 
@@ -118,42 +114,34 @@ public class PublisherController : BaseController
         catch (Exception ex)
         {
             //TODO: Add appropriate error handling logic
-            _logger.LogError(ex, "Error editing publisher.");
+            _logger.LogError(ex, "Error editing gender.");
             return GenerateCatchMessage(ErrorsMessagesConstants.UnSuccessfulEditItemErrMsg)!;
         }
     }
-
-    // Helper Method
-
-    private async Task<PublisherViewModel> PreparePublisherViewModel()
+    
+    //Helper Methods
+    private async Task<IActionResult> RePopulateViewModelAndReturnView(GenderViewModel model)
     {
         try
         {
-            var genders = await _genderService.GetGendersAsync();
-
-
-            return new PublisherViewModel
-            {
-                Genders = genders.Select(dto => new SelectListItem(dto.Title, dto.GenderId.ToString())).ToList()
-            };
+            // Get view model data
+            var viewModel = await PrepareGenderViewModel();
+            viewModel.GenderDto = model.GenderDto;
+            // Return view with populated model
+            return View(viewModel);
         }
         catch (Exception e)
         {
             throw;
         }
     }
-
-    private async Task<IActionResult> RePopulateViewModelAndReturnView(PublisherViewModel model)
+    
+    
+    private static Task<GenderViewModel> PrepareGenderViewModel()
     {
         try
         {
-            // Get view model data
-            var viewModel = await PreparePublisherViewModel();
-
-            viewModel.Publisher = model.Publisher;
-
-            // Return view with populated model
-            return View(viewModel);
+            return Task.FromResult(new GenderViewModel());
         }
         catch (Exception e)
         {

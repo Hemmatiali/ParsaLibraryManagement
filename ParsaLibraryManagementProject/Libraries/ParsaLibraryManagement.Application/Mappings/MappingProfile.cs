@@ -18,7 +18,18 @@ namespace ParsaLibraryManagement.Application.Mappings
             CreateMap<BooksCategory, BookCategoryDto>().ReverseMap();
 
             CreateMap<Publisher, PublisherDto>()
-                .ForMember(dto => dto.Email,expression => expression.MapFrom(publisher => publisher.Email.CleanEmail()))
+                .ForMember(dto => dto.Email,
+                    expression => expression.MapFrom(publisher => publisher.Email.CleanEmail()))
+                .ReverseMap();
+
+            CreateMap<GenderDto, Gender>()
+                .ForMember(dto => dto.Code, expression => expression.MapFrom(gender => gender.Code))
+                .ForMember(dto => dto.Title, expression => expression.MapFrom(gender => gender.Title))
+                .ForMember(dto => dto.GenderId, expression =>
+                {
+                    expression.PreCondition(dto => dto.GenderId.HasValue);
+                    expression.MapFrom(dto => dto.GenderId!.Value);
+                })
                 .ReverseMap();
         }
     }
