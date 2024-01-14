@@ -21,5 +21,9 @@
         public const string LengthBetweenMsg = "{0} must be between {1} and {2} characters.";
         public const string MaximumLengthMsg = "{0} must be maximum {1} characters.";
         public const string HasRelationOnWithPlaceHolderMsg = "Has relation on {0}.";
+        public const string NotValid = "{0} not valid";
+        public const string DoesNotExist = "The {0} does not exist in the database.";
+        public const string DuplicatedValue = "The {0} Can Not Be Duplicated.";
+        
     }
 }

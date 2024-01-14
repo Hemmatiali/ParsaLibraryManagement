@@ -1,0 +1,55 @@
+﻿@model System.Collections.Generic.List<ParsaLibraryManagement.Application.DTOs.GenderDto>
+
+@{
+    ViewBag.Title = "List Of Genders";
+    Layout = "_Layout";
+}
+
+<main class="main-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+
+                        <div class="row card-title">
+                            <h5 class="col-4">Classification of genders</h5>
+                            <a class="btn btn-primary col-3 offset-4 d-block" asp-action="Create" style="color:white">
+                                <i class="ti-plus m-r-5"></i> Create a new Gender
+                            </a>
+
+                        </div>
+
+                        <div class="table-responsive" tabindex="1" style="overflow: hidden; outline: none;">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th class="text-center" scope="col">Code</th>
+                                    <th class="text-center" scope="col">Title</th>
+                                    <th class="text-center" scope="col">Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @{
+                                    @foreach (var gender in Model.Select((dto, i) => new { gender = dto, index = i + 1 }))
+                                    {
+                                        <tr>
+                                            <td class="text-center">@gender.index</td>
+                                            <td class="text-center">@gender.gender.Code</td>
+                                            <td class="text-center">@gender.gender.Title</td>
+                                            <td class="text-center">
+                                                <a asp-action="Edit" asp-route-id="@gender.gender.GenderId" class="btn btn-warning" style="color:white"> <i class="ti-pencil m-r-5"></i> Edit </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

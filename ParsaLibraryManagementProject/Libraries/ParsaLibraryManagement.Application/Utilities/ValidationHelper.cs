@@ -15,5 +15,4 @@ namespace ParsaLibraryManagement.Application.Utilities
             return string.Join(", ", validationResult.Errors.Select(e => e.ErrorMessage));
         }
     }
-
 }
