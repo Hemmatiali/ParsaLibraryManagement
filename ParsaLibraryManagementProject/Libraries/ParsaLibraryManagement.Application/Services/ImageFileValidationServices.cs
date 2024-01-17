@@ -11,7 +11,7 @@ namespace ParsaLibraryManagement.Application.Services
     /// <remarks>
     ///     This class implements the <see cref="IImageFileValidationService"/> interface and provides methods for validating image files.
     /// </remarks>
-    public class ImageFileValidationService : IImageFileValidationService
+    public class ImageFileValidationServices : IImageFileValidationService
     {
         #region Fields
 
@@ -22,7 +22,7 @@ namespace ParsaLibraryManagement.Application.Services
 
         #region Ctor
 
-        public ImageFileValidationService(FileUploadOptions options)
+        public ImageFileValidationServices(FileUploadOptions options)
         {
             _maxFileSize = options.MaxFileSize;
             _allowedExtensions = options.AllowedExtensions;

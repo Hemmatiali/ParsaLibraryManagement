@@ -1,0 +1,61 @@
+﻿@model List<ParsaLibraryManagement.Application.DTOs.PublisherDto>
+
+@{
+    ViewBag.Title = "List Of Publishers";
+    Layout = "_Layout";
+}
+
+<main class="main-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+
+                        <div class="row card-title">
+                            <h5 class="col-4">Classification of publishers</h5>
+                            <a class="btn btn-primary col-3 offset-4 d-block" asp-action="Create" style="color:white">
+                                <i class="ti-plus m-r-5"></i> Create a new publisher
+                            </a>
+                        </div>
+
+                        <div class="table-responsive" tabindex="1" style="overflow: hidden; outline: none;">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">First Name</th>
+                                        <th scope="col">Last Name</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Gender</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        int rowIndex = 1;
+                                        @foreach (var publisher in Model)
+                                        {
+                                            <tr>
+                                                <td>@rowIndex</td>
+                                                <td>@publisher.FirstName</td>
+                                                <td>@publisher.LastName</td>
+                                                <td>@publisher.Email</td>
+                                                <td>@publisher.GenderTitle</td>
+                                                <td>
+                                                    <a asp-action="Edit" asp-route-publisherId="@publisher.PublisherId" class="btn btn-warning" style="color:white"> <i class="ti-pencil m-r-5"></i> Edit </a>
+                                                    <a asp-action="Delete" asp-route-publisherId="@publisher.PublisherId" class="btn btn-danger" style="color:white"> <i class="ti-pencil m-r-5"></i> Delete</a>
+
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

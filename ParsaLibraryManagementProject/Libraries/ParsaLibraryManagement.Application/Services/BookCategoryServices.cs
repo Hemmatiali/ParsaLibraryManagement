@@ -6,10 +6,12 @@ using ParsaLibraryManagement.Application.Interfaces;
 using ParsaLibraryManagement.Application.Interfaces.ImageServices;
 using ParsaLibraryManagement.Application.Utilities;
 using ParsaLibraryManagement.Domain.Common;
+using ParsaLibraryManagement.Domain.Common.Extensions;
 using ParsaLibraryManagement.Domain.Entities;
 using ParsaLibraryManagement.Domain.Interfaces;
 using ParsaLibraryManagement.Domain.Interfaces.ImageServices;
 using ParsaLibraryManagement.Domain.Interfaces.Repository;
+using System.Linq.Expressions;
 
 namespace ParsaLibraryManagement.Application.Services
 {
@@ -20,7 +22,7 @@ namespace ParsaLibraryManagement.Application.Services
 
         private readonly IMapper _mapper;
         private readonly IValidator<BookCategoryDto> _validator;
-        private readonly IBaseRepository<BooksCategory> _baseRepository;
+        private readonly IBaseRepository<BookCategory> _baseRepository;
         private readonly IBooksCategoryRepository _booksCategoryRepository;
         private readonly IImageFileValidationService _imageFileValidationServices;
         private readonly IImageServices _imageServices;
@@ -33,7 +35,7 @@ namespace ParsaLibraryManagement.Application.Services
         {
             _mapper = mapper;
             _validator = validator;
-            _baseRepository = repositoryFactory.GetRepository<BooksCategory>();
+            _baseRepository = repositoryFactory.GetRepository<BookCategory>();
             _booksCategoryRepository = booksCategoryRepository;
             _imageFileValidationServices = imageFileValidationServices;
             _imageServices = imageServices;
@@ -43,16 +45,28 @@ namespace ParsaLibraryManagement.Application.Services
 
         #region Methods
 
+        #region Private
+
+        //todo xml
+        private static void NormalizeBookCategoryDto(BookCategoryDto bookCategoryDto)
+        {
+            bookCategoryDto.Title = bookCategoryDto.Title.NormalizeAndTrim();
+        }
+
+        #endregion
+
+        #region Retrieval
+
         /// <inheritdoc />
-        public async Task<BookCategoryDto?> GetCategoryByIdAsync(short categoryId)
+        public async Task<BookCategoryDto?> GetCategoryByIdAsync(short bookCategoryId)
         {
             try
             {
                 // Get category
-                var category = await _baseRepository.GetByIdAsync(categoryId);
-                return category == null ? null :
-                    // Map the category to Dto
-                    _mapper.Map<BookCategoryDto>(category);
+                var booksCategory = await _baseRepository.GetByIdAsync(bookCategoryId);
+
+                // Map entity to DTO and return
+                return booksCategory == null ? null : _mapper.Map<BookCategoryDto>(booksCategory);
             }
             catch (Exception e)
             {
@@ -65,12 +79,11 @@ namespace ParsaLibraryManagement.Application.Services
         {
             try
             {
-                // Get categories
-                var categories = await _baseRepository.GetAllAsync();
+                // Retrieve all categories
+                var booksCategories = await _baseRepository.GetAllAsync(new Expression<Func<BookCategory, object>>[] { b => b.Ref! });
 
-                // Map the categories to Dto
-                var categoryDtos = categories.Select(c => _mapper.Map<BookCategoryDto>(c)).ToList();
-                return categoryDtos;
+                // Map categories to DTOs and return the list
+                return booksCategories.Select(bookCategory => _mapper.Map<BookCategoryDto>(bookCategory)).ToList();
             }
             catch (Exception e)
             {
@@ -82,14 +95,18 @@ namespace ParsaLibraryManagement.Application.Services
         public async Task<List<BookCategoryDto>> GetCategoriesAsync(string prefix)
         {
             // Get categories
-            var categories = await _booksCategoryRepository.GetBookCategoriesAsync(prefix);
+            var bookCategories = await _booksCategoryRepository.GetBookCategoriesAsync(prefix);
 
             // Map the categories to Dto
-            return _mapper.Map<List<BookCategoryDto>>(categories);
+            return _mapper.Map<List<BookCategoryDto>>(bookCategories);
         }
 
+        #endregion
+
+        #region Modification
+
         /// <inheritdoc />
-        public async Task<string?> CreateCategoryAsync(BookCategoryDto categoryDto, IFormFile imageFile, string folderName)
+        public async Task<string?> CreateCategoryAsync(BookCategoryDto bookCategoryDto, IFormFile imageFile, string folderName)
         {
             var imageNameWithExtension = "";
             try
@@ -105,16 +122,22 @@ namespace ParsaLibraryManagement.Application.Services
                     return ErrorMessages.ImageUploadFailedMsg;
 
                 // Validate DTO
-                categoryDto.ImageAddress = imageNameWithExtension;
-                var validationResult = await _validator.ValidateAsync(categoryDto);
+                bookCategoryDto.ImageAddress = imageNameWithExtension;
+                var validationResult = await _validator.ValidateAsync(bookCategoryDto);
                 if (!validationResult.IsValid)
                     return ValidationHelper.GetErrorMessages(validationResult);
 
-                // Map DTO to entity and save
-                var category = _mapper.Map<BooksCategory>(categoryDto);
-                category.ImageAddress = imageNameWithExtension; // Set the image path
+                // Normalize values
+                NormalizeBookCategoryDto(bookCategoryDto);
 
-                await _baseRepository.AddAsync(category);
+                // Check existence of title
+                var titleExists = await _baseRepository.AnyAsync(p => p.Title.Equals(bookCategoryDto.Title));
+                if (titleExists)
+                    return string.Format(ErrorMessages.Exist, nameof(bookCategoryDto.Title));
+
+                // Map DTO to entity and save
+                var bookCategory = _mapper.Map<BookCategory>(bookCategoryDto);
+                await _baseRepository.AddAsync(bookCategory);
                 await _baseRepository.SaveChangesAsync();
 
                 // Done
@@ -128,13 +151,13 @@ namespace ParsaLibraryManagement.Application.Services
         }
 
         /// <inheritdoc />
-        public async Task<string?> UpdateCategoryAsync(short id, BookCategoryDto categoryDto, IFormFile imageFile, string folderName)
+        public async Task<string?> UpdateCategoryAsync(BookCategoryDto bookCategoryDto, IFormFile imageFile, string folderName)
         {
             var imageNameWithExtension = "";
             try
             {
                 // Get existing category
-                var existingCategory = await _baseRepository.GetByIdAsync(id);
+                var existingCategory = await _baseRepository.GetByIdAsync(bookCategoryDto.CategoryId);
                 if (existingCategory == null)
                     return ErrorMessages.ItemNotFoundMsg;
 
@@ -153,13 +176,21 @@ namespace ParsaLibraryManagement.Application.Services
                     return ErrorMessages.ImageUploadFailedMsg;
 
                 // Validate DTO
-                categoryDto.ImageAddress = imageNameWithExtension;
-                var validationResult = await _validator.ValidateAsync(categoryDto);
+                bookCategoryDto.ImageAddress = imageNameWithExtension;
+                var validationResult = await _validator.ValidateAsync(bookCategoryDto);
                 if (!validationResult.IsValid)
-                    return ValidationHelper.GetErrorMessages(validationResult);
+                    return ValidationHelper.GetErrorMessages(validationResult); //TODO image is uploaded and should be handled
+
+                // Normalize values
+                NormalizeBookCategoryDto(bookCategoryDto);
+
+                // Check existence of title
+                var titleExists = await _baseRepository.AnyAsync(p => p.Title.Equals(bookCategoryDto.Title) && p.CategoryId != bookCategoryDto.CategoryId);
+                if (titleExists)
+                    return string.Format(ErrorMessages.Exist, nameof(bookCategoryDto.Title));
 
                 // Map DTO to existing entity and save
-                _mapper.Map(categoryDto, existingCategory);
+                _mapper.Map(bookCategoryDto, existingCategory);
                 await _baseRepository.UpdateAsync(existingCategory);
                 await _baseRepository.SaveChangesAsync();
 
@@ -172,6 +203,10 @@ namespace ParsaLibraryManagement.Application.Services
                 throw;
             }
         }
+
+        #endregion
+
+        #region Deletion
 
         /// <inheritdoc />
         public async Task<string?> DeleteCategoryAsync(short categoryId, string folderName)
@@ -205,6 +240,7 @@ namespace ParsaLibraryManagement.Application.Services
             }
         }
 
+        #endregion
 
         #endregion
     }

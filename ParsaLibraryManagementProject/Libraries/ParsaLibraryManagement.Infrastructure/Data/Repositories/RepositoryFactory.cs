@@ -13,13 +13,13 @@ namespace ParsaLibraryManagement.Infrastructure.Data.Repositories
     {
         #region Fields
 
-        private readonly ParsaLibraryManagementDBContext _context;
+        private readonly ParsaLibraryManagementDbContext _context;
 
         #endregion
 
         #region Ctor
 
-        public RepositoryFactory(ParsaLibraryManagementDBContext context)
+        public RepositoryFactory(ParsaLibraryManagementDbContext context)
         {
             _context = context;
         }

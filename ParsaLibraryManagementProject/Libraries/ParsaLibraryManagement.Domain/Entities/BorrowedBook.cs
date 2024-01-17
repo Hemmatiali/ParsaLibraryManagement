@@ -28,7 +28,7 @@
         /// <summary>
         /// Navigation property for the borrowed book.
         /// </summary>
-        public virtual Books Books { get; set; }
+        public virtual Book Book { get; set; }
 
         /// <summary>
         /// Navigation property for the user who borrowed the book.

@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ParsaLibraryManagement.Web.Models;
-using System.Diagnostics;
 
 namespace ParsaLibraryManagement.Web.Controllers
 {

@@ -12,15 +12,33 @@ namespace ParsaLibraryManagement.Application.Validators
     /// </remarks>
     public class BookCategoryValidator : AbstractValidator<BookCategoryDto>
     {
+        #region Fields
+
+        private const int TitleMinimumLength = 1;
+        private const int TitleMaximumLength = 50;
+
+        private const int ImageAddressMaximumLength = 37;
+
+        #endregion
+
+        #region Ctor
+
         public BookCategoryValidator()
         {
-            RuleFor(x => x.Title)
-                .NotEmpty().WithMessage(string.Format(ErrorMessages.RequiredFieldMsg, "Title"))
-                .Length(1, 50).WithMessage(string.Format(ErrorMessages.LengthBetweenMsg, "Title", 1, 50));
+            RuleFor(dto => dto.Title)
+                .NotEmpty()
+                .WithMessage(string.Format(ErrorMessages.RequiredFieldMsg, nameof(BookCategoryDto.Title)))
+                .Length(TitleMinimumLength, TitleMaximumLength)
+                .WithMessage(string.Format(ErrorMessages.LengthBetweenMsg, nameof(BookCategoryDto.Title), TitleMinimumLength, TitleMaximumLength));
 
-            RuleFor(x => x.ImageAddress)
-                .NotEmpty().WithMessage(string.Format(ErrorMessages.RequiredFieldMsg, "Image address"))
-                .MaximumLength(37).WithMessage(string.Format(ErrorMessages.MaximumLengthMsg, "Image address", 37));
+            RuleFor(dto => dto.ImageAddress)
+                .NotEmpty()
+                .WithMessage(string.Format(ErrorMessages.RequiredFieldMsg, nameof(BookCategoryDto.ImageAddress)))
+                .MaximumLength(ImageAddressMaximumLength)
+                .WithMessage(string.Format(ErrorMessages.MaximumLengthMsg, nameof(BookCategoryDto.ImageAddress), ImageAddressMaximumLength));
         }
+
+        #endregion
+
     }
 }

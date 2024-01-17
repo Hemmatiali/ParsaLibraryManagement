@@ -10,10 +10,21 @@ namespace ParsaLibraryManagement.Application.Utilities
     /// </remarks>
     public static class ValidationHelper
     {
+        /// <summary>
+        ///     Gets a concatenated string of error messages from a ValidationResult object.
+        /// </summary>
+        /// <param name="validationResult">
+        ///     The ValidationResult object containing the collection of validation errors.
+        /// </param>
+        /// <returns>
+        ///     A string representing the concatenated error messages separated by commas.
+        /// </returns>
+        /// <remarks>
+        ///     This method is useful for consolidating error messages from validation results into a single string.
+        /// </remarks>
         public static string GetErrorMessages(ValidationResult validationResult)
         {
             return string.Join(", ", validationResult.Errors.Select(e => e.ErrorMessage));
         }
     }
-
 }

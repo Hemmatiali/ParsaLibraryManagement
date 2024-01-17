@@ -12,13 +12,13 @@ namespace ParsaLibraryManagement.Infrastructure.Data.Repositories
     {
         #region Fields
 
-        private readonly ParsaLibraryManagementDBContext _context;
+        private readonly ParsaLibraryManagementDbContext _context;
 
         #endregion
 
         #region Ctor
 
-        public BooksCategoryRepository(ParsaLibraryManagementDBContext context)
+        public BooksCategoryRepository(ParsaLibraryManagementDbContext context)
         {
             _context = context;
         }
@@ -39,7 +39,7 @@ namespace ParsaLibraryManagement.Infrastructure.Data.Repositories
 
                 // Check for books with this category
                 var hasBooks = await _context.Books.AnyAsync(b => b.CategoryId == categoryId);
-                return hasBooks ? new OperationResultModel { WasSuccess = true, Message = string.Format(ErrorMessages.HasRelationOnWithPlaceHolderMsg, "books") } :
+                return hasBooks ? new OperationResultModel { WasSuccess = true, Message = string.Format(ErrorMessages.HasRelationOnWithPlaceHolderMsg, nameof(Book)) } :
                     new OperationResultModel { WasSuccess = false };
             }
             catch (Exception e)
@@ -49,7 +49,7 @@ namespace ParsaLibraryManagement.Infrastructure.Data.Repositories
         }
 
         /// <inheritdoc />
-        public async Task<List<BooksCategory>> GetBookCategoriesAsync(string prefix)
+        public async Task<List<BookCategory>> GetBookCategoriesAsync(string prefix)
         {
             try
             {

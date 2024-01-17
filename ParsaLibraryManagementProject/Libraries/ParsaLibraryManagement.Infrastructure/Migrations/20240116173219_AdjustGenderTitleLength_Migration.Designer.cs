@@ -11,9 +11,9 @@ using ParsaLibraryManagement.Infrastructure.Data.Contexts;
 
 namespace ParsaLibraryManagement.Infrastructure.Migrations
 {
-    [DbContext(typeof(ParsaLibraryManagementDBContext))]
-    [Migration("20231125174249_DBInit")]
-    partial class DBInit
+    [DbContext(typeof(ParsaLibraryManagementDbContext))]
+    [Migration("20240116173219_AdjustGenderTitleLength_Migration")]
+    partial class AdjustGenderTitleLength_Migration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -62,8 +62,8 @@ namespace ParsaLibraryManagement.Infrastructure.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(10, 0)");
 
-                    b.Property<short>("PublisherId")
-                        .HasColumnType("smallint");
+                    b.Property<Guid>("PublisherId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Status")
                         .IsRequired()
@@ -102,9 +102,12 @@ namespace ParsaLibraryManagement.Infrastructure.Migrations
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(50)
+                        .IsUnicode(true)
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("CategoryId");
+
+                    b.HasIndex("RefId");
 
                     b.ToTable("BooksCategories");
                 });
@@ -154,21 +157,47 @@ namespace ParsaLibraryManagement.Infrastructure.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(15)
+                        .IsUnicode(true)
+                        .HasColumnType("nvarchar(15)");
 
                     b.HasKey("GenderId");
 
                     b.ToTable("Genders");
+
+                    b.HasData(
+                        new
+                        {
+                            GenderId = (byte)1,
+                            Code = "M",
+                            Title = "Male"
+                        },
+                        new
+                        {
+                            GenderId = (byte)2,
+                            Code = "F",
+                            Title = "Female"
+                        },
+                        new
+                        {
+                            GenderId = (byte)3,
+                            Code = "RNS",
+                            Title = "Rather Not Say"
+                        },
+                        new
+                        {
+                            GenderId = (byte)4,
+                            Code = "MXD",
+                            Title = "Mixed"
+                        });
                 });
 
             modelBuilder.Entity("ParsaLibraryManagement.Domain.Entities.Publisher", b =>
                 {
-                    b.Property<short>("PublisherId")
+                    b.Property<Guid>("PublisherId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("smallint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<short>("PublisherId"));
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("newid()");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -189,14 +218,10 @@ namespace ParsaLibraryManagement.Infrastructure.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasMaxLength(11)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(11)")
-                        .HasComment("This is only for Iranian phone numbers - This field is null for foreign users.");
-
                     b.HasKey("PublisherId");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
 
                     b.HasIndex("GenderId");
 
@@ -269,6 +294,15 @@ namespace ParsaLibraryManagement.Infrastructure.Migrations
                     b.Navigation("Publisher");
                 });
 
+            modelBuilder.Entity("ParsaLibraryManagement.Domain.Entities.BooksCategory", b =>
+                {
+                    b.HasOne("ParsaLibraryManagement.Domain.Entities.BooksCategory", null)
+                        .WithMany()
+                        .HasForeignKey("RefId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .HasConstraintName("FK_BooksCategory_RefId");
+                });
+
             modelBuilder.Entity("ParsaLibraryManagement.Domain.Entities.BorrowedBook", b =>
                 {
                     b.HasOne("ParsaLibraryManagement.Domain.Entities.Books", "Books")
@@ -293,6 +327,7 @@ namespace ParsaLibraryManagement.Infrastructure.Migrations
                     b.HasOne("ParsaLibraryManagement.Domain.Entities.Gender", "Gender")
                         .WithMany("Publishers")
                         .HasForeignKey("GenderId")
+                        .OnDelete(DeleteBehavior.ClientNoAction)
                         .IsRequired()
                         .HasConstraintName("FK_Publishers_Genders");
 

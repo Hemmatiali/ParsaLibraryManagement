@@ -4,7 +4,7 @@ using ParsaLibraryManagement.Domain.Models;
 namespace ParsaLibraryManagement.Domain.Interfaces
 {
     /// <summary>
-    ///     Interface for the repository that handles book category entities.
+    ///     Interface for the repository that handles book category entity.
     /// </summary>
     /// <remarks>
     ///     This interface defines methods related to book categories in the repository.
@@ -22,7 +22,7 @@ namespace ParsaLibraryManagement.Domain.Interfaces
         ///     Retrieves a list of book categories based on the specified prefix asynchronously.
         /// </summary>
         /// <param name="prefix">The prefix used to filter book categories.</param>
-        /// <returns>A task representing the asynchronous operation, returning a list of <see cref="BooksCategory"/>.</returns>
-        Task<List<BooksCategory>> GetBookCategoriesAsync(string prefix);
+        /// <returns>A task representing the asynchronous operation, returning a list of <see cref="BookCategory"/>.</returns>
+        Task<List<BookCategory>> GetBookCategoriesAsync(string prefix);
     }
 }

@@ -1,0 +1,109 @@
+﻿@model ParsaLibraryManagement.Web.ViewModels.Publisher.PublisherViewModel
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Create publisher";
+}
+
+<!-- begin::main content -->
+<main class="main-content">
+    <div class="container-fluid">
+        <!-- begin::page header -->
+        <div class="page-header">
+            <div>
+                <h3>Create a publisher</h3>
+            </div>
+        </div>
+        <!-- end::page header -->
+
+        <div class="card">
+            <div class="card-body">
+                @if (@ViewBag.errorMessage != null)
+                {
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="alert alert-danger" role="alert">
+                                        <i class="ti-alert m-l-10"></i> @ViewBag.errorMessage
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <form asp-action="Create" class="needs-validation" novalidate="" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <label for="txtFirstName">First Name</label>
+                            <input id="txtFirstName" asp-for="@Model.Publisher.FirstName" type="text" class="form-control" placeholder="First Name" maxlength="30" required=""/>
+                            <span asp-validation-for="@Model.Publisher.FirstName" class="text-danger"></span>
+                            <div class="invalid-feedback">
+                                First name is required.
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="txtLastName">Last Name</label>
+                            <input id="txtLastName" asp-for="@Model.Publisher.LastName" type="text" class="form-control" placeholder="Last Name" maxlength="30" required=""/>
+                            <span asp-validation-for="@Model.Publisher.LastName" class="text-danger"></span>
+                            <div class="invalid-feedback">
+                                Last name is required.
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="drpGenders">Gender</label>
+                            @{
+                                <select id="drpGenders" class="form-control" asp-for="@Model.Publisher.GenderId" asp-items="@Model.Genders"></select>
+                            }
+                            <span asp-validation-for="@Model.Publisher.GenderId" class="text-danger"></span>
+                            <div class="invalid-feedback">
+                                Gender is required.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="txtEmail">Email</label>
+                            <input id="txtEmail" asp-for="@Model.Publisher.Email" type="email" class="form-control" placeholder="Email" maxlength="50" required=""/>
+                            <span asp-validation-for="@Model.Publisher.Email" class="text-danger"></span>
+                            <div class="invalid-feedback">
+                                Email is required.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row" style="margin-top: 12px">
+                        <div class="col-md-12">
+                            <input type="submit" value="Submit" class="btn btn btn-primary"/>
+                            <a class="btn btn-secondary" style="color:white" asp-action="Index">Back to list</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    @section FormsValidation
+    {
+        <script>
+            //  Form Validation
+            window.addEventListener('load', function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        </script>
+    }
+
+</main>
+<!-- end::main content -->

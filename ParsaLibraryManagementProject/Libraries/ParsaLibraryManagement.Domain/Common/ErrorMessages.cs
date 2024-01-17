@@ -10,7 +10,7 @@
     {
         // General messages
         public const string ItemNotFoundMsg = "Item not found.";
-        public const string HasRelationOnSubCategoriesMsg = "Has relation on sub categories.";
+        public const string HasRelationOnSubCategoriesMsg = "Has relation on subcategories.";
 
         // Image messages
         public const string ImageUploadFailedMsg = "Failed to upload image.";
@@ -19,7 +19,15 @@
         // Validator messages
         public const string RequiredFieldMsg = "{0} is required.";
         public const string LengthBetweenMsg = "{0} must be between {1} and {2} characters.";
-        public const string MaximumLengthMsg = "{0} must be maximum {1} characters.";
+        public const string MaximumLengthMsg = "{0} must be a maximum of {1} characters.";
         public const string HasRelationOnWithPlaceHolderMsg = "Has relation on {0}.";
+        public const string NotValid = "The {0} is not valid.";
+        public const string Exist = "The {0} exists in the database.";
+        public const string DoesNotExist = "The {0} does not exist in the database.";
+        public const string DuplicatedValue = "The {0} cannot be duplicated.";
+
+        // New message
+        public const string InputCannotBeNullWhiteSpaceMsg = "Input cannot be null or whitespace.";
     }
+
 }

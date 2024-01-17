@@ -24,7 +24,7 @@ namespace ParsaLibraryManagement.Infrastructure.Data.Configurations
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_BorrowedBooks_Users");
 
-            builder.HasOne(d => d.Books)
+            builder.HasOne(d => d.Book)
                 .WithMany(p => p.BorrowedBooks)
                 .HasForeignKey(d => d.BookId)
                 .OnDelete(DeleteBehavior.ClientSetNull)

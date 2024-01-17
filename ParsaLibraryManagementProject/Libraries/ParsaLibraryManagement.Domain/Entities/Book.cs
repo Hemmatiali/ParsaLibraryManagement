@@ -3,7 +3,7 @@
     /// <summary>
     /// Represents a book in the library.
     /// </summary>
-    public class Books
+    public class Book
     {
         /// <summary>
         /// Gets or sets the unique identifier for the book.
@@ -18,7 +18,7 @@
         /// <summary>
         /// Gets or sets the identifier of the publisher of the book.
         /// </summary>
-        public short PublisherId { get; set; }
+        public Guid PublisherId { get; set; }
 
         /// <summary>
         /// Gets or sets the identifier of the category of the book.
@@ -56,7 +56,7 @@
         public string Status { get; set; } = "";
 
         // Navigation properties
-        public virtual BooksCategory Category { get; set; }
+        public virtual BookCategory Category { get; set; }
         public virtual Publisher Publisher { get; set; }
         public virtual ICollection<BorrowedBook> BorrowedBooks { get; set; }
     }

@@ -14,7 +14,17 @@ namespace ParsaLibraryManagement.Application.Mappings
     {
         public MappingProfile()
         {
-            CreateMap<BooksCategory, BookCategoryDto>().ReverseMap();
+            CreateMap<BookCategory, BookCategoryDto>()
+                .ForMember(dest => dest.RefTitle, opt => opt.MapFrom(src => src.Ref.Title))
+                .ReverseMap()
+                .ReverseMap();
+
+            CreateMap<Gender, GenderDto>().ReverseMap();
+
+            CreateMap<Publisher, PublisherDto>()
+                .ForMember(dest => dest.GenderTitle, opt => opt.MapFrom(src => src.Gender.Title))
+                .ReverseMap()
+                .ForMember(dest => dest.Gender, opt => opt.Ignore()); // Ignore Gender object during mapping
         }
     }
 }

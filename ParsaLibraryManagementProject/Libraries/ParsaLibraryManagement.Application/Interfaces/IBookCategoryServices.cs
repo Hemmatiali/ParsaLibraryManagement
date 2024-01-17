@@ -11,12 +11,14 @@ namespace ParsaLibraryManagement.Application.Interfaces
     /// </remarks>
     public interface IBookCategoryServices
     {
+        #region Retrieval
+
         /// <summary>
         ///     Gets a book category by its ID asynchronously.
         /// </summary>
-        /// <param name="categoryId">The ID of the book category to retrieve.</param>
+        /// <param name="bookCategoryId">The ID of the book category to retrieve.</param>
         /// <returns>A task representing the asynchronous operation, yielding a nullable <see cref="BookCategoryDto"/>.</returns>
-        Task<BookCategoryDto?> GetCategoryByIdAsync(short categoryId);
+        Task<BookCategoryDto?> GetCategoryByIdAsync(short bookCategoryId);
 
         /// <summary>
         ///     Gets all book categories asynchronously.
@@ -31,24 +33,31 @@ namespace ParsaLibraryManagement.Application.Interfaces
         /// <returns>A task representing the asynchronous operation, returning a list of <see cref="BookCategoryDto"/>.</returns>
         Task<List<BookCategoryDto>> GetCategoriesAsync(string prefix);
 
+        #endregion
+
+        #region Modification
+
         /// <summary>
         ///     Creates a new book category asynchronously.
         /// </summary>
-        /// <param name="categoryDto">The data for the new book category.</param>
+        /// <param name="bookCategoryDto">The data for the new book category.</param>
         /// <param name="imageFile">The image file associated with the new book category.</param>
         /// <param name="folderName">The folder name where images are stored.</param>
         /// <returns>A task representing the asynchronous operation, yielding a nullable string representing the result message.</returns>
-        Task<string?> CreateCategoryAsync(BookCategoryDto categoryDto, IFormFile imageFile, string folderName);
+        Task<string?> CreateCategoryAsync(BookCategoryDto bookCategoryDto, IFormFile imageFile, string folderName);
 
         /// <summary>
         ///     Updates an existing book category asynchronously.
         /// </summary>
-        /// <param name="categoryId">The ID of the book category to update.</param>
-        /// <param name="categoryDto">The updated data for the book category.</param>
+        /// <param name="bookCategoryDto">The updated data for the book category.</param>
         /// <param name="imageFile">The updated image file associated with the book category.</param>
         /// <param name="folderName">The folder name where images are stored.</param>
         /// <returns>A task representing the asynchronous operation, yielding a nullable string representing the result message.</returns>
-        Task<string?> UpdateCategoryAsync(short categoryId, BookCategoryDto categoryDto, IFormFile imageFile, string folderName);
+        Task<string?> UpdateCategoryAsync(BookCategoryDto bookCategoryDto, IFormFile imageFile, string folderName);
+
+        #endregion
+
+        #region Deletion
 
         /// <summary>
         ///     Deletes a book category asynchronously.
@@ -57,5 +66,8 @@ namespace ParsaLibraryManagement.Application.Interfaces
         /// <param name="folderName">The folder name where images are stored.</param>
         /// <returns>A task representing the asynchronous operation, yielding a nullable string representing the result message.</returns>
         Task<string?> DeleteCategoryAsync(short categoryId, string folderName);
+
+        #endregion
+
     }
 }

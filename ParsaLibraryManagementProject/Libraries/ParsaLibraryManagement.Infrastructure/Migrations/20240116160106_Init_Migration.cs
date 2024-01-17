@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace ParsaLibraryManagement.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class DBInit : Migration
+    public partial class Init_Migration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -23,6 +24,12 @@ namespace ParsaLibraryManagement.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_BooksCategories", x => x.CategoryId);
+                    table.ForeignKey(
+                        name: "FK_BooksCategory_RefId",
+                        column: x => x.RefId,
+                        principalTable: "BooksCategories",
+                        principalColumn: "CategoryId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -43,13 +50,11 @@ namespace ParsaLibraryManagement.Infrastructure.Migrations
                 name: "Publishers",
                 columns: table => new
                 {
-                    PublisherId = table.Column<short>(type: "smallint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PublisherId = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "newid()"),
                     FirstName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     GenderId = table.Column<byte>(type: "tinyint", nullable: false),
-                    Email = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: false),
-                    PhoneNumber = table.Column<string>(type: "varchar(11)", unicode: false, maxLength: 11, nullable: false, comment: "This is only for Iranian phone numbers - This field is null for foreign users.")
+                    Email = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -91,7 +96,7 @@ namespace ParsaLibraryManagement.Infrastructure.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    PublisherId = table.Column<short>(type: "smallint", nullable: false),
+                    PublisherId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CategoryId = table.Column<short>(type: "smallint", nullable: false),
                     PageCount = table.Column<short>(type: "smallint", nullable: false, defaultValueSql: "((1))"),
                     Price = table.Column<decimal>(type: "decimal(10,0)", nullable: false),
@@ -151,6 +156,11 @@ namespace ParsaLibraryManagement.Infrastructure.Migrations
                 column: "PublisherId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_BooksCategories_RefId",
+                table: "BooksCategories",
+                column: "RefId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_BorrowedBooks_BookId",
                 table: "BorrowedBooks",
                 column: "BookId");
@@ -159,6 +169,12 @@ namespace ParsaLibraryManagement.Infrastructure.Migrations
                 name: "IX_BorrowedBooks_UserId",
                 table: "BorrowedBooks",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Publishers_Email",
+                table: "Publishers",
+                column: "Email",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Publishers_GenderId",

@@ -23,7 +23,7 @@ builder.Services.AddControllersWithViews();
 #region DataBase Context
 
 //Add dbContext services 
-builder.Services.AddDbContext<ParsaLibraryManagementDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("ParsaLibraryManagementSQLServerConnection")));
+builder.Services.AddDbContext<ParsaLibraryManagementDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("ParsaLibraryManagementSQLServerConnection")));
 
 #endregion
 
@@ -33,22 +33,39 @@ builder.Services.AddDbContext<ParsaLibraryManagementDBContext>(options => option
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<BookCategoryValidator>());
-
+builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<GenderValidator>());
+builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<PublisherValidator>());//todo add others
 
 
 #endregion
 
 #region Services
 
-builder.Services.AddScoped<IRepositoryFactory, RepositoryFactory>();
-var fileUploadOptions = builder.Configuration.GetSection("FileUploadOptions").Get<FileUploadOptions>();
+//todo categorized and separate to new files
+
+var fileUploadOptions = builder.Configuration.GetSection("FileUploadOptions").Get<FileUploadOptions>(); //todo refactor
 builder.Services.AddSingleton(fileUploadOptions);
-builder.Services.AddScoped<ImageFileValidationService>();
-builder.Services.AddScoped<ImageFileValidationService>();
-builder.Services.AddTransient<IBookCategoryServices, BookCategoryServices>();
+
+// Application services
+builder.Services.AddScoped<ImageFileValidationServices>();
+
+
+// Domain interfaces
+builder.Services.AddScoped<IRepositoryFactory, RepositoryFactory>();
 builder.Services.AddTransient<IBooksCategoryRepository, BooksCategoryRepository>();
+builder.Services.AddScoped<IPublisherRepository, PublisherRepository>();
 builder.Services.AddTransient<IImageServices, ImageServices>();
-builder.Services.AddTransient<IImageFileValidationService, ImageFileValidationService>();
+
+
+
+// Application interfaces
+builder.Services.AddTransient<IBookCategoryServices, BookCategoryServices>();
+builder.Services.AddScoped<IPublisherServices, PublisherServices>();
+builder.Services.AddTransient<IImageFileValidationService, ImageFileValidationServices>();
+
+
+builder.Services.AddScoped<IGenderService, GenderServices>();
+
 
 #endregion
 
@@ -64,7 +81,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     //Unexpected error
-    app.UseExceptionHandler("/Error"); 
+    app.UseExceptionHandler("/Error");
 
     //Handle status codes like 404
     app.UseStatusCodePagesWithReExecute("/Error", "?statusCode={0}");

@@ -5,14 +5,14 @@ using ParsaLibraryManagement.Domain.Entities;
 namespace ParsaLibraryManagement.Infrastructure.Data.Configurations
 {
     /// <summary>
-    /// Configuration for the entity type <see cref="Books"/> in the database context.
+    /// Configuration for the entity type <see cref="Book"/> in the database context.
     /// </summary>
     /// <remarks>
     /// This class defines how the Books entity should be mapped to the database, including its properties and relationships.
     /// </remarks>
-    public class BooksConfiguration : IEntityTypeConfiguration<Books>
+    public class BookConfiguration : IEntityTypeConfiguration<Book>
     {
-        public void Configure(EntityTypeBuilder<Books> builder)
+        public void Configure(EntityTypeBuilder<Book> builder)
         {
             builder.HasKey(e => e.Id);
             builder.Property(e => e.Id).ValueGeneratedOnAdd();

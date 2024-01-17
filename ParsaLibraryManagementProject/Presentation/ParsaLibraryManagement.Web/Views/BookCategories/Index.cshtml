@@ -13,42 +13,39 @@
 
 <main class="main-content">
     <div class="container">
-        <!-- begin::page header -->
-        <div class="page-header">
-            <div class="row">
-                <a class="btn btn-primary col-md-3" asp-action="Create" style="color:white">
-                    <i class="ti-plus m-r-5"></i> Create a new category
-                </a>
-            </div>
-            <div class="row">
-                <div class="btn-group btn-group-sm mt-2 mb-2" role="group" aria-label="Filter">
-                    @foreach (var letter in letters)
-                    {
-                        <a class="btn btn-outline-primary" asp-action="Filter" asp-route-prefix="@letter">@letter</a>
-                    }
-                </div>
-            </div>
-            <div class="row">
-                <a class="btn btn-dark btn-uppercase col-md-3" asp-action="Index" style=" color:white">
-                    <i class="ti-brush m-r-5"></i> Clear Filter
-                </a>
-            </div>
-        </div>
-        <!-- end::page header -->
-
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
 
-                        <h5 class="card-title">Classification of books</h5>
+                        <div class="row card-title">
+                            <h5 class="col-4">Classification of books</h5>
+                            <a class="btn btn-primary col-3 offset-4 d-block" asp-action="Create" style="color:white">
+                                <i class="ti-plus m-r-5"></i> Create a new category
+                            </a>
+                        </div>
+
+                        <div class="row">
+                            <div class="btn-group btn-group-sm mt-2 mb-2" role="group" aria-label="Filter">
+                                @foreach (var letter in letters)
+                                {
+                                    <a class="btn btn-outline-primary" asp-action="Filter" asp-route-prefix="@letter">@letter</a>
+                                }
+                            </div>
+                        </div>
+                        <div class="row">
+                            <a class="btn btn-dark btn-uppercase col-md-3" asp-action="Index" style=" color:white">
+                                <i class="ti-brush m-r-5"></i> Clear Filter
+                            </a>
+                        </div>
 
                         <div class="table-responsive" tabindex="1" style="overflow: hidden; outline: none;">
                             <table class="table">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Category title</th>
+                                        <th scope="col">Title</th>
+                                        <th scope="col">Reference</th>
                                         <th class="text-left" scope="col">Action</th>
                                     </tr>
                                 </thead>
@@ -60,9 +57,10 @@
                                             <tr>
                                                 <td>@rowIndex</td>
                                                 <td>@category.Title</td>
+                                                <td>@category.RefTitle</td>
                                                 <td class="text-left">
-                                                    <a asp-action="Edit" asp-route-id="@category.CategoryId" class="btn btn-warning" style="color:white"> <i class="ti-pencil m-r-5"></i> Edit </a>
-                                                    <a asp-action="Delete" asp-route-id="@category.CategoryId" class="btn btn-danger" style="color:white"> <i class="ti-pencil m-r-5"></i> Delete</a>
+                                                    <a asp-action="Edit" asp-route-bookCategoryId="@category.CategoryId" class="btn btn-warning" style="color:white"> <i class="ti-pencil m-r-5"></i> Edit </a>
+                                                    <a asp-action="Delete" asp-route-bookCategoryId="@category.CategoryId" class="btn btn-danger" style="color:white"> <i class="ti-pencil m-r-5"></i> Delete</a>
                                                 </td>
                                             </tr>
                                             rowIndex++;
