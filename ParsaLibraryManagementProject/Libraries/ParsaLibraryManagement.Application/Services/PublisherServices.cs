@@ -27,7 +27,8 @@ public class PublisherServices : IPublisherServices
 
     #region Ctor
 
-    public PublisherServices(IMapper mapper, IValidator<PublisherDto> validator, IRepositoryFactory repositoryFactory, IPublisherRepository publisherRepository)
+    public PublisherServices(IMapper mapper, IValidator<PublisherDto> validator, IRepositoryFactory repositoryFactory,
+        IPublisherRepository publisherRepository)
     {
         _mapper = mapper;
         _validator = validator;
@@ -80,7 +81,8 @@ public class PublisherServices : IPublisherServices
         try
         {
             // Retrieve all publishers
-            var publishers = await _basePublisherRepository.GetAllAsync(new Expression<Func<Publisher, object>>[] { p => p.Gender });
+            var publishers = await _basePublisherRepository.GetAllAsync(new Expression<Func<Publisher, object>>[]
+                { p => p.Gender });
             //todo order by insertDate or updateDate
 
             // Map publishers to DTOs and return the list
@@ -183,7 +185,8 @@ public class PublisherServices : IPublisherServices
             NormalizePublisherDto(publisherDto);
 
             // Check existence of email
-            var emailExists = await _basePublisherRepository.AnyAsync(p => p.Email.Equals(publisherDto.Email) && p.PublisherId != publisherDto.PublisherId);
+            var emailExists = await _basePublisherRepository.AnyAsync(p =>
+                p.Email.Equals(publisherDto.Email) && p.PublisherId != publisherDto.PublisherId);
             if (emailExists)
                 return string.Format(ErrorMessages.Exist, nameof(PublisherDto.Email));
 

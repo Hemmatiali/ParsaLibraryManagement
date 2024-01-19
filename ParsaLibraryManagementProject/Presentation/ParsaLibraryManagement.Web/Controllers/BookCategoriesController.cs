@@ -210,6 +210,7 @@ public class BookCategoriesController : BaseController
         try
         {
             // Validate model
+            ModelState.Remove(nameof(model.ImageFile));
             if (!ModelState.IsValid)
                 return await RePopulateViewModelAndReturnView(model);
 

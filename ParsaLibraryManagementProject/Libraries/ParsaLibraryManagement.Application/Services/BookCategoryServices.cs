@@ -31,7 +31,9 @@ namespace ParsaLibraryManagement.Application.Services
 
         #region Ctor
 
-        public BookCategoryServices(IMapper mapper, IValidator<BookCategoryDto> validator, IRepositoryFactory repositoryFactory, IBooksCategoryRepository booksCategoryRepository, IImageFileValidationService imageFileValidationServices, IImageServices imageServices)
+        public BookCategoryServices(IMapper mapper, IValidator<BookCategoryDto> validator,
+            IRepositoryFactory repositoryFactory, IBooksCategoryRepository booksCategoryRepository,
+            IImageFileValidationService imageFileValidationServices, IImageServices imageServices)
         {
             _mapper = mapper;
             _validator = validator;
@@ -80,7 +82,8 @@ namespace ParsaLibraryManagement.Application.Services
             try
             {
                 // Retrieve all categories
-                var booksCategories = await _baseRepository.GetAllAsync(new Expression<Func<BookCategory, object>>[] { b => b.Ref! });
+                var booksCategories = await _baseRepository.GetAllAsync(new Expression<Func<BookCategory, object>>[]
+                    { b => b.Ref! });
 
                 // Map categories to DTOs and return the list
                 return booksCategories.Select(bookCategory => _mapper.Map<BookCategoryDto>(bookCategory)).ToList();
@@ -106,14 +109,16 @@ namespace ParsaLibraryManagement.Application.Services
         #region Modification
 
         /// <inheritdoc />
-        public async Task<string?> CreateCategoryAsync(BookCategoryDto bookCategoryDto, IFormFile imageFile, string folderName)
+        public async Task<string?> CreateCategoryAsync(BookCategoryDto bookCategoryDto, IFormFile imageFile,
+            string folderName)
         {
             var imageNameWithExtension = "";
             try
             {
                 // Validate image file
                 var fileValidationResult = await _imageFileValidationServices.ValidateFileAsync(imageFile);
-                if (fileValidationResult.WasSuccess == false || !string.IsNullOrWhiteSpace(fileValidationResult.Message))
+                if (fileValidationResult.WasSuccess == false ||
+                    !string.IsNullOrWhiteSpace(fileValidationResult.Message))
                     return fileValidationResult.Message;
 
                 // Handle image upload
@@ -151,7 +156,8 @@ namespace ParsaLibraryManagement.Application.Services
         }
 
         /// <inheritdoc />
-        public async Task<string?> UpdateCategoryAsync(BookCategoryDto bookCategoryDto, IFormFile imageFile, string folderName)
+        public async Task<string?> UpdateCategoryAsync(BookCategoryDto bookCategoryDto, IFormFile imageFile,
+            string folderName)
         {
             var imageNameWithExtension = "";
             try
@@ -161,31 +167,43 @@ namespace ParsaLibraryManagement.Application.Services
                 if (existingCategory == null)
                     return ErrorMessages.ItemNotFoundMsg;
 
-                // Delete old image if it exists
-                if (!string.IsNullOrWhiteSpace(existingCategory.ImageAddress))
-                    await _imageServices.DeleteImageAsync(existingCategory.ImageAddress, folderName);
+                if (imageFile != null)
+                {
+                    // Delete old image if it exists
+                    if (!string.IsNullOrWhiteSpace(existingCategory.ImageAddress))
+                        await _imageServices.DeleteImageAsync(existingCategory.ImageAddress, folderName);
 
-                // Validate and upload new image
-                var fileValidationResult = await _imageFileValidationServices.ValidateFileAsync(imageFile);
-                if (fileValidationResult.WasSuccess == false || !string.IsNullOrWhiteSpace(fileValidationResult.Message))
-                    return fileValidationResult.Message;
+                    // Validate and upload new image
+                    var fileValidationResult = await _imageFileValidationServices.ValidateFileAsync(imageFile);
+                    if (fileValidationResult.WasSuccess == false ||
+                        !string.IsNullOrWhiteSpace(fileValidationResult.Message))
+                        return fileValidationResult.Message;
 
-                // Handle image upload
-                imageNameWithExtension = await _imageServices.SaveImageAsync(imageFile, folderName);
-                if (string.IsNullOrWhiteSpace(imageNameWithExtension))
-                    return ErrorMessages.ImageUploadFailedMsg;
+                    // Handle image upload
+                    imageNameWithExtension = await _imageServices.SaveImageAsync(imageFile, folderName);
+                    if (string.IsNullOrWhiteSpace(imageNameWithExtension))
+                        return ErrorMessages.ImageUploadFailedMsg;
+                }
+                else
+                {
+                    imageNameWithExtension = existingCategory.ImageAddress;
+                }
+            
 
                 // Validate DTO
                 bookCategoryDto.ImageAddress = imageNameWithExtension;
                 var validationResult = await _validator.ValidateAsync(bookCategoryDto);
                 if (!validationResult.IsValid)
-                    return ValidationHelper.GetErrorMessages(validationResult); //TODO image is uploaded and should be handled
+                    return
+                        ValidationHelper
+                            .GetErrorMessages(validationResult); //TODO image is uploaded and should be handled
 
                 // Normalize values
                 NormalizeBookCategoryDto(bookCategoryDto);
 
                 // Check existence of title
-                var titleExists = await _baseRepository.AnyAsync(p => p.Title.Equals(bookCategoryDto.Title) && p.CategoryId != bookCategoryDto.CategoryId);
+                var titleExists = await _baseRepository.AnyAsync(p =>
+                    p.Title.Equals(bookCategoryDto.Title) && p.CategoryId != bookCategoryDto.CategoryId);
                 if (titleExists)
                     return string.Format(ErrorMessages.Exist, nameof(bookCategoryDto.Title));
 

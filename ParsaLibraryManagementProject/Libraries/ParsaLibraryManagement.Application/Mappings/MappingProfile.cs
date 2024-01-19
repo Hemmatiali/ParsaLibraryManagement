@@ -17,7 +17,7 @@ namespace ParsaLibraryManagement.Application.Mappings
             CreateMap<BookCategory, BookCategoryDto>()
                 .ForMember(dest => dest.RefTitle, opt => opt.MapFrom(src => src.Ref.Title))
                 .ReverseMap()
-                .ReverseMap();
+                .ForMember(category => category.Ref, expression => expression.Ignore());
 
             CreateMap<Gender, GenderDto>().ReverseMap();
 

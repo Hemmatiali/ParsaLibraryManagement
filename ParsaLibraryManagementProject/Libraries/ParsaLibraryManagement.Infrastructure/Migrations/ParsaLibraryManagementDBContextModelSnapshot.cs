@@ -154,9 +154,9 @@ namespace ParsaLibraryManagement.Infrastructure.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(15)
+                        .HasMaxLength(25)
                         .IsUnicode(true)
-                        .HasColumnType("nvarchar(15)");
+                        .HasColumnType("nvarchar(25)");
 
                     b.HasKey("GenderId");
 
