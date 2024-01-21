@@ -80,7 +80,7 @@ public class PublisherServices : IPublisherServices
         try
         {
             // Retrieve all publishers
-            var publishers = await _basePublisherRepository.GetAllAsync(new Expression<Func<Publisher, object>>[] { p => p.Gender });
+            var publishers = await _basePublisherRepository.GetAllAsync(null,new Expression<Func<Publisher, object>>[] { p => p.Gender });
             //todo order by insertDate or updateDate
 
             // Map publishers to DTOs and return the list

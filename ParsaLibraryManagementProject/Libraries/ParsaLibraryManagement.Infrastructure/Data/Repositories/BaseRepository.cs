@@ -49,10 +49,15 @@ namespace ParsaLibraryManagement.Infrastructure.Data.Repositories
         public async Task<IEnumerable<TEntity>> GetAllAsync() => await _context.Set<TEntity>().ToListAsync();
 
         /// <inheritdoc/>
-        public async Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, object>>[]? includeProperties)
+        public async Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>>? predicate, Expression<Func<TEntity, object>>[]? includeProperties = null)
         {
             IQueryable<TEntity> query = _context.Set<TEntity>();
 
+            // Apply the predicate if it's not null
+            if (predicate != null)
+                query = query.Where(predicate);
+
+            // Include any specified navigation properties
             if (includeProperties == null) return await query.ToListAsync();
             foreach (var includeProperty in includeProperties)
             {

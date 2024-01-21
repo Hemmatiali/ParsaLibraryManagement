@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using ParsaLibraryManagement.Application.DTOs;
+using ParsaLibraryManagement.Domain.Models;
 
 namespace ParsaLibraryManagement.Application.Interfaces
 {
@@ -33,6 +34,13 @@ namespace ParsaLibraryManagement.Application.Interfaces
         /// <returns>A task representing the asynchronous operation, returning a list of <see cref="BookCategoryDto"/>.</returns>
         Task<List<BookCategoryDto>> GetCategoriesAsync(string prefix);
 
+        /// <summary>
+        ///     Asynchronously retrieves a list of Book Category DTOs for editing based on the specified category ID.
+        /// </summary>
+        /// <param name="categoryId">The ID of the category to retrieve for editing.</param>
+        /// <returns>A task representing the asynchronous operation, yielding a list of Book Category DTOs.</returns>
+        Task<List<BookCategoryDto>> GetCategoriesForEditAsync(short categoryId);
+
         #endregion
 
         #region Modification
@@ -47,13 +55,13 @@ namespace ParsaLibraryManagement.Application.Interfaces
         Task<string?> CreateCategoryAsync(BookCategoryDto bookCategoryDto, IFormFile imageFile, string folderName);
 
         /// <summary>
-        ///     Updates an existing book category asynchronously.
+        ///     Asynchronously updates a Book Category with new data and an optional image file.
         /// </summary>
-        /// <param name="bookCategoryDto">The updated data for the book category.</param>
-        /// <param name="imageFile">The updated image file associated with the book category.</param>
-        /// <param name="folderName">The folder name where images are stored.</param>
-        /// <returns>A task representing the asynchronous operation, yielding a nullable string representing the result message.</returns>
-        Task<string?> UpdateCategoryAsync(BookCategoryDto bookCategoryDto, IFormFile imageFile, string folderName);
+        /// <param name="bookCategoryDto">The Book Category DTO containing updated data.</param>
+        /// <param name="imageFile">The optional image file to be associated with the category.</param>
+        /// <param name="folderName">The folder name where the image will be stored.</param>
+        /// <returns>A task representing the asynchronous operation, yielding an OperationResultModel.</returns>
+        Task<OperationResultModel> UpdateCategoryAsync(BookCategoryDto bookCategoryDto, IFormFile imageFile, string folderName);
 
         #endregion
 

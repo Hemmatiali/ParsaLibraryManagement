@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ParsaLibraryManagement.Domain.Common;
+using ParsaLibraryManagement.Domain.Common.Extensions;
 using ParsaLibraryManagement.Domain.Entities;
 using ParsaLibraryManagement.Domain.Interfaces;
 using ParsaLibraryManagement.Domain.Models;
@@ -53,9 +54,13 @@ namespace ParsaLibraryManagement.Infrastructure.Data.Repositories
         {
             try
             {
+                // Normalize prefix
+                var normalizedPrefix = prefix.NormalizeAndTrim();
+
                 // Get categories with prefix
-                return await _context.BooksCategories.Where(b => b.Title.ToUpper()
-                            .StartsWith(prefix.ToUpper())).ToListAsync();
+                return await _context.BooksCategories
+                    .Where(b => EF.Functions.Like(b.Title, $"{normalizedPrefix}%"))
+                    .ToListAsync();
             }
             catch (Exception e)
             {

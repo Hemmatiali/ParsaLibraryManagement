@@ -1,5 +1,5 @@
 ﻿@using ParsaLibraryManagement.Infrastructure.Common.Constants
-@model ParsaLibraryManagement.Web.ViewModels.BookCategories.BookCategoryViewModel
+@model ParsaLibraryManagement.Web.ViewModels.BookCategories.BookCategoryCreateEditViewModel
 @{
     Layout = "_Layout";
     ViewData["Title"] = "Edit book category";
@@ -69,7 +69,7 @@
                                 </a>
                             }
 
-                            <input id="fuImg" asp-for="@Model.ImageFile" type="file" class="form-control" required="" maxlength="37" />
+                            <input id="fuImg" asp-for="@Model.ImageFile" type="file" class="form-control" maxlength="37" />
                             <small id="fuImgHelp" class="form-text text-muted">Note that for better quality, the minimum photo size should be 250 x 250.</small>
                             <span asp-validation-for="@Model.ImageFile" class="text-danger"></span>
                             <div class="invalid-feedback">
@@ -88,7 +88,7 @@
         </div>
     </div>
     @section FormsValidation
-        {
+    {
         <script>
             //  Form Validation
             window.addEventListener('load', function () {

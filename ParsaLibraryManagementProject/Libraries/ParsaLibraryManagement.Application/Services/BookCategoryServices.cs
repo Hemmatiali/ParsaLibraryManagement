@@ -11,6 +11,7 @@ using ParsaLibraryManagement.Domain.Entities;
 using ParsaLibraryManagement.Domain.Interfaces;
 using ParsaLibraryManagement.Domain.Interfaces.ImageServices;
 using ParsaLibraryManagement.Domain.Interfaces.Repository;
+using ParsaLibraryManagement.Domain.Models;
 using System.Linq.Expressions;
 
 namespace ParsaLibraryManagement.Application.Services
@@ -47,10 +48,92 @@ namespace ParsaLibraryManagement.Application.Services
 
         #region Private
 
-        //todo xml
+        /// <summary>
+        ///     Normalizes and trims the title of a Book Category DTO.
+        /// </summary>
+        /// <param name="bookCategoryDto">The Book Category DTO to normalize.</param>
+        /// <remarks>This method modifies the Title property of the provided Book Category DTO.</remarks>
         private static void NormalizeBookCategoryDto(BookCategoryDto bookCategoryDto)
         {
             bookCategoryDto.Title = bookCategoryDto.Title.NormalizeAndTrim();
+        }
+
+        /// <summary>
+        ///     Checks if adding a category would create a circular hierarchy.
+        /// </summary>
+        /// <param name="categoryId">The ID of the category to be added.</param>
+        /// <param name="parentCategoryId">The ID of the parent category.</param>
+        /// <returns>True if a circular hierarchy would be created, otherwise false.</returns>
+        /// <remarks>
+        ///     This method checks if adding a category with the specified parent would create a circular hierarchy.
+        /// </remarks>
+        private async Task<bool> IsCircularHierarchy(short categoryId, short? parentCategoryId)
+        {
+            try
+            {
+                // Check if a parent category ID is provided
+                if (!parentCategoryId.HasValue)
+                    return false;
+
+                var currentCategoryId = parentCategoryId;
+
+                // Iterate through the hierarchy to check for circular reference
+                while (currentCategoryId.HasValue)
+                {
+                    // Checks if the current category ID matches the target category ID
+                    if (currentCategoryId.Value == categoryId)
+                        return true;
+
+                    // Retrieves the current category based on the current category ID
+                    var currentCategory = await _baseRepository.GetByIdAsync(currentCategoryId.Value);
+
+                    // Updates currentCategoryId to its parent category ID
+                    currentCategoryId = currentCategory?.RefId;
+                }
+
+                return false;
+            }
+            catch (Exception a)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        ///     Gets the IDs of descendant categories for a given category.
+        /// </summary>
+        /// <param name="categoryId">The ID of the category to retrieve descendants for.</param>
+        /// <returns>A list of descendant category IDs.</returns>
+        /// <remarks>
+        ///     This method asynchronously retrieves the IDs of descendant categories for a given category.
+        /// </remarks>
+        private async Task<List<short>> GetDescendantCategoryIdsAsync(short categoryId)
+        {
+            try
+            {
+                // Initializes an empty list to store descendant category IDs
+                var descendants = new List<short>();
+
+                // Retrieves child categories based on the provided category ID
+                var childCategories = await _baseRepository.GetAllAsync(cd => cd.RefId == categoryId);
+
+                // Iterates through child categories to collect descendant IDs
+                foreach (var child in childCategories)
+                {
+                    // Adds the ID of the current child category to the descendants list
+                    descendants.Add(child.CategoryId);
+
+                    // Recursively calls the method to get descendants of the current child
+                    descendants.AddRange(await GetDescendantCategoryIdsAsync(child.CategoryId));
+                }
+
+                // Returns the list of descendant category IDs
+                return descendants;
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
         }
 
         #endregion
@@ -80,7 +163,7 @@ namespace ParsaLibraryManagement.Application.Services
             try
             {
                 // Retrieve all categories
-                var booksCategories = await _baseRepository.GetAllAsync(new Expression<Func<BookCategory, object>>[] { b => b.Ref! });
+                var booksCategories = await _baseRepository.GetAllAsync(null, new Expression<Func<BookCategory, object>>[] { b => b.Ref! });
 
                 // Map categories to DTOs and return the list
                 return booksCategories.Select(bookCategory => _mapper.Map<BookCategoryDto>(bookCategory)).ToList();
@@ -94,11 +177,41 @@ namespace ParsaLibraryManagement.Application.Services
         /// <inheritdoc />
         public async Task<List<BookCategoryDto>> GetCategoriesAsync(string prefix)
         {
-            // Get categories
-            var bookCategories = await _booksCategoryRepository.GetBookCategoriesAsync(prefix);
+            try
+            {
+                // Get categories
+                var bookCategories = await _booksCategoryRepository.GetBookCategoriesAsync(prefix);
 
-            // Map the categories to Dto
-            return _mapper.Map<List<BookCategoryDto>>(bookCategories);
+                // Map the categories to Dto
+                return _mapper.Map<List<BookCategoryDto>>(bookCategories);
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        public async Task<List<BookCategoryDto>> GetCategoriesForEditAsync(short categoryId)
+        {
+            try
+            {
+                // Get all categories
+                var allCategories = await _baseRepository.GetAllAsync();
+
+                // Get all descendant categories
+                var descendants = await GetDescendantCategoryIdsAsync(categoryId);
+
+                // Exclude the current category and its descendants
+                var filteredCategories = allCategories.Where(c => c.CategoryId != categoryId && !descendants.Contains(c.CategoryId));
+
+                // Return mapped categories
+                return filteredCategories.Select(c => _mapper.Map<BookCategoryDto>(c)).ToList();
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
         }
 
         #endregion
@@ -151,7 +264,7 @@ namespace ParsaLibraryManagement.Application.Services
         }
 
         /// <inheritdoc />
-        public async Task<string?> UpdateCategoryAsync(BookCategoryDto bookCategoryDto, IFormFile imageFile, string folderName)
+        public async Task<OperationResultModel> UpdateCategoryAsync(BookCategoryDto bookCategoryDto, IFormFile imageFile, string folderName)
         {
             var imageNameWithExtension = "";
             try
@@ -159,27 +272,38 @@ namespace ParsaLibraryManagement.Application.Services
                 // Get existing category
                 var existingCategory = await _baseRepository.GetByIdAsync(bookCategoryDto.CategoryId);
                 if (existingCategory == null)
-                    return ErrorMessages.ItemNotFoundMsg;
+                    return new OperationResultModel { WasSuccess = false, Message = ErrorMessages.ItemNotFoundMsg };
 
-                // Delete old image if it exists
-                if (!string.IsNullOrWhiteSpace(existingCategory.ImageAddress))
-                    await _imageServices.DeleteImageAsync(existingCategory.ImageAddress, folderName);
+                // Circular hierarchy check
+                if (await IsCircularHierarchy(bookCategoryDto.CategoryId, bookCategoryDto.RefId))
+                    return new OperationResultModel { WasSuccess = false, Message = ErrorMessages.CircularHierarchyMsg };
 
-                // Validate and upload new image
-                var fileValidationResult = await _imageFileValidationServices.ValidateFileAsync(imageFile);
-                if (fileValidationResult.WasSuccess == false || !string.IsNullOrWhiteSpace(fileValidationResult.Message))
-                    return fileValidationResult.Message;
+                // Handle image uploaded if exist
+                if (imageFile != null)
+                {
+                    // Delete old image if it exists
+                    if (!string.IsNullOrWhiteSpace(existingCategory.ImageAddress))
+                        await _imageServices.DeleteImageAsync(existingCategory.ImageAddress, folderName);
 
-                // Handle image upload
-                imageNameWithExtension = await _imageServices.SaveImageAsync(imageFile, folderName);
-                if (string.IsNullOrWhiteSpace(imageNameWithExtension))
-                    return ErrorMessages.ImageUploadFailedMsg;
+                    // Validate and upload new image
+                    var fileValidationResult = await _imageFileValidationServices.ValidateFileAsync(imageFile);
+                    if (fileValidationResult.WasSuccess == false ||
+                        !string.IsNullOrWhiteSpace(fileValidationResult.Message))
+                        return new OperationResultModel { WasSuccess = false, Message = fileValidationResult.Message };
+
+                    // Handle image upload
+                    imageNameWithExtension = await _imageServices.SaveImageAsync(imageFile, folderName);
+                    if (string.IsNullOrWhiteSpace(imageNameWithExtension))
+                        return new OperationResultModel { WasSuccess = false, Message = ErrorMessages.ImageUploadFailedMsg };
+                }
+                else
+                    imageNameWithExtension = existingCategory.ImageAddress;
 
                 // Validate DTO
                 bookCategoryDto.ImageAddress = imageNameWithExtension;
                 var validationResult = await _validator.ValidateAsync(bookCategoryDto);
                 if (!validationResult.IsValid)
-                    return ValidationHelper.GetErrorMessages(validationResult); //TODO image is uploaded and should be handled
+                    return new OperationResultModel { WasSuccess = false, Message = ValidationHelper.GetErrorMessages(validationResult) }; //TODO image is uploaded and should be handled
 
                 // Normalize values
                 NormalizeBookCategoryDto(bookCategoryDto);
@@ -187,7 +311,7 @@ namespace ParsaLibraryManagement.Application.Services
                 // Check existence of title
                 var titleExists = await _baseRepository.AnyAsync(p => p.Title.Equals(bookCategoryDto.Title) && p.CategoryId != bookCategoryDto.CategoryId);
                 if (titleExists)
-                    return string.Format(ErrorMessages.Exist, nameof(bookCategoryDto.Title));
+                    return new OperationResultModel { WasSuccess = false, Message = string.Format(ErrorMessages.Exist, nameof(bookCategoryDto.Title)) };
 
                 // Map DTO to existing entity and save
                 _mapper.Map(bookCategoryDto, existingCategory);
@@ -195,7 +319,7 @@ namespace ParsaLibraryManagement.Application.Services
                 await _baseRepository.SaveChangesAsync();
 
                 // Done
-                return null;
+                return new OperationResultModel { WasSuccess = true };
             }
             catch (Exception e)
             {
