@@ -23,7 +23,7 @@ The project is actively being developed, with new features and improvements bein
 ## Getting Involved
 We welcome contributions from developers of all skill levels. To get started:
 1. Fork the repository.
-2. Clone your forked repo: `git clone https://github.com/your-username/ParsaLibraryManagement.git`.
+2. Clone your forked repo: `https://github.com/Hemmatiali/ParsaLibraryManagement.git`.
 3. Create a new branch for your feature with your name: `git checkout -b YourName/YourFeature`.
 4. Make your changes and commit them: `git commit -m 'Add YourFeature'`.
 5. Push to your branch: `git push origin YourName/YourFeature`.
