@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ParsaLibraryManagement.Web.Constants;
 using ParsaLibraryManagement.Web.Generators;
+using Serilog;
 
 namespace ParsaLibraryManagement.Web.Controllers
 {
@@ -35,6 +36,7 @@ namespace ParsaLibraryManagement.Web.Controllers
             }
 
             ViewBag.errMessage = errorMessage;//todo check
+            Log.Fatal(errorMessage);
             return View();
         }
 
