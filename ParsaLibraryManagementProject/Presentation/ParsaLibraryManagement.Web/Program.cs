@@ -16,19 +16,22 @@ using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
+#region Logger
+
 //Serilog Logger
 var logger = new LoggerConfiguration().ReadFrom
-                .Configuration(builder.Configuration)
-                .Enrich.FromLogContext()
-                .CreateLogger();
+    .Configuration(builder.Configuration)
+    .Enrich.FromLogContext()
+    .CreateLogger();
 builder.Logging.ClearProviders();
 builder.Logging.AddSerilog(logger);
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
-
+#endregion
 
 #region Services
+
+// Add services to the container.
+builder.Services.AddControllersWithViews();
 
 #region DataBase Context
 
