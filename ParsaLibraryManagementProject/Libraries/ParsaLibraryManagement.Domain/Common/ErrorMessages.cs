@@ -11,6 +11,10 @@
         // General messages
         public const string ItemNotFoundMsg = "Item not found.";
         public const string HasRelationOnSubCategoriesMsg = "Has relation on subcategories.";
+        public const string InputCannotBeNullWhiteSpaceMsg = "Input cannot be null or whitespace.";
+
+        // Category messages
+        public const string CircularHierarchyMsg = "Circular hierarchy detected. A category cannot be its own parent or ancestor.";
 
         // Image messages
         public const string ImageUploadFailedMsg = "Failed to upload image.";
@@ -26,8 +30,6 @@
         public const string DoesNotExist = "The {0} does not exist in the database.";
         public const string DuplicatedValue = "The {0} cannot be duplicated.";
 
-        // New message
-        public const string InputCannotBeNullWhiteSpaceMsg = "Input cannot be null or whitespace.";
     }
 
 }

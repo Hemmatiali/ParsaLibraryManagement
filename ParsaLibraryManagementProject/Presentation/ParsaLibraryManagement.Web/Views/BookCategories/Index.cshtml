@@ -1,14 +1,8 @@
-﻿@model List<ParsaLibraryManagement.Application.DTOs.BookCategoryDto>
+﻿@model ParsaLibraryManagement.Web.ViewModels.BookCategories.BookCategoryIndexViewModel
 
 @{
     Layout = "_Layout";
     ViewData["Title"] = "List of book categories";
-
-    var letters = new List<string> {
-        "A", "B", "C", "D", "E", "F", "G", "H", "I",
-        "J", "K", "L", "M", "N", "O", "P", "Q", "R",
-        "S", "T", "U", "V", "W", "X", "Y", "Z"
-    };
 }
 
 <main class="main-content">
@@ -27,14 +21,22 @@
 
                         <div class="row">
                             <div class="btn-group btn-group-sm mt-2 mb-2" role="group" aria-label="Filter">
-                                @foreach (var letter in letters)
+                                @foreach (var letter in Model.AlphabetLetters)
                                 {
-                                    <a class="btn btn-outline-primary" asp-action="Filter" asp-route-prefix="@letter">@letter</a>
+                                    <a class="btn btn-outline-primary @(Model.SelectedFilter == letter ? "active" : "")" asp-action="Filter" asp-route-prefix="@letter">@letter</a>
                                 }
                             </div>
                         </div>
+
+                        @if (!string.IsNullOrEmpty(Model.SelectedFilter))
+                        {
+                            <div class="row">
+                                <p>Selected Filter: @Model.SelectedFilter</p>
+                            </div>
+                        }
+
                         <div class="row">
-                            <a class="btn btn-dark btn-uppercase col-md-3" asp-action="Index" style=" color:white">
+                            <a class="btn btn-dark btn-uppercase col-md-2" asp-action="Index" style=" color:white">
                                 <i class="ti-brush m-r-5"></i> Clear Filter
                             </a>
                         </div>
@@ -52,7 +54,7 @@
                                 <tbody>
                                     @{
                                         int rowIndex = 1;
-                                        @foreach (var category in Model)
+                                        @foreach (var category in Model.Categories)
                                         {
                                             <tr>
                                                 <td>@rowIndex</td>

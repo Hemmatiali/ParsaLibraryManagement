@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ParsaLibraryManagement.Application.Interfaces;
+using ParsaLibraryManagement.Application.Utilities;
 using ParsaLibraryManagement.Infrastructure.Common.Constants;
 using ParsaLibraryManagement.Web.Constants;
 using ParsaLibraryManagement.Web.ViewModels.BookCategories;
@@ -35,19 +36,35 @@ public class BookCategoriesController : BaseController
     #region Methods
 
     /// <summary>
-    ///     Prepares a view model for the BookCategory view (Create and Edit methods).
+    ///     Prepares and returns a view model for the Book Category index page.
     /// </summary>
-    /// <returns>A task representing the asynchronous operation, yielding a <see cref="BookCategoryViewModel"/>.</returns>
-    private async Task<BookCategoryViewModel> PrepareBookCategoryViewModel()
+    /// <param name="selectedFilter">The selected filter for categorization, if any.</param>
+    /// <returns>
+    ///     A <see cref="Task{TResult}"/> representing the asynchronous operation.
+    ///     The task result is a <see cref="BookCategoryIndexViewModel"/> with populated categories, alphabet letters, and selected filter.
+    /// </returns>
+    /// <remarks>
+    ///     This method retrieves all categories, generates alphabet letters, and constructs a view model for the Book Category index page.
+    /// </remarks>
+    private async Task<BookCategoryIndexViewModel> PrepareBookCategoryIndexViewModel(string selectedFilter = "")
     {
         try
         {
-            // Get all categories
-            var categories = await _bookCategoryServices.GetAllCategoriesAsync();
+            // Retrieve categories based on the selected filter
+            var categoriesDto = string.IsNullOrEmpty(selectedFilter)
+                ? await _bookCategoryServices.GetAllCategoriesAsync()
+                : await _bookCategoryServices.GetCategoriesAsync(selectedFilter);
 
-            // Assign categories to view model
-            return new BookCategoryViewModel
-                { RefGroups = categories.Select(bookCategoryDto => new SelectListItem(bookCategoryDto.Title, bookCategoryDto.CategoryId.ToString())).ToList() };
+            // Generate alphabet letters
+            var letters = DataHelper.GenerateAlphabetLetters();
+
+            // Return the view model with populated data
+            return new BookCategoryIndexViewModel
+            {
+                Categories = categoriesDto,
+                AlphabetLetters = letters,
+                SelectedFilter = selectedFilter
+            };
         }
         catch (Exception e)
         {
@@ -56,16 +73,24 @@ public class BookCategoriesController : BaseController
     }
 
     /// <summary>
-    ///     Re-populates the view model and returns the associated view.
+    ///     Repopulates the specified view model and returns the corresponding view.
     /// </summary>
-    /// <param name="model">The view model to be re-populated.</param>
-    /// <returns>A task representing the asynchronous operation, yielding an <see cref="IActionResult"/>.</returns>
-    private async Task<IActionResult> RePopulateViewModelAndReturnView(BookCategoryViewModel model)
+    /// <param name="model">The <see cref="BookCategoryCreateEditViewModel"/> containing user inputs.</param>
+    /// <param name="currentCategoryId">The ID of the current book category, if applicable.</param>
+    /// <returns>
+    ///     A <see cref="Task{TResult}"/> representing the asynchronous operation.
+    ///     The task result is an <see cref="IActionResult"/> representing the view with the repopulated model.
+    /// </returns>
+    /// <remarks>
+    ///     This method retrieves view model data using <see cref="PrepareBookCategoryViewModel"/>, preserves user inputs,
+    ///     and returns the view with the repopulated model.
+    /// </remarks>
+    private async Task<IActionResult> RePopulateViewModelAndReturnView(BookCategoryCreateEditViewModel model, short? currentCategoryId = null)
     {
         try
         {
             // Get view model data
-            var viewModel = await PrepareBookCategoryViewModel();
+            var viewModel = await PrepareBookCategoryViewModel(currentCategoryId);
 
             // Preserve user inputs
             viewModel.Category = model.Category;
@@ -80,46 +105,88 @@ public class BookCategoriesController : BaseController
     }
 
     /// <summary>
-    ///     Handles the HTTP GET request for the index view of book categories.
+    ///     Prepares and returns a <see cref="BookCategoryCreateEditViewModel"/> based on specified conditions.
     /// </summary>
-    /// <returns>A task representing the asynchronous operation, yielding an <see cref="IActionResult"/>.</returns>
+    /// <param name="currentCategoryId">The ID of the current book category, if applicable.</param>
+    /// <returns>
+    ///     A <see cref="Task{TResult}"/> representing the asynchronous operation.
+    ///     The task result is a <see cref="BookCategoryCreateEditViewModel"/> with assigned categories.
+    /// </returns>
+    /// <remarks>
+    ///     This method retrieves all categories based on conditions for creation or edition and assigns them to the view model.
+    /// </remarks>
+    private async Task<BookCategoryCreateEditViewModel> PrepareBookCategoryViewModel(short? currentCategoryId = null)
+    {
+        try
+        {
+            // Get all categories based on conditions for creation or edition
+            var categories = currentCategoryId.HasValue
+                ? await _bookCategoryServices.GetCategoriesForEditAsync(currentCategoryId.Value)
+                : await _bookCategoryServices.GetAllCategoriesAsync();
+
+            // Assign categories to view model
+            return new BookCategoryCreateEditViewModel
+            { RefGroups = categories.Select(bookCategoryDto => new SelectListItem(bookCategoryDto.Title, bookCategoryDto.CategoryId.ToString())).ToList() };
+        }
+        catch (Exception e)
+        {
+            throw;
+        }
+    }
+
+    /// <summary>
+    ///     Handles the HTTP GET request for the index view of Book Categories.
+    /// </summary>
+    /// <returns>
+    ///     A <see cref="Task{TResult}"/> representing the asynchronous operation.
+    ///     The task result is an <see cref="IActionResult"/> representing the view with the populated Book Category index view model.
+    /// </returns>
     [HttpGet]
     public async Task<IActionResult> Index()
     {
         try
         {
-            // Get all categories
-            var categoriesDto = await _bookCategoryServices.GetAllCategoriesAsync();
+            // Prepare the Book Category index view model
+            var viewModel = await PrepareBookCategoryIndexViewModel();
 
-            return View(categoriesDto);
+            // Return the view with the populated model
+            return View(viewModel);
         }
         catch (Exception e)
         {
+            //TODO: Add appropriate error handling logic
             _logger.LogError(e, "Error reading book categories.");
             return GenerateCatchMessage(ErrorsMessagesConstants.UnSuccessfulReadItemsErrMsg)!;
         }
     }
 
     /// <summary>
-    ///     Handles the HTTP GET request for the view of filtered book categories.
+    ///     Handles the HTTP GET request for filtering Book Categories based on a prefix.
     /// </summary>
-    /// <returns>A task representing the asynchronous operation, yielding an <see cref="IActionResult"/>.</returns>
+    /// <param name="prefix">The prefix used for filtering categories.</param>
+    /// <returns>
+    ///     A <see cref="Task{TResult}"/> representing the asynchronous operation.
+    ///     The task result is an <see cref="IActionResult"/> representing the view with the filtered Book Category index view model.
+    /// </returns>
     [HttpGet("[controller]/[action]/{prefix}")]
     public async Task<IActionResult> Filter(string prefix)
     {
         try
         {
-            // Get all categories
-            var categoriesDto = await _bookCategoryServices.GetCategoriesAsync(prefix);
+            // Prepare the Book Category index view model with filtering
+            var viewModel = await PrepareBookCategoryIndexViewModel(prefix);
 
-            return View("Index", categoriesDto);
+            // Return the view with the filtered model
+            return View("Index", viewModel);
         }
         catch (Exception e)
         {
+            //TODO: Add appropriate error handling logic
             _logger.LogError(e, "Error reading book categories.");
             return GenerateCatchMessage(ErrorsMessagesConstants.UnSuccessfulReadItemsErrMsg)!;
         }
     }
+
 
     /// <summary>
     ///     Handles the HTTP GET request for the create view of book categories.
@@ -131,7 +198,7 @@ public class BookCategoriesController : BaseController
         try
         {
             // Prepare view model
-            return await RePopulateViewModelAndReturnView(new BookCategoryViewModel());
+            return await RePopulateViewModelAndReturnView(new BookCategoryCreateEditViewModel());
         }
         catch (Exception e)
         {
@@ -146,7 +213,7 @@ public class BookCategoriesController : BaseController
     /// <param name="model">The view model containing data for the new book category.</param>
     /// <returns>A task representing the asynchronous operation, yielding an <see cref="IActionResult"/>.</returns>
     [HttpPost]
-    public async Task<IActionResult> Create(BookCategoryViewModel model)
+    public async Task<IActionResult> Create(BookCategoryCreateEditViewModel model)
     {
         try
         {
@@ -189,8 +256,8 @@ public class BookCategoriesController : BaseController
                 return NotFound();
 
             // Prepare view model with the existing category data
-            var viewModel = new BookCategoryViewModel { Category = categoryDto };
-            return await RePopulateViewModelAndReturnView(viewModel);
+            var viewModel = new BookCategoryCreateEditViewModel { Category = categoryDto };
+            return await RePopulateViewModelAndReturnView(viewModel, bookCategoryId);
         }
         catch (Exception e)
         {
@@ -205,21 +272,22 @@ public class BookCategoriesController : BaseController
     /// <param name="model">The view model containing updated data for the book category.</param>
     /// <returns>A task representing the asynchronous operation, yielding an <see cref="IActionResult"/>.</returns>
     [HttpPost]
-    public async Task<IActionResult> Edit(BookCategoryViewModel model)
+    public async Task<IActionResult> Edit(BookCategoryCreateEditViewModel model)
     {
         try
         {
             // Validate model
+            ModelState.Remove(nameof(model.ImageFile));
             if (!ModelState.IsValid)
                 return await RePopulateViewModelAndReturnView(model);
 
             // Edit the book category
             var result = await _bookCategoryServices.UpdateCategoryAsync(model.Category, model.ImageFile, PathConstants.BookCategoriesFolderName);
-            if (string.IsNullOrWhiteSpace(result))
+            if (result.WasSuccess && string.IsNullOrWhiteSpace(result.Message))
                 return RedirectToAction("Index"); // Done
 
             // Error
-            ViewBag.errorMessage = result;
+            ViewBag.errorMessage = result.Message;
             return await RePopulateViewModelAndReturnView(model);
         }
         catch (Exception ex)

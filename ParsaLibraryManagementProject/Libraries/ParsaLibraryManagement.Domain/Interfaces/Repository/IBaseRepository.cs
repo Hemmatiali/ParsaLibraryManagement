@@ -56,23 +56,18 @@ namespace ParsaLibraryManagement.Domain.Interfaces.Repository
         Task<IEnumerable<TEntity>> GetAllAsync();
 
         /// <summary>
-        ///     Asynchronously retrieves all entities of type TEntity from the data source, including related entities specified by the provided includeProperties.
+        ///     Retrieves all entities of type <typeparamref name="TEntity"/> from the database based on the specified predicate and includes optional navigation properties.
         /// </summary>
-        /// <param name="includeProperties">
-        ///     An array of expressions specifying the related entities to be included in the result.
-        ///     Each expression should point to a navigation property or a complex property that should be eagerly loaded.
-        ///     If null, no related entities will be included.
-        /// </param>
+        /// <param name="predicate">The expression to filter entities, or null to retrieve all entities.</param>
+        /// <param name="includeProperties">An array of expressions specifying navigation properties to include, or null if no navigation properties should be included.</param>
         /// <returns>
-        ///     A task representing the asynchronous operation.
-        ///     The task result contains an IEnumerable<TEntity> representing the collection of entities retrieved from the data source.
+        ///     A <see cref="Task{TResult}"/> representing the asynchronous operation.
+        ///     The task result is an <see cref="IEnumerable{TEntity}"/> containing the retrieved entities.
         /// </returns>
         /// <remarks>
-        ///     The method uses the Entity Framework Core to build a query for entities of type TEntity.
-        ///     If includeProperties is not null, the method eagerly loads the specified related entities using the Include method.
-        ///     The resulting IQueryable<TEntity> is then asynchronously executed to retrieve the entities.
+        ///     This method constructs a query to retrieve entities from the database based on the provided predicate and includes specified navigation properties.
         /// </remarks>
-        Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, object>>[]? includeProperties);
+        Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>>? predicate, Expression<Func<TEntity, object>>[]? includeProperties = null);
 
         /// <summary>
         ///     Retrieves all entities from the repository.
