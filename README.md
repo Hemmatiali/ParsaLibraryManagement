@@ -16,6 +16,7 @@ This project is being built using a range of modern technologies and architectur
 - **Generic Repository Pattern**: Abstracting data access to enhance maintainability.
 - **Test-Driven Development (TDD)**: Ensuring code reliability and quality.
 - **xUnit**: For comprehensive unit testing.
+- **Serilog**: Providing sophisticated logging, diagnostic, and auditing capabilities.
 
 ## Project Status
 The project is actively being developed, with new features and improvements being added regularly. While it currently focuses on managing books, book categories, and related entities, the scope is set to expand to encompass a wide range of library management functionalities.
