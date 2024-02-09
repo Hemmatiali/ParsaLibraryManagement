@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.ParsaLibraryManagement
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.ParsaLibraryManagement.Infrastructure", "Tests\Test.ParsaLibraryManagement.Infrastructure\Test.ParsaLibraryManagement.Infrastructure.csproj", "{C3155681-AC4B-46D2-8DD1-A382451991CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.ParsaLibraryManagement.Domain", "Tests\Test.ParsaLibraryManagement.Domain\Test.ParsaLibraryManagement.Domain.csproj", "{08221EA5-7126-480F-A09C-9A4D8B22D6CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.ParsaLibraryManagement.Domain", "Tests\Test.ParsaLibraryManagement.Domain\Test.ParsaLibraryManagement.Domain.csproj", "{08221EA5-7126-480F-A09C-9A4D8B22D6CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
