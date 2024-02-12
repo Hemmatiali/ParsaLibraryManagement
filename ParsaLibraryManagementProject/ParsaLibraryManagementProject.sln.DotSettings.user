@@ -1,7 +1,15 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=2122e0d5_002D1cbf_002D43c3_002D8acf_002D2a01729f9c0a/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Constructor_InitializesInverseRefCollection" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;xUnit::08221EA5-7126-480F-A09C-9A4D8B22D6CA::net8.0::Test.ParsaLibraryManagement.Domain.Entities.BookCategoryTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::97B966D3-7D8A-4C1E-8456-7B075CDF947F::net8.0::Test.ParsaLibraryManagement.IntegrationTests.Infrastructure.Data.Repositories.BooksCategoryRepositoryTests.GetBookCategoriesAsync_WithValidPrefix_ReturnsExpectedCategories&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::97B966D3-7D8A-4C1E-8456-7B075CDF947F::net8.0::Test.ParsaLibraryManagement.IntegrationTests.Infrastructure.Data.Repositories.BooksCategoryRepositoryTests.GetBookCategoriesAsync_WithVeryLongString_ReturnsEmpty&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::97B966D3-7D8A-4C1E-8456-7B075CDF947F::net8.0::Test.ParsaLibraryManagement.IntegrationTests.Infrastructure.Data.Repositories.BooksCategoryRepositoryTests.GetBookCategoriesAsync_WithSpecialCharacters_ReturnsEmpty&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::97B966D3-7D8A-4C1E-8456-7B075CDF947F::net8.0::Test.ParsaLibraryManagement.IntegrationTests.Infrastructure.Data.Repositories.BooksCategoryRepositoryTests.HasChildRelations_WithCategoryIdHavingNoChildren_ReturnsFalse&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::97B966D3-7D8A-4C1E-8456-7B075CDF947F::net8.0::Test.ParsaLibraryManagement.IntegrationTests.Infrastructure.Data.Repositories.BooksCategoryRepositoryTests.GetBookCategoriesAsync_WithEmptyDatabase_ReturnsEmptyList&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::97B966D3-7D8A-4C1E-8456-7B075CDF947F::net8.0::Test.ParsaLibraryManagement.IntegrationTests.Infrastructure.Data.Repositories.BooksCategoryRepositoryTests.HasChildRelations_WithCategoryIdHavingChildren_ReturnsTrue&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::97B966D3-7D8A-4C1E-8456-7B075CDF947F::net8.0::Test.ParsaLibraryManagement.IntegrationTests.Infrastructure.Data.Repositories.BooksCategoryRepositoryTests.HasChildRelations_WithNonExistingCategoryId_ReturnsFalse&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::97B966D3-7D8A-4C1E-8456-7B075CDF947F::net8.0::Test.ParsaLibraryManagement.IntegrationTests.Infrastructure.Data.Repositories.BooksCategoryRepositoryTests.HasChildRelations_WithCategoryIdHavingBooks_ReturnsTrue&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::97B966D3-7D8A-4C1E-8456-7B075CDF947F::net8.0::Test.ParsaLibraryManagement.IntegrationTests.Infrastructure.Data.Repositories.BooksCategoryRepositoryTests.HasChildRelations_WithCategoryIdHavingBooksButNoChildCategories_ReturnsTrueWithCorrectMessage&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Consts/@EntryIndexedValue">True</s:Boolean>
