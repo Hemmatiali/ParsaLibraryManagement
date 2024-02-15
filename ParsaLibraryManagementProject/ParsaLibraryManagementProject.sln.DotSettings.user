@@ -10,6 +10,11 @@
     &lt;TestId&gt;xUnit::97B966D3-7D8A-4C1E-8456-7B075CDF947F::net8.0::Test.ParsaLibraryManagement.IntegrationTests.Infrastructure.Data.Repositories.BooksCategoryRepositoryTests.HasChildRelations_WithNonExistingCategoryId_ReturnsFalse&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::97B966D3-7D8A-4C1E-8456-7B075CDF947F::net8.0::Test.ParsaLibraryManagement.IntegrationTests.Infrastructure.Data.Repositories.BooksCategoryRepositoryTests.HasChildRelations_WithCategoryIdHavingBooks_ReturnsTrue&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::97B966D3-7D8A-4C1E-8456-7B075CDF947F::net8.0::Test.ParsaLibraryManagement.IntegrationTests.Infrastructure.Data.Repositories.BooksCategoryRepositoryTests.HasChildRelations_WithCategoryIdHavingBooksButNoChildCategories_ReturnsTrueWithCorrectMessage&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::D7481EB2-4DCB-46C8-8504-C2512C1F7FBE::net8.0::Test.ParsaLibraryManagement.UnitTests.Application.Services.BookCategoryServicesTests.BookCategoryRetrievalTests.GetCategoryById_WithValidId_ReturnsCategory&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::D7481EB2-4DCB-46C8-8504-C2512C1F7FBE::net8.0::Test.ParsaLibraryManagement.UnitTests.Application.Services.BookCategoryServicesTests.BookCategoryRetrievalTests.GetCategoryById_WithInvalidId_ReturnsNull&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::D7481EB2-4DCB-46C8-8504-C2512C1F7FBE::net8.0::Test.ParsaLibraryManagement.UnitTests.Application.Services.BookCategoryServicesTests.BookCategoryRetrievalTests.GetCategoryById_RepositoryThrows_ThrowsException&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::D7481EB2-4DCB-46C8-8504-C2512C1F7FBE::net8.0::Test.ParsaLibraryManagement.UnitTests.Application.Services.BookCategoryServicesTests.BookCategoryRetrievalTests.GetCategoryById_WithOutOfRangeId_ThrowsArgumentOutOfRangeException&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::D7481EB2-4DCB-46C8-8504-C2512C1F7FBE::net8.0::Test.ParsaLibraryManagement.UnitTests.Application.Services.BookCategoryServicesTests.BookCategoryRetrievalTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Consts/@EntryIndexedValue">True</s:Boolean>
