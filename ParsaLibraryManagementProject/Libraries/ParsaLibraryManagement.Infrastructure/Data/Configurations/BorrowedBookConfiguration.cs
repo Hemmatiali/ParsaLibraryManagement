@@ -30,7 +30,6 @@ namespace ParsaLibraryManagement.Infrastructure.Data.Configurations
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_BorrowedBooks_Books");
 
-            builder.Property(e => e.IsBorrowed).HasDefaultValueSql("((0))");
         }
     }
 }

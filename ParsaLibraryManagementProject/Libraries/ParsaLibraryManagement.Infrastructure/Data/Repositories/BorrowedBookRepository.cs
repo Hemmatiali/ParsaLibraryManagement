@@ -39,11 +39,10 @@ namespace ParsaLibraryManagement.Infrastructure.Data.Repositories
         {
             try
             {
-             
-
                 // Get categories with prefix
                 return await _context.BorrowedBooks
-                    .Where(b => b.UserId== UserId)
+                    .Where(b =>      b.UserId== UserId
+                                 && !b.BackEndDate.HasValue)
                     .ToListAsync();
             }
             catch (Exception e)

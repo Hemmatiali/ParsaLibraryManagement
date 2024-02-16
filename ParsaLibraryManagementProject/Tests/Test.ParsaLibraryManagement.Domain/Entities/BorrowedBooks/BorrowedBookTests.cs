@@ -46,7 +46,7 @@ public class BorrowedBookTests
         yield return new BorrowedBook[] { new BorrowedBook() {
              Bid=1
             ,BookId=5
-            ,IsBorrowed=true
+           
             ,UserId=1
             ,StartDateBorrowed=DateTime.Now
             ,BackEndDate=DateTime.Now
@@ -54,7 +54,6 @@ public class BorrowedBookTests
         yield return new BorrowedBook[] { new BorrowedBook() {
              Bid=2
             ,BookId=51
-            ,IsBorrowed=true
             ,UserId=11
             ,StartDateBorrowed=DateTime.Now
             ,BackEndDate=DateTime.Now
@@ -76,7 +75,6 @@ public class BorrowedBookTests
         {
             StartDateBorrowed = borrowedBook.StartDateBorrowed,
             Bid = borrowedBook.Bid,
-            IsBorrowed = borrowedBook.IsBorrowed,
             BookId = borrowedBook.BookId,
             BackEndDate = borrowedBook.BackEndDate,
             UserId = borrowedBook.UserId,
@@ -86,7 +84,6 @@ public class BorrowedBookTests
         // Act & Assert
         Assert.Equal(borrowedBook.StartDateBorrowed, BorrowedBook.StartDateBorrowed);
         Assert.Equal(borrowedBook.Bid, BorrowedBook.Bid);
-        Assert.Equal(borrowedBook.IsBorrowed, BorrowedBook.IsBorrowed);
         Assert.Equal(borrowedBook.BookId, BorrowedBook.BookId);
         Assert.Equal(borrowedBook.BackEndDate, BorrowedBook.BackEndDate);
         Assert.Equal(borrowedBook.UserId, BorrowedBook.UserId);

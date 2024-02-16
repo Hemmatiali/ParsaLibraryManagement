@@ -20,6 +20,8 @@ namespace ParsaLibraryManagement.Application.Mappings
                 .ForMember(dest => dest.Ref, opt => opt.Ignore()); // Ignore Self reference book category object during mapping
 
             CreateMap<Gender, GenderDto>().ReverseMap();
+            CreateMap<BorrowedBook, BorrowedBookEditDto>().ReverseMap();
+            CreateMap<BorrowedBook, BorrowedBookDto>().ReverseMap();
 
             CreateMap<Publisher, PublisherDto>()
                 .ForMember(dest => dest.GenderTitle, opt => opt.MapFrom(src => src.Gender.Title))

@@ -17,7 +17,7 @@ namespace ParsaLibraryManagement.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.14")
+                .HasAnnotation("ProductVersion", "8.0.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -111,20 +111,21 @@ namespace ParsaLibraryManagement.Infrastructure.Migrations
 
             modelBuilder.Entity("ParsaLibraryManagement.Domain.Entities.BorrowedBook", b =>
                 {
-                    b.Property<int>("Bid")
+                    b.Property<long>("Bid")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("bigint")
                         .HasColumnName("BID");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Bid"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Bid"));
+
+                    b.Property<DateTime?>("BackEndDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("BookId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("IsBorrowed")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValueSql("((0))");
+                    b.Property<DateTime>("StartDateBorrowed")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");

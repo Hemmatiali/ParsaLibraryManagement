@@ -8,7 +8,7 @@
         /// <summary>
         /// Gets or sets the unique identifier for the borrowed book record.
         /// </summary>
-        public long Bid { get; set; }
+        public int Bid { get; set; }
 
         /// <summary>
         /// Gets or sets the user ID of the borrower.
@@ -20,11 +20,7 @@
         /// </summary>
         public int BookId { get; set; }
 
-        /// <summary>
-        /// Gets or sets the status of the borrowed book (true if borrowed).
-        /// </summary>
-        public bool IsBorrowed { get; set; }
-
+     
         /// <summary>
         /// Gets or sets the Start Date of the borrowed book. 
         /// </summary>
@@ -33,7 +29,7 @@
         /// <summary>
         /// Gets or sets the Back EndDate of the borrowed book. 
         /// </summary>
-        public DateTime BackEndDate { get; set; }
+        public DateTime? BackEndDate { get; set; }
         /// <summary>
         /// Navigation property for the borrowed book.
         /// </summary>
