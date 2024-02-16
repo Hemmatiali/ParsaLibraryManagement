@@ -18,6 +18,7 @@
 
         // Image messages
         public const string ImageUploadFailedMsg = "Failed to upload image.";
+        public const string ImageDeleteFailedMsg = "Failed to delete image.";
         public const string UploadImageMsg = "Please upload an image file.";
 
         // Validator messages

@@ -13,13 +13,6 @@ public class BookCategoryRetrievalTests : BaseBookCategoryTests
     #region Methods
 
     /// <summary>
-    ///     Creates a <see cref="BookCategoryServices"/> instance for testing purposes.
-    /// </summary>
-    /// <returns>A new instance of <see cref="BookCategoryServices"/>.</returns>
-    private BookCategoryServices CreateService() =>
-         new(MockMapper.Object, MockValidator.Object, MockRepositoryFactory.Object, MockBooksCategoryRepository.Object, MockImageFileValidationServices.Object, MockImageServices.Object);
-
-    /// <summary>
     ///     Generates a list of book categories for testing purposes.
     /// </summary>
     /// <returns>A list of <see cref="BookCategory"/> objects.</returns>
@@ -35,6 +28,7 @@ public class BookCategoryRetrievalTests : BaseBookCategoryTests
 
     /// <summary>
     ///     Unit test for retrieving a book category by valid ID.
+    ///     Happy path
     /// </summary>
     /// <remarks>
     ///     Tests the happy path scenario where a valid category ID is provided.
@@ -63,6 +57,7 @@ public class BookCategoryRetrievalTests : BaseBookCategoryTests
 
     /// <summary>
     ///     Unit test for retrieving a book category by invalid ID.
+    ///     Not found
     /// </summary>
     /// <remarks>
     ///     Tests the scenario where an invalid category ID is provided, resulting in a null return.
@@ -86,6 +81,7 @@ public class BookCategoryRetrievalTests : BaseBookCategoryTests
 
     /// <summary>
     ///     Unit test for handling exceptions thrown by the repository during category retrieval.
+    ///     Throws exception
     /// </summary>
     /// <remarks>
     ///     Tests the scenario where the repository throws an exception.
@@ -110,6 +106,7 @@ public class BookCategoryRetrievalTests : BaseBookCategoryTests
 
     /// <summary>
     ///     Unit test for retrieving all book categories.
+    ///     Happy path
     /// </summary>
     /// <remarks>
     ///     Tests the happy path scenario where all categories are successfully retrieved.
@@ -138,6 +135,7 @@ public class BookCategoryRetrievalTests : BaseBookCategoryTests
 
     /// <summary>
     ///     Unit test for retrieving all book categories when no categories are found.
+    ///     Not found
     /// </summary>
     /// <remarks>
     ///     Tests the scenario where no categories are found in the repository, resulting in an empty list.
@@ -161,6 +159,7 @@ public class BookCategoryRetrievalTests : BaseBookCategoryTests
 
     /// <summary>
     ///     Unit test for handling exceptions thrown by the repository during category retrieval.
+    ///     Throws exception
     /// </summary>
     /// <remarks>
     ///     Tests the scenario where the repository throws an exception.
@@ -184,6 +183,7 @@ public class BookCategoryRetrievalTests : BaseBookCategoryTests
 
     /// <summary>
     ///     Unit test for retrieving book categories with a valid prefix.
+    ///     Happy path
     /// </summary>
     /// <remarks>
     ///     Tests the scenario where book categories are filtered based on a valid prefix.
@@ -212,6 +212,7 @@ public class BookCategoryRetrievalTests : BaseBookCategoryTests
 
     /// <summary>
     ///     Unit test for retrieving book categories with no matching prefix.
+    ///     Not found
     /// </summary>
     /// <remarks>
     ///     Tests the scenario where no book categories match the provided prefix, resulting in an empty list.
@@ -235,6 +236,7 @@ public class BookCategoryRetrievalTests : BaseBookCategoryTests
 
     /// <summary>
     ///     Unit test for handling exceptions thrown by the repository during category retrieval.
+    ///     Throws exception
     /// </summary>
     /// <remarks>
     ///     Tests the scenario where the repository throws an exception.
@@ -259,6 +261,7 @@ public class BookCategoryRetrievalTests : BaseBookCategoryTests
 
     /// <summary>
     ///     Unit test for retrieving categories for editing, excluding self and descendants.
+    ///     Happy path
     /// </summary>
     /// <remarks>
     ///     Tests the scenario where categories are filtered to exclude the specified category and its descendants.
@@ -307,6 +310,7 @@ public class BookCategoryRetrievalTests : BaseBookCategoryTests
 
     /// <summary>
     ///     Unit test for retrieving categories for editing when no categories exist.
+    ///     Not found
     /// </summary>
     /// <remarks>
     ///     Tests the scenario where no categories exist in the repository, resulting in an empty list.
@@ -331,6 +335,7 @@ public class BookCategoryRetrievalTests : BaseBookCategoryTests
 
     /// <summary>
     ///     Unit test for handling exceptions thrown by the repository during category retrieval for editing.
+    ///     Throws exception
     /// </summary>
     /// <remarks>
     ///     Tests the scenario where the repository throws an exception.
