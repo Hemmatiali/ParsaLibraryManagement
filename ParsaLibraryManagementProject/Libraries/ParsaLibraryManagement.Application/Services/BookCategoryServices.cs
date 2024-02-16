@@ -349,7 +349,11 @@ namespace ParsaLibraryManagement.Application.Services
 
                 // Delete old image if it exists
                 if (!string.IsNullOrWhiteSpace(existingCategory.ImageAddress))
-                    await _imageServices.DeleteImageAsync(existingCategory.ImageAddress, folderName);
+                {
+                    var deletionResult = await _imageServices.DeleteImageAsync(existingCategory.ImageAddress, folderName);
+                    if (!deletionResult)
+                        return ErrorMessages.ImageDeleteFailedMsg;
+                }
 
                 // Delete the category
                 await _baseRepository.RemoveAsync(existingCategory);

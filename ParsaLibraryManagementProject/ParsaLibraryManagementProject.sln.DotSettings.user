@@ -15,6 +15,12 @@
     &lt;TestId&gt;xUnit::D7481EB2-4DCB-46C8-8504-C2512C1F7FBE::net8.0::Test.ParsaLibraryManagement.UnitTests.Application.Services.BookCategoryServicesTests.BookCategoryRetrievalTests.GetCategoryById_RepositoryThrows_ThrowsException&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::D7481EB2-4DCB-46C8-8504-C2512C1F7FBE::net8.0::Test.ParsaLibraryManagement.UnitTests.Application.Services.BookCategoryServicesTests.BookCategoryRetrievalTests.GetCategoryById_WithOutOfRangeId_ThrowsArgumentOutOfRangeException&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::D7481EB2-4DCB-46C8-8504-C2512C1F7FBE::net8.0::Test.ParsaLibraryManagement.UnitTests.Application.Services.BookCategoryServicesTests.BookCategoryRetrievalTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::D7481EB2-4DCB-46C8-8504-C2512C1F7FBE::net8.0::Test.ParsaLibraryManagement.UnitTests.Application.Services.BookCategoryServicesTests.BookCategoryDeletionTests.DeleteCategoryAsync_WithChildRelations_ReturnsFailureMessage&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::D7481EB2-4DCB-46C8-8504-C2512C1F7FBE::net8.0::Test.ParsaLibraryManagement.UnitTests.Application.Services.BookCategoryServicesTests.BookCategoryDeletionTests.DeleteCategoryAsync_CategoryNotFound_ReturnsNotFoundMessage&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::D7481EB2-4DCB-46C8-8504-C2512C1F7FBE::net8.0::Test.ParsaLibraryManagement.UnitTests.Application.Services.BookCategoryServicesTests.BookCategoryDeletionTests.DeleteCategoryAsync_WhenImageServiceFails_ReturnsErrorMessage&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::D7481EB2-4DCB-46C8-8504-C2512C1F7FBE::net8.0::Test.ParsaLibraryManagement.UnitTests.Application.Services.BookCategoryServicesTests.BookCategoryDeletionTests.DeleteCategoryAsync_SuccessfulDeletion_ReturnsNull&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::D7481EB2-4DCB-46C8-8504-C2512C1F7FBE::net8.0::Test.ParsaLibraryManagement.UnitTests.Application.Services.BookCategoryServicesTests.BookCategoryDeletionTests.DeleteCategoryAsync_WhenRepositoryThrows_ThrowsException&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::D7481EB2-4DCB-46C8-8504-C2512C1F7FBE::net8.0::Test.ParsaLibraryManagement.UnitTests.Application.Services.BookCategoryServicesTests.BookCategoryDeletionTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Consts/@EntryIndexedValue">True</s:Boolean>

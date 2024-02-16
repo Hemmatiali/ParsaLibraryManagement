@@ -23,6 +23,9 @@ public abstract class BaseBookCategoryTests
     protected const string BookCategoryTitle3 = "Finance";
     protected const string BookCategoryTitle4 = "Historical Fiction";
 
+
+    protected const string FolderName = "TestFolder";
+
     protected readonly Mock<IMapper> MockMapper = new();
     protected readonly Mock<IValidator<BookCategoryDto>> MockValidator = new();
     protected readonly Mock<IRepositoryFactory> MockRepositoryFactory = new();
@@ -41,6 +44,17 @@ public abstract class BaseBookCategoryTests
         MockRepositoryFactory.Setup(factory => factory.GetRepository<BookCategory>())
             .Returns(MockBaseRepository.Object);
     }
+
+    #endregion
+
+    #region Methods
+
+    /// <summary>
+    ///     Creates a <see cref="BookCategoryServices"/> instance for testing purposes.
+    /// </summary>
+    /// <returns>A new instance of <see cref="BookCategoryServices"/>.</returns>
+    protected BookCategoryServices CreateService() =>
+        new(MockMapper.Object, MockValidator.Object, MockRepositoryFactory.Object, MockBooksCategoryRepository.Object, MockImageFileValidationServices.Object, MockImageServices.Object);
 
     #endregion
 }
