@@ -1,0 +1,90 @@
+﻿@using ParsaLibraryManagement.Application.DTOs
+@using ParsaLibraryManagement.Infrastructure.Common.Constants
+@model BorrowedBookDto
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Edit";
+}
+
+<!-- begin::main content -->
+<main class="main-content">
+    <div class="container-fluid">
+        <!-- begin::page header -->
+        <div class="page-header">
+            <div>
+                <h3>Edit the book category</h3>
+            </div>
+        </div>
+        <!-- end::page header -->
+
+        <div class="card">
+            <div class="card-body">
+                @if (@ViewBag.errorMessage != null)
+                {
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="alert alert-danger" role="alert">
+                                        <i class="ti-alert m-l-10"></i>  @ViewBag.errorMessage
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <form asp-action="Edit" class="needs-validation" novalidate="" method="post" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                 
+                    <input type="hidden" asp-for="@Model.Bid" />
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <label for="UserId">UserId</label>:
+                           
+                            <label >@Model.UserId</label>
+
+                            
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <label for="BookId">BookId</label>:
+
+                            <label>@Model.BookId</label>
+
+
+                        </div>
+                    </div>
+                    <div class="form-row" style="margin-top: 12px">
+                        <div class="col-md-12">
+                            <input type="submit" value="Submit" class="btn btn btn-primary" />
+                            <a class="btn btn-secondary" style="color:white" asp-action="Index">Back to list</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    @section FormsValidation
+    {
+        <script>
+            //  Form Validation
+            window.addEventListener('load', function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        </script>
+    }
+</main>
+<!-- end::main content -->

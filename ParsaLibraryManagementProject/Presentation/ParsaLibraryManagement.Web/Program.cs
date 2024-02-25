@@ -68,7 +68,12 @@ builder.Services.AddScoped<ImageFileValidationServices>();
 
 
 // Domain interfaces
+
+
+
 builder.Services.AddScoped<IRepositoryFactory, RepositoryFactory>();
+builder.Services.AddTransient<IBorrowedBookRepository, BorrowedBookRepository>();
+
 builder.Services.AddTransient<IBooksCategoryRepository, BooksCategoryRepository>();
 builder.Services.AddScoped<IPublisherRepository, PublisherRepository>();
 builder.Services.AddTransient<IImageServices, ImageServices>();
@@ -76,6 +81,8 @@ builder.Services.AddTransient<IImageServices, ImageServices>();
 
 
 // Application interfaces
+builder.Services.AddScoped<IBorrowedBookServices, BorrowedBookServices>();
+
 builder.Services.AddTransient<IBookCategoryServices, BookCategoryServices>();
 builder.Services.AddScoped<IPublisherServices, PublisherServices>();
 builder.Services.AddTransient<IImageFileValidationService, ImageFileValidationServices>();

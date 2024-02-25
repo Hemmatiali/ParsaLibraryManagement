@@ -28,6 +28,15 @@ namespace ParsaLibraryManagement.Application.Interfaces
         Task<List<BorrowedBookDto>> GetAllBorrowedAsync();
 
 
+        /// <summary>
+        ///     Gets all book Borrowed asynchronously.
+        /// </summary>
+        /// <param name="BookId">Book Id</param>
+        /// <param name="UserId">User Id</param>
+        /// <returns>A task representing the asynchronous operation, yielding a list of <see cref="BorrowedBookDto"/>.</returns>
+        Task<List<BorrowedBookDto>> GetAllBorrowedByBookandUserAsync(int BookId,int UserId);
+
+
         #endregion
 
         #region Modification

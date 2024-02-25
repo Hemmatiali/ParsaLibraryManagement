@@ -61,24 +61,6 @@ namespace ParsaLibraryManagement.Application.Validators
         public BorrowedBookEditValidator()
         {
 
-            RuleFor(dto => dto.UserId)
-              .NotEmpty()
-              .WithMessage(string.Format(ErrorMessages.RequiredFieldMsg, nameof(BorrowedBookDto.UserId)));
-
-            RuleFor(dto => dto.BookId)
-                .NotEmpty()
-                .WithMessage(string.Format(ErrorMessages.RequiredFieldMsg, nameof(BorrowedBookDto.BookId)));
-
-
-
-
-            RuleFor(dto => dto.BackEndDate)
-                .NotEmpty()
-                .WithMessage(string.Format(ErrorMessages.RequiredFieldMsg, nameof(BorrowedBookDto.BackEndDate)));
-
-           
-
-
         }
 
         #endregion

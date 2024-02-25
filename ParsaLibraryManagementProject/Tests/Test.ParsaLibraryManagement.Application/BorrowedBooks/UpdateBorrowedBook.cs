@@ -60,11 +60,7 @@ public class UpdateBorrowedBook
 
             var _BookCategoryDto = new BorrowedBookEditDto()
             {
-                BookId = 1,
-                BorrowedId=BorrowedBookid,
-                UserId = 1,
-                
-                BackEndDate = DateTime.Now
+                Bid = 1
             };
 
 
@@ -128,10 +124,7 @@ public class UpdateBorrowedBook
 
             var _booksCategoryeditDto = new BorrowedBookEditDto()
             {
-                BookId = 1,
-                UserId = 1,
-                BorrowedId=BorrowedBookid,
-                StartDateBorrowed = DateTime.Now
+                Bid = 1
             };
 
             #endregion

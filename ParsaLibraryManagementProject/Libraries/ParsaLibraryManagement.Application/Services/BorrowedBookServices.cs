@@ -78,6 +78,30 @@ namespace ParsaLibraryManagement.Application.Services
             }
         }
 
+        /// <summary>
+        ///     Gets all book Borrowed asynchronously.
+        /// </summary>
+        /// <param name="BookId">Book Id</param>
+        /// <param name="UserId">User Id</param>
+        /// <returns>A task representing the asynchronous operation, yielding a list of <see cref="BorrowedBookDto"/>.</returns>
+        public async Task<List<BorrowedBookDto>> GetAllBorrowedByBookandUserAsync(int BookId, int UserId)
+        {
+            try
+            {
+                // Retrieve all Borrowed
+                var booksBorrowed = await _baseRepository.GetAllAsync(d=> (UserId==0 || d.UserId== UserId) &&
+                (BookId == 0 || d.BookId == BookId)
+                );
+
+                // Map Borrowed to DTOs and return the list
+                return booksBorrowed.Select(BorrowedBook => _mapper.Map<BorrowedBookDto>(BorrowedBook)).ToList();
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+
         /// <inheritdoc />
         public async Task<List<BorrowedBookDto>> GetAllBorrowedAsync()
         {
@@ -135,12 +159,15 @@ namespace ParsaLibraryManagement.Application.Services
                 if (Exists)
                     return string.Format(ErrorMessages.Exist, nameof(BorrowedBookDto.BookId));
 
+                BorrowedBookDto.StartDateBorrowed = DateTime.Now;
                 var validationResult = await _validator.ValidateAsync(BorrowedBookDto);
                 if (!validationResult.IsValid)
                     return string.Format(ValidationHelper.GetErrorMessages(validationResult));
 
                               // Map DTO to entity and save
                 var BorrowedBook = _mapper.Map<BorrowedBook>(BorrowedBookDto);
+
+            
                 await _baseRepository.AddAsync(BorrowedBook);
                 await _baseRepository.SaveChangesAsync();
 
@@ -161,7 +188,7 @@ namespace ParsaLibraryManagement.Application.Services
             try
             {
                 // Get existing Borrowed
-                var existingBorrowed = await _baseRepository.GetByIdAsync(BorrowedBookDto.BorrowedId);
+                var existingBorrowed = await _baseRepository.GetByIdAsync(BorrowedBookDto.Bid);
                 if (existingBorrowed == null)
                     return new OperationResultModel { WasSuccess = false, Message = ErrorMessages.ItemNotFoundMsg };
 
@@ -170,17 +197,19 @@ namespace ParsaLibraryManagement.Application.Services
                 if (!validationResult.IsValid)
                     return new OperationResultModel { WasSuccess = false, Message = ValidationHelper.GetErrorMessages(validationResult) }; //TODO image is uploaded and should be handled
 
-                // Check existence of title
-                var Exists = await _baseRepository.AnyAsync(p => 
-                       p.UserId== BorrowedBookDto.UserId
-                   &&  p.BookId == BorrowedBookDto.BookId
-                   && !p.BackEndDate.HasValue
-                && p.Bid != BorrowedBookDto.BorrowedId);
-                if (Exists)
-                    return new OperationResultModel { WasSuccess = false, Message = string.Format(ErrorMessages.Exist, nameof(BorrowedBookDto.BookId)) };
+                //// Check existence of title
+                //var Exists = await _baseRepository.AnyAsync(p => 
+                //       p.UserId== BorrowedBookDto.UserId
+                //   &&  p.BookId == BorrowedBookDto.BookId
+                //   && !p.BackEndDate.HasValue
+                //&& p.Bid != BorrowedBookDto.BorrowedId);
+                //if (Exists)
+                //    return new OperationResultModel { WasSuccess = false, Message = string.Format(ErrorMessages.Exist, nameof(BorrowedBookDto.BookId)) };
 
                 // Map DTO to existing entity and save
                 _mapper.Map(BorrowedBookDto, existingBorrowed);
+
+                existingBorrowed.BackEndDate = DateTime.Now;
                 await _baseRepository.UpdateAsync(existingBorrowed);
                 await _baseRepository.SaveChangesAsync();
 

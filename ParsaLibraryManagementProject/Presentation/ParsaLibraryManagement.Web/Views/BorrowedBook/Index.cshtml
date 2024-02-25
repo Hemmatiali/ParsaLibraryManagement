@@ -1,0 +1,92 @@
+﻿@model ParsaLibraryManagement.Web.ViewModels.BorrowedBooks.BorrowedBookIndexViewModel
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "List of Borrowed book ";
+}
+
+<main class="main-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+
+                        <div class="row card-title">
+                            <h5 class="col-4">Classification of BorrowedBook</h5>
+                            <a class="btn btn-primary col-3 offset-4 d-block" asp-action="Create" style="color:white">
+                                <i class="ti-plus m-r-5"></i> Create a new
+                            </a>
+                        </div>
+
+                        <form method="get" asp-action="Index">
+
+                            <div class="row">
+                                <div class="btn-group btn-group-sm mt-2 mb-2" role="group" aria-label="Filter">
+                                    <label for="UserId">UserId</label>
+                                    <input asp-for="UserId" type="text" id="UserId" class="form-control" placeholder="Enter your UserId" />
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="btn-group btn-group-sm mt-2 mb-2" role="group" aria-label="Filter">
+                                    <label for="BookId">BookId</label>
+                                    <input id="BookId" asp-for="@Model.BookId" type="text" placeholder="Enter your BookId" class="form-control" maxlength="37" />
+
+                                </div>
+                            </div>
+                            <input type="submit" value="filter"  class="btn btn-primary col-3 offset-4 d-block">
+                            
+                        </form>
+
+                      
+                        <div class="row">
+                            <a class="btn btn-dark btn-uppercase col-md-2" asp-action="Index" style=" color:white">
+                                <i class="ti-brush m-r-5"></i> Clear Filter
+                            </a>
+                        </div>
+
+                        <div class="table-responsive" tabindex="1" style="overflow: hidden; outline: none;">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">UserId</th>
+                                        <th scope="col">BookId</th>
+                                        <th scope="col">StartDateBorrowed</th>
+                                        <th scope="col">BackEndDate</th>
+
+                                        <th class="text-left" scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        int rowIndex = 1;
+                                        @foreach (var item in Model.BorrowedBooks)
+                                        {
+                                            <tr>
+                                                <td>@rowIndex</td>
+                                                <td>@item.UserId</td>
+                                                <td>@item.BookId</td>
+                                                <td>@item.StartDateBorrowed</td>
+                                                <td>@item.BackEndDate</td>
+
+                                                <td class="text-left">
+                                                    <a asp-action="Edit" asp-route-Bid="@item.Bid"
+                                                       class="btn btn-warning" style="color:white"> <i class="ti-pencil m-r-5"></i> Edit </a>
+
+                                                </td>
+                                            </tr>
+                                            rowIndex++;
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
