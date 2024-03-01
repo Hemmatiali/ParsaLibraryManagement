@@ -25,7 +25,7 @@ namespace ParsaLibraryManagement.Infrastructure.Data.Configurations
 
             builder.Property(e => e.Title)
                 .IsRequired()
-                .HasMaxLength(15)
+                .HasMaxLength(20)
                 .IsUnicode(true);
 
             // Ensure Code is unique

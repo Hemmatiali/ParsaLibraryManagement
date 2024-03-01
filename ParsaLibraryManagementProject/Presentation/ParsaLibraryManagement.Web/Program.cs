@@ -16,6 +16,10 @@ using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Configuration.AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json",
+    optional: true);
+
+
 #region Logger
 
 //Serilog Logger
@@ -74,6 +78,7 @@ builder.Services.AddTransient<IImageServices, ImageServices>();
 // Application interfaces
 builder.Services.AddTransient<IBookCategoryServices, BookCategoryServices>();
 builder.Services.AddScoped<IPublisherServices, PublisherServices>();
+builder.Services.AddScoped<IBooksServices, BooksServices>();
 builder.Services.AddTransient<IImageFileValidationService, ImageFileValidationServices>();
 
 

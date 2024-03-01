@@ -11,7 +11,8 @@ namespace ParsaLibraryManagement.Web.ViewModels.BookCategories;
 /// <remarks>
 ///     This class represents the view model used when creating or editing book categories, including data for the category, reference groups, and an image file.
 /// </remarks>
-public class BookCategoryCreateEditViewModel
+public class 
+    BookCategoryCreateEditViewModel
 {
     public BookCategoryDto Category { get; set; } = new();
 
