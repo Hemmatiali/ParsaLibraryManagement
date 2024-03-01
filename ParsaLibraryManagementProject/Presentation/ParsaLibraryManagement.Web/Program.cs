@@ -15,6 +15,9 @@ using ParsaLibraryManagement.Infrastructure.Services.ImageServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Configuration.AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json",
+    optional: true);
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -61,6 +64,7 @@ builder.Services.AddTransient<IImageServices, ImageServices>();
 // Application interfaces
 builder.Services.AddTransient<IBookCategoryServices, BookCategoryServices>();
 builder.Services.AddScoped<IPublisherServices, PublisherServices>();
+builder.Services.AddScoped<IBooksServices, BooksServices>();
 builder.Services.AddTransient<IImageFileValidationService, ImageFileValidationServices>();
 
 

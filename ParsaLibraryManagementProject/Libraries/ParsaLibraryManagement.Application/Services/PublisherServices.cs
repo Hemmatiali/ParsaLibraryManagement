@@ -92,6 +92,15 @@ public class PublisherServices : IPublisherServices
         }
     }
 
+    /// <inheritdoc />
+
+    public async Task<List<(Guid id, string fullName)>> GetAllPublisherIdsAndNamesAsync()
+    {
+        var publishers = await _basePublisherRepository.GetAllAsync();
+
+        return publishers.Select(publisher => (publisher.PublisherId, $"{publisher.FirstName} {publisher.LastName}")).ToList();
+    }
+
     #endregion
 
     #region Checking
