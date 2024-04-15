@@ -23,14 +23,21 @@
 
         #region Book category
 
-        public static string BookCategoriesFolderName = "BookCategories";
-        public static string BookCategoriesImgPathPhysicalAddress = "wwwroot\\images\\BookCategories";
-        public static string BookCategoriesImgPath = "wwwroot/images/BookCategories";
-        public static string BookCategoriesImgPathWithoutWwwRoot = "images/BookCategories";
+        public const string BookCategoriesFolderName = "BookCategories";
+        public const string BookCategoriesImgPathPhysicalAddress = "wwwroot\\images\\BookCategories";
+        public const string BookCategoriesImgPath = "wwwroot/images/BookCategories";
+        public const string BookCategoriesImgPathWithoutWwwRoot = "images/BookCategories";
 
-        public static string BookCategoriesThumbnailImgPathPhysicalAddress = "wwwroot\\images\\BookCategories\\thumbnail";
-        public static string BookCategoriesThumbnailImgPath = "wwwroot/images/BookCategories/thumbnail";
-        public static string BookCategoriesThumbnailImgPathWithoutWwwRoot = "images/BookCategories/thumbnail";
+        public const string BookCategoriesThumbnailImgPathPhysicalAddress = "wwwroot\\images\\BookCategories\\thumbnail";
+        public const string BookCategoriesThumbnailImgPath = "wwwroot/images/BookCategories/thumbnail";
+        public const string BookCategoriesThumbnailImgPathWithoutWwwRoot = "images/BookCategories/thumbnail";
+
+        #endregion
+
+        #region MyRegion
+
+        public const string BookFolderName = "BookCategories";
+
 
         #endregion
     }

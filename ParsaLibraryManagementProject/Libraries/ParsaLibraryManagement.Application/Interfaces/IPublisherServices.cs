@@ -25,6 +25,8 @@ public interface IPublisherServices
     /// <returns>A task representing the asynchronous operation, yielding a list of <see cref="PublisherDto"/>.</returns>
     Task<List<PublisherDto>> GetAllPublishersAsync();
 
+    Task<List<(Guid id, string fullName)>> GetAllPublisherIdsAndNamesAsync(); 
+
     #endregion
 
     #region Checking
