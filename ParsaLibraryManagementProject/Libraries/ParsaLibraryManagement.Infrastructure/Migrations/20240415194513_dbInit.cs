@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace ParsaLibraryManagement.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class Init_Migration : Migration
+    public partial class dbInit : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -39,7 +41,7 @@ namespace ParsaLibraryManagement.Infrastructure.Migrations
                     GenderId = table.Column<byte>(type: "tinyint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Code = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false)
+                    Title = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -103,7 +105,7 @@ namespace ParsaLibraryManagement.Infrastructure.Migrations
                     CountInStock = table.Column<short>(type: "smallint", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ImageAddress = table.Column<string>(type: "varchar(37)", unicode: false, maxLength: 37, nullable: false),
-                    Status = table.Column<string>(type: "varchar(20)", unicode: false, maxLength: 20, nullable: false, comment: "- Available  -NotAvailable")
+                    IsAvailable = table.Column<bool>(type: "bit", nullable: false, defaultValueSql: "((0))", comment: "-0 NotAvailable -1 Available")
                 },
                 constraints: table =>
                 {
@@ -145,6 +147,17 @@ namespace ParsaLibraryManagement.Infrastructure.Migrations
                         principalColumn: "UserId");
                 });
 
+            migrationBuilder.InsertData(
+                table: "Genders",
+                columns: new[] { "GenderId", "Code", "Title" },
+                values: new object[,]
+                {
+                    { (byte)1, "M", "Male" },
+                    { (byte)2, "F", "Female" },
+                    { (byte)3, "RNS", "Rather Not Say" },
+                    { (byte)4, "MXD", "Mixed" }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Books_CategoryId",
                 table: "Books",
@@ -169,6 +182,12 @@ namespace ParsaLibraryManagement.Infrastructure.Migrations
                 name: "IX_BorrowedBooks_UserId",
                 table: "BorrowedBooks",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Genders_Code",
+                table: "Genders",
+                column: "Code",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Publishers_Email",

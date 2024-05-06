@@ -1,0 +1,164 @@
+﻿@using ParsaLibraryManagement.Application.DTOs.Enumeration
+@model ParsaLibraryManagement.Web.ViewModels.Book.BookCreateEditViewModel
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Create book";
+}
+
+<!-- begin::main content -->
+<main class="main-content">
+    <div class="container-fluid">
+        <!-- begin::page header -->
+        <div class="page-header">
+            <div>
+                <h3>Create a book</h3>
+            </div>
+        </div>
+        <!-- end::page header -->
+
+        <div class="card">
+            <div class="card-body">
+                @if (@ViewBag.errorMessage != null)
+                {
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="alert alert-danger" role="alert">
+                                        <i class="ti-alert m-l-10"></i> @ViewBag.errorMessage
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <form asp-action="Create" class="needs-validation" novalidate="" method="post" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="drpRefGroups">Publisher</label>
+                            @{
+                                <select class="form-control" asp-for="@Model.Book.PublisherId" asp-items="@Model.PublisherIds" required></select>
+                            }
+                            <span asp-validation-for="@Model.Book.PublisherId" class="text-danger"></span>
+                            <div class="invalid-feedback">
+                                Publisher is required.
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="drpRefGroups">Book Category</label>
+                            @{
+                                <select id="drpRefGroups" class="form-control" asp-for="@Model.Book.CategoryId" asp-items="@Model.CategoryIds" required></select>
+                            }
+                            <span asp-validation-for="@Model.Book.CategoryId" class="text-danger"></span>
+                            <div class="invalid-feedback">
+                                Book Category is required.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-3 mb-3">
+                            <label asp-for="@Model.Book.Price">Price</label>
+                            <input asp-for="@Model.Book.Price" type="number" class="form-control" placeholder="Price" maxlength="50" required="" />
+                            <span asp-validation-for="@Model.Book.Price" class="text-danger"></span>
+                            <div class="invalid-feedback">
+                                Price is required.
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label asp-for="@Model.Book.PageCount">Page Count</label>
+                            <input asp-for="@Model.Book.PageCount" type="number" class="form-control" placeholder="Page Count" maxlength="50" required="" />
+                            <span asp-validation-for="@Model.Book.PageCount" class="text-danger"></span>
+                            <div class="invalid-feedback">
+                                Page Count is required.
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label asp-for="@Model.Book.CountInStock">Count in Stock</label>
+                            <input asp-for="@Model.Book.CountInStock" type="number" class="form-control" placeholder="Count in Stock" maxlength="50" required="" />
+                            <span asp-validation-for="@Model.Book.CountInStock" class="text-danger"></span>
+                            <div class="invalid-feedback">
+                                Count in stock is required.
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label asp-for="@Model.Book.Status">Status</label>
+                            <select class="form-control" asp-for="@Model.Book.Status">
+                                @foreach (var bookStatus in Enum.GetValues<BookStatus>())
+                                {
+                                    <option value="@bookStatus">@bookStatus.ToString()</option>
+                                }
+                            </select>
+                            <span asp-validation-for="@Model.Book.Status" class="text-danger"></span>
+                            <div class="invalid-feedback">
+                                status is required.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="txtTitle">Name</label>
+                            <input id="txtTitle" asp-for="@Model.Book.Name" type="text" class="form-control" placeholder="Title" maxlength="50" required="" />
+                            <span asp-validation-for="@Model.Book.Name" class="text-danger"></span>
+                            <div class="invalid-feedback">
+                                Name is required.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <div class="form-group">
+                                <label asp-for="Book.Description">Book Description</label>
+                                <textarea class="form-control" asp-for="Book.Description" rows="3" spellcheck="false" data-gramm="false"></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <label for="fuImg">Book image</label>
+                            <input id="fuImg" asp-for="@Model.ImageFile" type="file" class="form-control" required="" maxlength="37" />
+                            <small id="fuImgHelp" class="form-text text-muted">Note that for better quality, the minimum photo size should be 250 x 250.</small>
+                            <span asp-validation-for="@Model.ImageFile" class="text-danger"></span>
+                            <div class="invalid-feedback">
+                                Book image is required.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row" style="margin-top: 12px">
+                        <div class="col-md-12">
+                            <input type="submit" value="Submit" class="btn btn btn-primary" />
+                            <a class="btn btn-secondary" style="color:white" asp-action="Index">Back to list</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    @section FormsValidation
+    {
+        <script>
+            //  Form Validation
+            window.addEventListener('load', function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        </script>
+    }
+
+</main>
+<!-- end::main content -->

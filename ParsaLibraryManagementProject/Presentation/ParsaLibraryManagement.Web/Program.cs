@@ -16,6 +16,10 @@ using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Configuration.AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json",
+    optional: true);
+
+
 #region Logger
 
 //Serilog Logger
@@ -46,6 +50,7 @@ builder.Services.AddDbContext<ParsaLibraryManagementDbContext>(options => option
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<BookCategoryValidator>());
+builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<BookValidator>()); //todo check or remove
 builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<GenderValidator>());
 builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<PublisherValidator>());//todo add others
 
@@ -74,6 +79,7 @@ builder.Services.AddTransient<IImageServices, ImageServices>();
 // Application interfaces
 builder.Services.AddTransient<IBookCategoryServices, BookCategoryServices>();
 builder.Services.AddScoped<IPublisherServices, PublisherServices>();
+builder.Services.AddScoped<IBooksServices, BooksServices>();
 builder.Services.AddTransient<IImageFileValidationService, ImageFileValidationServices>();
 
 

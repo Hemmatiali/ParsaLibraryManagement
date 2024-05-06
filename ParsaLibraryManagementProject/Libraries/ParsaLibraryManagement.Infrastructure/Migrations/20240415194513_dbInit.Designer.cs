@@ -12,20 +12,20 @@ using ParsaLibraryManagement.Infrastructure.Data.Contexts;
 namespace ParsaLibraryManagement.Infrastructure.Migrations
 {
     [DbContext(typeof(ParsaLibraryManagementDbContext))]
-    [Migration("20240116173219_AdjustGenderTitleLength_Migration")]
-    partial class AdjustGenderTitleLength_Migration
+    [Migration("20240415194513_dbInit")]
+    partial class dbInit
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.14")
+                .HasAnnotation("ProductVersion", "8.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("ParsaLibraryManagement.Domain.Entities.Books", b =>
+            modelBuilder.Entity("ParsaLibraryManagement.Domain.Entities.Book", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -49,6 +49,12 @@ namespace ParsaLibraryManagement.Infrastructure.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(37)");
 
+                    b.Property<bool>("IsAvailable")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValueSql("((0))")
+                        .HasComment("-0 NotAvailable -1 Available");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -65,13 +71,6 @@ namespace ParsaLibraryManagement.Infrastructure.Migrations
                     b.Property<Guid>("PublisherId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(20)")
-                        .HasComment("- Available  -NotAvailable");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
@@ -81,7 +80,7 @@ namespace ParsaLibraryManagement.Infrastructure.Migrations
                     b.ToTable("Books");
                 });
 
-            modelBuilder.Entity("ParsaLibraryManagement.Domain.Entities.BooksCategory", b =>
+            modelBuilder.Entity("ParsaLibraryManagement.Domain.Entities.BookCategory", b =>
                 {
                     b.Property<short>("CategoryId")
                         .ValueGeneratedOnAdd()
@@ -157,11 +156,14 @@ namespace ParsaLibraryManagement.Infrastructure.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(15)
+                        .HasMaxLength(20)
                         .IsUnicode(true)
-                        .HasColumnType("nvarchar(15)");
+                        .HasColumnType("nvarchar(20)");
 
                     b.HasKey("GenderId");
+
+                    b.HasIndex(new[] { "Code" }, "IX_Genders_Code")
+                        .IsUnique();
 
                     b.ToTable("Genders");
 
@@ -220,10 +222,10 @@ namespace ParsaLibraryManagement.Infrastructure.Migrations
 
                     b.HasKey("PublisherId");
 
-                    b.HasIndex("Email")
-                        .IsUnique();
-
                     b.HasIndex("GenderId");
+
+                    b.HasIndex(new[] { "Email" }, "IX_Publishers_Email")
+                        .IsUnique();
 
                     b.ToTable("Publishers");
                 });
@@ -275,9 +277,9 @@ namespace ParsaLibraryManagement.Infrastructure.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("ParsaLibraryManagement.Domain.Entities.Books", b =>
+            modelBuilder.Entity("ParsaLibraryManagement.Domain.Entities.Book", b =>
                 {
-                    b.HasOne("ParsaLibraryManagement.Domain.Entities.BooksCategory", "Category")
+                    b.HasOne("ParsaLibraryManagement.Domain.Entities.BookCategory", "Category")
                         .WithMany("Books")
                         .HasForeignKey("CategoryId")
                         .IsRequired()
@@ -294,18 +296,20 @@ namespace ParsaLibraryManagement.Infrastructure.Migrations
                     b.Navigation("Publisher");
                 });
 
-            modelBuilder.Entity("ParsaLibraryManagement.Domain.Entities.BooksCategory", b =>
+            modelBuilder.Entity("ParsaLibraryManagement.Domain.Entities.BookCategory", b =>
                 {
-                    b.HasOne("ParsaLibraryManagement.Domain.Entities.BooksCategory", null)
-                        .WithMany()
+                    b.HasOne("ParsaLibraryManagement.Domain.Entities.BookCategory", "Ref")
+                        .WithMany("InverseRef")
                         .HasForeignKey("RefId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .HasConstraintName("FK_BooksCategory_RefId");
+
+                    b.Navigation("Ref");
                 });
 
             modelBuilder.Entity("ParsaLibraryManagement.Domain.Entities.BorrowedBook", b =>
                 {
-                    b.HasOne("ParsaLibraryManagement.Domain.Entities.Books", "Books")
+                    b.HasOne("ParsaLibraryManagement.Domain.Entities.Book", "Book")
                         .WithMany("BorrowedBooks")
                         .HasForeignKey("BookId")
                         .IsRequired()
@@ -317,7 +321,7 @@ namespace ParsaLibraryManagement.Infrastructure.Migrations
                         .IsRequired()
                         .HasConstraintName("FK_BorrowedBooks_Users");
 
-                    b.Navigation("Books");
+                    b.Navigation("Book");
 
                     b.Navigation("User");
                 });
@@ -345,14 +349,16 @@ namespace ParsaLibraryManagement.Infrastructure.Migrations
                     b.Navigation("Gender");
                 });
 
-            modelBuilder.Entity("ParsaLibraryManagement.Domain.Entities.Books", b =>
+            modelBuilder.Entity("ParsaLibraryManagement.Domain.Entities.Book", b =>
                 {
                     b.Navigation("BorrowedBooks");
                 });
 
-            modelBuilder.Entity("ParsaLibraryManagement.Domain.Entities.BooksCategory", b =>
+            modelBuilder.Entity("ParsaLibraryManagement.Domain.Entities.BookCategory", b =>
                 {
                     b.Navigation("Books");
+
+                    b.Navigation("InverseRef");
                 });
 
             modelBuilder.Entity("ParsaLibraryManagement.Domain.Entities.Gender", b =>

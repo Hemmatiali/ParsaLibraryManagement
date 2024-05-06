@@ -17,7 +17,7 @@ namespace ParsaLibraryManagement.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.14")
+                .HasAnnotation("ProductVersion", "8.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -46,6 +46,12 @@ namespace ParsaLibraryManagement.Infrastructure.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(37)");
 
+                    b.Property<bool>("IsAvailable")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValueSql("((0))")
+                        .HasComment("-0 NotAvailable -1 Available");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -61,13 +67,6 @@ namespace ParsaLibraryManagement.Infrastructure.Migrations
 
                     b.Property<Guid>("PublisherId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(20)")
-                        .HasComment("- Available  -NotAvailable");
 
                     b.HasKey("Id");
 
@@ -154,9 +153,9 @@ namespace ParsaLibraryManagement.Infrastructure.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(15)
+                        .HasMaxLength(20)
                         .IsUnicode(true)
-                        .HasColumnType("nvarchar(15)");
+                        .HasColumnType("nvarchar(20)");
 
                     b.HasKey("GenderId");
 

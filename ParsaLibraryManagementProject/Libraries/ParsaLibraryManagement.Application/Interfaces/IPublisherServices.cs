@@ -25,6 +25,12 @@ public interface IPublisherServices
     /// <returns>A task representing the asynchronous operation, yielding a list of <see cref="PublisherDto"/>.</returns>
     Task<List<PublisherDto>> GetAllPublishersAsync();
 
+    /// <summary>
+    ///     Gets all publishers' IDs and full names asynchronously.
+    /// </summary>
+    /// <returns>A task with a list of (Guid, string) tuples.</returns>
+    public Task<List<(Guid id, string fullName)>> GetAllPublisherIdsAndNamesAsync();
+
     #endregion
 
     #region Checking
@@ -37,7 +43,7 @@ public interface IPublisherServices
     ///     A <see cref="Task{TResult}"/> representing the asynchronous operation.
     ///     The task result is <c>true</c> if the email address is unique; otherwise, <c>false</c>.
     /// </returns>
-    Task<bool> IsEmailUniqueAsync(string emailAddress);
+    Task<bool> IsEmailUniqueAsync(string emailAddress); //todo move to related service
 
     /// <summary>
     ///     Checks whether a gender with the specified identifier exists.
@@ -47,7 +53,7 @@ public interface IPublisherServices
     ///     A <see cref="Task{TResult}"/> representing the asynchronous operation.
     ///     The task result is <c>true</c> if a gender with the specified identifier exists; otherwise, <c>false</c>.
     /// </returns>
-    Task<bool> DoesGenderExistAsync(byte genderId);
+    Task<bool> DoesGenderExistAsync(byte genderId); //todo move to related service
 
     #endregion
 
