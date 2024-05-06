@@ -1,5 +1,4 @@
-﻿using ParsaLibraryManagement.Domain.Entities;
-namespace Test.ParsaLibraryManagement.UnitTests.Domain.Entities;
+﻿namespace Test.ParsaLibraryManagement.UnitTests.Domain.Entities;
 
 /// <summary>
 ///     Unit tests for the <see cref="BookCategory"/> class.

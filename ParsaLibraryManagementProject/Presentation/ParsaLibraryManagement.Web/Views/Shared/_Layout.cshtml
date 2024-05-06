@@ -3,7 +3,7 @@
 <head>
 
     <!--Meta tags!-->
-    <partial name="_MetaTagsPartialView"/>
+    <partial name="_MetaTagsPartialView" />
 
     <!-- begin::favicon -->
     <link rel="shortcut icon" href="/assets/media/image/">
@@ -20,87 +20,87 @@
 </head>
 
 <body class="dark-side-menu">
-<!-- begin::page loader-->
-<div class="page-loader">
-    <div class="spinner-border"></div>
-    <span>Loading ...</span>
-</div>
-<!-- end::page loader -->
-<!-- begin::side menu -->
-<div class="side-menu">
-    <div class="side-menu-body">
-        <ul>
-            <li class="side-menu-divider">Navigation</li>
-            <li>
-                <a href="#">
-                    <i class="icon ti-home"></i> <span>Dashboards</span>
-                </a>
-                <ul>
-                    <li>
-                        <a href="#">test</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a asp-controller="BookCategories" asp-action="Index">
-                    <i class="icon ti-book"></i> <span>Book categories</span>
-                </a>
-            </li>
-            <li>
-                <a asp-controller="Book" asp-action="Index">
-                    <i class="icon ti-user"></i> <span>Books</span>
-                </a>
-            </li>
-            <li>
-                <a asp-controller="Publisher" asp-action="Index">
-                    <i class="icon ti-user"></i> <span>Publishers</span>
-                </a>
-            </li>
-        </ul>
+    <!-- begin::page loader-->
+    <div class="page-loader">
+        <div class="spinner-border"></div>
+        <span>Loading ...</span>
     </div>
-</div>
-<!-- end::side menu -->
-<!-- begin::navbar -->
-<nav class="navbar">
-    <div class="container-fluid">
-
-        <!-- begin::header logo -->
-        <div class="header-logo">
-            <a href="#">
-                <img src="/assets/media/image/light-logo.png" alt="Parsa library management">
-                <span class="logo-text d-none d-lg-block">Parsa</span>
-            </a>
-        </div>
-        <!-- end::header logo -->
-
-        <div class="header-body">
-            <!-- begin::mobile navigation -->
-            <ul class="navbar-nav">
-                <li class="nav-item d-lg-none d-sm-block">
-                    <a href="#" class="nav-link side-menu-open">
-                        <i class="ti-menu"></i>
+    <!-- end::page loader -->
+    <!-- begin::side menu -->
+    <div class="side-menu">
+        <div class="side-menu-body">
+            <ul>
+                <li class="side-menu-divider">Navigation</li>
+                <li>
+                    <a href="#">
+                        <i class="icon ti-home"></i> <span>Dashboards</span>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="#">test</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a asp-controller="BookCategories" asp-action="Index">
+                        <i class="icon ti-layers-alt"></i> <span>Book categories</span>
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="Books" asp-action="Index">
+                        <i class="icon ti-book"></i> <span>Books</span>
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="Publisher" asp-action="Index">
+                        <i class="icon ti-user"></i> <span>Publishers</span>
                     </a>
                 </li>
             </ul>
-            <!-- end::mobile navigation -->
         </div>
     </div>
-</nav>
-<!-- end::navbar -->
-<!-- begin::main content -->
-@RenderBody()
-<!-- end::main content -->
-<!-- begin::global scripts -->
-<script src="/assets/vendors/bundle.js"></script>
-<!-- end::global scripts -->
-<!-- begin::custom scripts -->
-@*<script src="/assets/js/custom.js"></script>*@
-<script src="/assets/js/app.js"></script>
-@await RenderSectionAsync("CustomScripts", false)
-<!-- end::custom scripts -->
-<!-- begin::form bootstrap validation -->
-@await RenderSectionAsync("FormsValidation", false);
-<!-- end::form bootstrap validation -->
+    <!-- end::side menu -->
+    <!-- begin::navbar -->
+    <nav class="navbar">
+        <div class="container-fluid">
+
+            <!-- begin::header logo -->
+            <div class="header-logo">
+                <a href="#">
+                    <img src="/assets/media/image/light-logo.png" alt="Parsa library management">
+                    <span class="logo-text d-none d-lg-block">Parsa</span>
+                </a>
+            </div>
+            <!-- end::header logo -->
+
+            <div class="header-body">
+                <!-- begin::mobile navigation -->
+                <ul class="navbar-nav">
+                    <li class="nav-item d-lg-none d-sm-block">
+                        <a href="#" class="nav-link side-menu-open">
+                            <i class="ti-menu"></i>
+                        </a>
+                    </li>
+                </ul>
+                <!-- end::mobile navigation -->
+            </div>
+        </div>
+    </nav>
+    <!-- end::navbar -->
+    <!-- begin::main content -->
+    @RenderBody()
+    <!-- end::main content -->
+    <!-- begin::global scripts -->
+    <script src="/assets/vendors/bundle.js"></script>
+    <!-- end::global scripts -->
+    <!-- begin::custom scripts -->
+    @*<script src="/assets/js/custom.js"></script>*@
+    <script src="/assets/js/app.js"></script>
+    @await RenderSectionAsync("CustomScripts", false)
+    <!-- end::custom scripts -->
+    <!-- begin::form bootstrap validation -->
+    @await RenderSectionAsync("FormsValidation", false);
+    <!-- end::form bootstrap validation -->
 
 </body>
 </html>

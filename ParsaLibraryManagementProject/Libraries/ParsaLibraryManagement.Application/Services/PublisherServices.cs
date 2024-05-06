@@ -93,7 +93,6 @@ public class PublisherServices : IPublisherServices
     }
 
     /// <inheritdoc />
-
     public async Task<List<(Guid id, string fullName)>> GetAllPublisherIdsAndNamesAsync()
     {
         var publishers = await _basePublisherRepository.GetAllAsync();
@@ -106,7 +105,7 @@ public class PublisherServices : IPublisherServices
     #region Checking
 
     /// <inheritdoc />
-    public async Task<bool> IsEmailUniqueAsync(string emailAddress)
+    public async Task<bool> IsEmailUniqueAsync(string emailAddress) 
     {
         try
         {
@@ -153,7 +152,7 @@ public class PublisherServices : IPublisherServices
             // Check existence of email
             var emailExists = await _basePublisherRepository.AnyAsync(p => p.Email.Equals(publisherDto.Email));
             if (emailExists)
-                return string.Format(ErrorMessages.Exist, nameof(PublisherDto.Email));
+                return string.Format(ErrorMessages.ExistMsg, nameof(PublisherDto.Email));
 
             // Map DTO to existing entity and save
             var publisher = _mapper.Map<Publisher>(publisherDto);
@@ -176,7 +175,7 @@ public class PublisherServices : IPublisherServices
         {
             // Check if PublisherId has a value
             if (publisherDto.PublisherId == Guid.Empty)
-                return string.Format(ErrorMessages.NotValid, nameof(PublisherDto.PublisherId));
+                return string.Format(ErrorMessages.NotValidMsg, nameof(PublisherDto.PublisherId));
 
             // Get existing publisher
             var existingPublisher = await _basePublisherRepository.GetByIdAsync(publisherDto.PublisherId);
@@ -194,7 +193,7 @@ public class PublisherServices : IPublisherServices
             // Check existence of email
             var emailExists = await _basePublisherRepository.AnyAsync(p => p.Email.Equals(publisherDto.Email) && p.PublisherId != publisherDto.PublisherId);
             if (emailExists)
-                return string.Format(ErrorMessages.Exist, nameof(PublisherDto.Email));
+                return string.Format(ErrorMessages.ExistMsg, nameof(PublisherDto.Email));
 
             // Map DTO to existing entity and save
             _mapper.Map(publisherDto, existingPublisher);

@@ -1,5 +1,4 @@
 ﻿using ParsaLibraryManagement.Application.DTOs;
-
 namespace ParsaLibraryManagement.Web.ViewModels.BookCategories;
 
 /// <summary>

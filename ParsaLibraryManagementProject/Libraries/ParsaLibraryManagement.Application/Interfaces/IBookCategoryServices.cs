@@ -76,5 +76,4 @@ public interface IBookCategoryServices
     Task<string?> DeleteCategoryAsync(short categoryId, string folderName);
 
     #endregion
-
 }

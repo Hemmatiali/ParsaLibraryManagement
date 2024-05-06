@@ -1,5 +1,4 @@
 ﻿using ParsaLibraryManagement.Application.DTOs.Enumeration;
-
 namespace ParsaLibraryManagement.Application.DTOs;
 
 /// <summary>
@@ -11,20 +10,13 @@ namespace ParsaLibraryManagement.Application.DTOs;
 public class BookDto
 {
     public int Id { get; set; }
-    
     public Guid PublisherId { get; set; }
-    
     public short CategoryId { get; set; }
-    
     public short PageCount { get; set; }
-    
     public decimal Price { get; set; }
-    public required string Name { get; set; }
-    
-    public required string Description { get; set; }
-    
-    public required short CountInStock { get; set; }
+    public string Name { get; set; } = "";
+    public string Description { get; set; } = "";
+    public short CountInStock { get; set; }
     public string? ImageAddress { get; set; }
-    
     public BookStatus Status { get; set; }
 }

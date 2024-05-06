@@ -50,6 +50,7 @@ builder.Services.AddDbContext<ParsaLibraryManagementDbContext>(options => option
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<BookCategoryValidator>());
+builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<BookValidator>()); //todo check or remove
 builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<GenderValidator>());
 builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<PublisherValidator>());//todo add others
 

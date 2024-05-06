@@ -41,9 +41,9 @@ public class PublisherValidator : AbstractValidator<PublisherDto>
             .NotEmpty()
             .WithMessage(string.Format(ErrorMessages.RequiredFieldMsg, nameof(PublisherDto.Email)))
             .EmailAddress()
-            .WithMessage(string.Format(ErrorMessages.NotValid, nameof(PublisherDto.Email)))
+            .WithMessage(string.Format(ErrorMessages.NotValidMsg, nameof(PublisherDto.Email)))
             .Must(BeAValidEmail)
-            .WithMessage(string.Format(ErrorMessages.NotValid, nameof(PublisherDto.Email)));
+            .WithMessage(string.Format(ErrorMessages.NotValidMsg, nameof(PublisherDto.Email)));
     }
 
     #endregion

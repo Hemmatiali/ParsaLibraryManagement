@@ -4,11 +4,19 @@ using ParsaLibraryManagement.Domain.Common;
 
 namespace ParsaLibraryManagement.Application.Validators;
 
+/// <summary>
+///     Validator for the <see cref="BookDto"/> class.
+/// </summary>
+/// <remarks>
+///     This class defines validation rules for the properties of the <see cref="BookDto"/> class.
+/// </remarks>
 public class BookValidator : AbstractValidator<BookDto>
 {
+    // Fields
     private const int NameMaximumLength = 50;
     private const int ImageAddressMaximumLength = 37;
 
+    // Constructor
     public BookValidator()
     {
         RuleFor(dto => dto.Name)
@@ -21,10 +29,8 @@ public class BookValidator : AbstractValidator<BookDto>
             .NotEmpty()
             .WithMessage(string.Format(ErrorMessages.RequiredFieldMsg, nameof(BookCategoryDto.ImageAddress)))
             .MaximumLength(ImageAddressMaximumLength)
-            .WithMessage(string.Format(ErrorMessages.MaximumLengthMsg, nameof(BookCategoryDto.ImageAddress),
-                ImageAddressMaximumLength));
+            .WithMessage(string.Format(ErrorMessages.MaximumLengthMsg, nameof(BookCategoryDto.ImageAddress), ImageAddressMaximumLength));
 
-        RuleFor(dto => dto.Status)
-            .IsInEnum();
+        RuleFor(dto => dto.Status).IsInEnum();
     }
 }

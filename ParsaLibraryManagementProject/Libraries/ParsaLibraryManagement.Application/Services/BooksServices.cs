@@ -1,5 +1,4 @@
-﻿using System.Linq.Expressions;
-using AutoMapper;
+﻿using AutoMapper;
 using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using ParsaLibraryManagement.Application.DTOs;
@@ -7,6 +6,7 @@ using ParsaLibraryManagement.Application.Interfaces;
 using ParsaLibraryManagement.Application.Interfaces.ImageServices;
 using ParsaLibraryManagement.Application.Utilities;
 using ParsaLibraryManagement.Domain.Common;
+using ParsaLibraryManagement.Domain.Common.Extensions;
 using ParsaLibraryManagement.Domain.Entities;
 using ParsaLibraryManagement.Domain.Interfaces.ImageServices;
 using ParsaLibraryManagement.Domain.Interfaces.Repository;
@@ -15,6 +15,8 @@ namespace ParsaLibraryManagement.Application.Services;
 
 public class BooksServices : IBooksServices
 {
+    #region Fields
+
     private readonly IMapper _mapper;
     private readonly IImageServices _imageServices;
     private readonly IValidator<BookDto> _validator;
@@ -23,48 +25,114 @@ public class BooksServices : IBooksServices
     private readonly IImageFileValidationService _imageFileValidationServices;
     private readonly IBaseRepository<BookCategory> _bookCategoryBaseRepository;
 
-    public BooksServices(IMapper mapper,
-        IImageServices imageServices,
-        IValidator<BookDto> validator,
-        IImageFileValidationService imageFileValidationService,
-        IRepositoryFactory repositoryFactory)
+    #endregion
+
+    #region Ctor
+
+    public BooksServices(IMapper mapper, IImageServices imageServices, IValidator<BookDto> validator, IImageFileValidationService imageFileValidationService, IRepositoryFactory repositoryFactory)
     {
-        this._mapper = mapper;
-        this._imageServices = imageServices;
-        this._validator = validator;
-        this._imageFileValidationServices = imageFileValidationService;
-        this._bookBaseRepository = repositoryFactory.GetRepository<Book>();
-        this._bookCategoryBaseRepository = repositoryFactory.GetRepository<BookCategory>();
-        this._publisherBaseRepository = repositoryFactory.GetRepository<Publisher>();
+        _mapper = mapper;
+        _imageServices = imageServices;
+        _validator = validator;
+        _imageFileValidationServices = imageFileValidationService;
+        _bookBaseRepository = repositoryFactory.GetRepository<Book>();
+        _bookCategoryBaseRepository = repositoryFactory.GetRepository<BookCategory>();
+        _publisherBaseRepository = repositoryFactory.GetRepository<Publisher>();
+    }
+
+    #endregion
+
+    #region Methods
+
+    #region Private
+
+    private async Task<bool> CheckBookCategoryExistence(BookDto command)
+        => await _bookCategoryBaseRepository.AnyAsync(category => category.CategoryId.Equals(command.CategoryId));
+
+    private async Task<bool> CheckPublisherExistence(BookDto command)
+        => await _publisherBaseRepository.AnyAsync(publisher => publisher.PublisherId.Equals(command.PublisherId));
+
+    private static void NormalizeBookDto(BookDto bookDto)
+        => bookDto.Name = bookDto.Name.NormalizeAndTrim();
+
+    #endregion
+
+    #region Retrieval
+
+    /// <inheritdoc/>
+    public async Task<BookDto?> GetBookByIdAsync(int bookId)
+    {
+        try
+        {
+            // Get book
+            var book = await _bookBaseRepository.GetByIdAsync(bookId);
+
+            // Map entity to DTO and return
+            return book == null ? null : _mapper.Map<BookDto>(book);
+        }
+        catch (Exception e)
+        {
+            throw;
+        }
     }
 
     /// <inheritdoc/>
-    public async Task<string?> AddBookAsync(BookDto command, IFormFile imageFile, string folderName)
+    public async Task<List<BookDto>> GetAllBooksAsync()
     {
-        if (!(await CheckPublisherExistence(command)))
-            return string.Format(ErrorMessages.NotValid, nameof(BookDto.Name));
-
-        if (!(await CheckBookCategoryExistence(command)))
-            return string.Format(ErrorMessages.NotValid, nameof(BookDto.CategoryId));
-
-        var imageNameWithExtension = "";
         try
         {
+            // Retrieve all books
+            var books = await _bookBaseRepository.GetAllAsync();
+
+            // Map books to DTOs and return the list
+            return books.Select(_mapper.Map<BookDto>).ToList();
+        }
+        catch (Exception e)
+        {
+            throw;
+        }
+    }
+
+    #endregion
+
+    #region Modification
+
+    /// <inheritdoc/>
+    public async Task<string?> CreateBookAsync(BookDto bookDto, IFormFile imageFile, string folderName)
+    {
+        // Validate publisherId
+        if (!await CheckPublisherExistence(bookDto))
+            return string.Format(ErrorMessages.NotValidMsg, nameof(Publisher));
+
+        // Validate categoryId
+        if (!await CheckBookCategoryExistence(bookDto))
+            return string.Format(ErrorMessages.NotValidMsg, nameof(BookCategory));
+
+        var imageNameWithExtension = "";
+
+        try
+        {
+            // Validate image file
             var fileValidationResult = await _imageFileValidationServices.ValidateFileAsync(imageFile);
             if (fileValidationResult.WasSuccess == false || !string.IsNullOrWhiteSpace(fileValidationResult.Message))
                 return fileValidationResult.Message;
 
+            // Handle image upload
             imageNameWithExtension = await _imageServices.SaveImageAsync(imageFile, folderName);
             if (string.IsNullOrWhiteSpace(imageNameWithExtension))
                 return ErrorMessages.ImageUploadFailedMsg;
 
-            command.ImageAddress = imageNameWithExtension;
-            var validationResult = await _validator.ValidateAsync(command);
+            // Validate DTO
+            bookDto.ImageAddress = imageNameWithExtension;
+            var validationResult = await _validator.ValidateAsync(bookDto);
             if (!validationResult.IsValid)
                 return ValidationHelper.GetErrorMessages(validationResult);
 
+            // Normalize values
+            NormalizeBookDto(bookDto);
+
             // Map DTO to entity and save
-            var book = _mapper.Map<Book>(command);
+            var book = _mapper.Map<Book>(bookDto);
             await _bookBaseRepository.AddAsync(book);
             await _bookBaseRepository.SaveChangesAsync();
 
@@ -79,18 +147,21 @@ public class BooksServices : IBooksServices
     }
 
     /// <inheritdoc/>
-    public async Task<string?> UpdateBookAsync(BookDto command, IFormFile? imageFile, string? folderName)
+    public async Task<string?> UpdateBookAsync(BookDto bookDto, IFormFile? imageFile, string? folderName)
     {
-        if (!(await CheckPublisherExistence(command)))
-            return string.Format(ErrorMessages.NotValid, nameof(BookDto.Name));
+        // Validate publisherId
+        if (!await CheckPublisherExistence(bookDto))
+            return string.Format(ErrorMessages.NotValidMsg, nameof(Publisher));
 
-        if (!(await CheckBookCategoryExistence(command)))
-            return string.Format(ErrorMessages.NotValid, nameof(BookDto.CategoryId));
+        // Validate categoryId
+        if (!await CheckBookCategoryExistence(bookDto))
+            return string.Format(ErrorMessages.NotValidMsg, nameof(BookCategory));
 
         var imageNameWithExtension = "";
         try
         {
-            var existingBook = await _bookBaseRepository.GetByIdAsync(command.Id);
+            // Get existing book
+            var existingBook = await _bookBaseRepository.GetByIdAsync(bookDto.Id);
             if (existingBook == null)
                 return ErrorMessages.ItemNotFoundMsg;
 
@@ -116,16 +187,17 @@ public class BooksServices : IBooksServices
                 imageNameWithExtension = existingBook.ImageAddress;
 
             // Validate DTO
-            command.ImageAddress = imageNameWithExtension;
-            var validationResult = await _validator.ValidateAsync(command);
+            bookDto.ImageAddress = imageNameWithExtension;
+            var validationResult = await _validator.ValidateAsync(bookDto);
             if (!validationResult.IsValid)
                 return ValidationHelper.GetErrorMessages(validationResult);
 
             // Map DTO to entity and save
-            var book = _mapper.Map(command, existingBook);
+            var book = _mapper.Map(bookDto, existingBook);
             await _bookBaseRepository.UpdateAsync(book);
             await _bookBaseRepository.SaveChangesAsync();
 
+            // Done
             return null;
         }
         catch (Exception e)
@@ -134,6 +206,10 @@ public class BooksServices : IBooksServices
             throw;
         }
     }
+
+    #endregion
+
+    #region Deletion
 
     /// <inheritdoc/>
     public async Task<string?> DeleteBookAsync(int bookId, string? folderName)
@@ -162,43 +238,7 @@ public class BooksServices : IBooksServices
         }
     }
 
-    /// <inheritdoc/>
-    public async Task<BookDto?> GetBookByIdAsync(int bookId)
-    {
-        try
-        {
-            var book = await _bookBaseRepository.GetByIdAsync(bookId);
+    #endregion
 
-            return book == null ? null : _mapper.Map<BookDto>(book);
-        }
-        catch (Exception e)
-        {
-            throw;
-        }
-    }
-
-    /// <inheritdoc/>
-    public async Task<List<BookDto>> GetBooksAsync()
-    {
-        try
-        {
-            var books =
-                await _bookBaseRepository.GetAllAsync(null, new Expression<Func<Book, object>>[] { b => b.Category });
-
-            return books.Select(bookCategory => _mapper.Map<BookDto>(bookCategory)).ToList();
-        }
-        catch (Exception e)
-        {
-            throw;
-        }
-    }
-
-
-    //Helper methods
-    private async Task<bool> CheckBookCategoryExistence(BookDto command)
-        => await _bookCategoryBaseRepository.AnyAsync(category => category.CategoryId.Equals(command.CategoryId));
-
-
-    private async Task<bool> CheckPublisherExistence(BookDto command)
-        => await _publisherBaseRepository.AnyAsync(publisher => publisher.PublisherId.Equals(command.PublisherId));
+    #endregion
 }
