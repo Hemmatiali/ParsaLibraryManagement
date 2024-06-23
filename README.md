@@ -12,9 +12,7 @@ This project is being built using a range of modern technologies and architectur
 - **FluentValidation**: For advanced data validation.
 - **AutoMapper**: To simplify object-to-object mappings.
 - **ImageSharp**: For handling image processing tasks.
-- **Domain-Driven Design (DDD)**: Ensuring a domain-focused design approach.
 - **Generic Repository Pattern**: Abstracting data access to enhance maintainability.
-- **Test-Driven Development (TDD)**: Ensuring code reliability and quality.
 - **xUnit**: For comprehensive unit testing.
 - **Serilog**: Providing sophisticated logging, diagnostic, and auditing capabilities.
 
